@@ -14,6 +14,9 @@ the code was deployed.
 - CHANGELOG.md (CU-d8qufg).
 - Local deployment instructions to README (CU-d8qufg).
 
+### Fixed
+- iOS deployment target (CU-d8qufg).
+
 ## [0.0.0] - 2020-11-26
 - Initial commit
 
