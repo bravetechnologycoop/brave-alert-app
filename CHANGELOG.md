@@ -14,6 +14,9 @@ the code was deployed.
 - CHANGELOG.md (CU-d8qufg).
 - Local deployment instructions to README (CU-d8qufg).
 
+### Removed
+- `yarn.lock` (CU-d8qufg).
+
 ### Fixed
 - iOS deployment target (CU-d8qufg).
 
