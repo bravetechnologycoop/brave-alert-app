@@ -12,6 +12,7 @@ the code was deployed.
 ### Added
 - Auto-generated React Native files (CU-d8qufg).
 - CHANGELOG.md (CU-d8qufg).
+- Local deployment instructions to README (CU-d8qufg).
 
 ## [0.0.0] - 2020-11-26
 - Initial commit
