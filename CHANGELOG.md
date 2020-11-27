@@ -14,6 +14,7 @@ the code was deployed.
 - CHANGELOG.md (CU-d8qufg).
 - Local deployment instructions to README (CU-d8qufg).
 - DotEnv (CU-d8qufg).
+- Automatic testing using Travis (CU-d8qufg).
 
 ### Removed
 - `yarn.lock` (CU-d8qufg).
