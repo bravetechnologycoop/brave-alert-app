@@ -13,6 +13,7 @@ the code was deployed.
 - Auto-generated React Native files (CU-d8qufg).
 - CHANGELOG.md (CU-d8qufg).
 - Local deployment instructions to README (CU-d8qufg).
+- DotEnv (CU-d8qufg).
 
 ### Removed
 - `yarn.lock` (CU-d8qufg).
