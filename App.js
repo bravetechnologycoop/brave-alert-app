@@ -24,6 +24,10 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import {
+  EXAMPLE
+} from '@env'
+
 const App: () => React$Node = () => {
   return (
     <>
@@ -44,6 +48,9 @@ const App: () => React$Node = () => {
               <Text style={styles.sectionDescription}>
                 Edit <Text style={styles.highlight}>App.js</Text> to change this
                 screen and then come back to see your edits.
+              </Text>
+              <Text>
+                Proving that .env works: {EXAMPLE}
               </Text>
             </View>
             <View style={styles.sectionContainer}>
