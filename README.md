@@ -1,4 +1,4 @@
-# brave-alert-app
+# brave-alert-app [![Build Status](https://travis-ci.com/bravetechnologycoop/brave-alert-app.svg?branch=main)](https://travis-ci.com/bravetechnologycoop/brave-alert-app)
 
 ## How to run locally on an Android emulator
 
