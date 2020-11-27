@@ -12,6 +12,7 @@ matrix:
       env:
         - EXAMPLE_TEST=testExample!
 
-      # run unit tests
+      # run linter and unit tests
       script:
+        - npm run lint
         - sudo env "PATH=$PATH" npm run test
