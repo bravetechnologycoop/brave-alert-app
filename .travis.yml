@@ -12,7 +12,8 @@ matrix:
       env:
         - EXAMPLE_TEST=testExample!
 
-      # run linter and unit tests
+      # run secuirty audit, linter, and unit tests
       script:
+        - npm audit --audit-level=moderate
         - npm run lint
         - sudo env "PATH=$PATH" npm run test
