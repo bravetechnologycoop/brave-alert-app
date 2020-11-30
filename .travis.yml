@@ -4,9 +4,9 @@ matrix:
   include:
     - language: node_js         # node version specified in .nvmrc
 
-      # install dependencies
+      # install dependencies from package-lock.json
       install:
-        - npm install
+        - npm ci
      
       # define environment variables 
       env:
