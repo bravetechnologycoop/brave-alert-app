@@ -51,3 +51,45 @@
 1. ```
    npm run lint
    ```
+
+## How to run Storybook
+
+1. If you are on a Mac, set `STORYBOOK_HOST` to your local IP address in `.env`. For example
+
+   ```
+   STORYBOOK_HOST=192.168.0.33
+   ```
+
+1. To open Storybook in your browser
+
+   - If you're on a Mac, run
+
+      ```
+      STORYBOOK_HOST=<your local IP address> npm run storybook
+      ```
+
+   - Otherwise, run
+   
+      ```
+      npm run storybook
+      ```
+
+   Note that the components will not appear until after the device has connected.
+
+1. Open the app, run
+
+   ```
+   npm run android
+   ```
+
+   OR 
+
+   ```
+   npm run ios
+   ```
+
+1. Open the developer menu by shaking the device or by pressing Command-M on a Mac.
+
+1. Click "Toggle Storybook".
+
+1. Wait for the components to appear in the browser.

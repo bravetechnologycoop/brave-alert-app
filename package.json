@@ -7,7 +7,20 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint --ext js,jsx --env jest ."
+    "lint": "eslint --ext js,jsx --env jest .",
+    "prestorybook": "rnstl",
+    "storybook": "start-storybook -p 7007",
+    "build-storybook": "build-storybook"
+  },
+  "config": {
+    "react-native-storybook-loader": {
+      "searchDir": [
+        "./src",
+        "./storybook"
+      ],
+      "pattern": "**/*.stories.js*",
+      "outputFile": "./storybook/storyLoader.js"
+    }
   },
   "dependencies": {
     "react": "16.13.1",
@@ -18,11 +31,22 @@
     "@babel/core": "^7.8.4",
     "@babel/runtime": "^7.8.4",
     "@react-native-community/eslint-config": "^1.1.0",
+    "@storybook/addon-actions": "^5.3.21",
+    "@storybook/addon-knobs": "^5.3.21",
+    "@storybook/addon-links": "^5.3.21",
+    "@storybook/addon-ondevice-actions": "^5.3.23",
+    "@storybook/addon-ondevice-knobs": "^5.3.23",
+    "@storybook/react-native": "^5.3.23",
+    "@storybook/react-native-server": "^5.3.23",
     "babel-jest": "^25.1.0",
+    "babel-loader": "^8.2.2",
     "eslint": "^7.11.0",
     "eslint-plugin-react": "^7.20.6",
     "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
+    "react-dom": "^16.13.1",
+    "react-native-dev-menu": "^4.0.2",
+    "react-native-storybook-loader": "^2.0.2",
     "react-test-renderer": "16.13.1"
   },
   "jest": {
