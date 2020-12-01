@@ -16,6 +16,7 @@ the code was deployed.
 - DotEnv (CU-d8qufg).
 - Automatic security auditing, linting, and testing using Travis (CU-d8qufg).
 - Storybook (CU-d8qufg).
+- HistoricAlert component (CU-d8qufg).
 
 ### Removed
 - `yarn.lock` (CU-d8qufg).
