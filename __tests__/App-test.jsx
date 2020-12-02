@@ -8,6 +8,17 @@ import App from '../src/App'
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer'
 
+
+// Do not actually call Sentry
+jest.mock('@sentry/react-native', () => ({
+    init: jest.fn()
+}))
+
+// Do not actually get the device version
+jest.mock('react-native-device-info', () => ({
+    getVersion: jest.fn()
+}))
+
 it('renders correctly', () => {
     renderer.create(<App />)
 })

@@ -1,11 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
+// Third-party dependencies
 import React from 'react'
 import {
     SafeAreaView,
@@ -15,7 +8,7 @@ import {
     Text,
     StatusBar,
 } from 'react-native'
-
+import DeviceInfo from 'react-native-device-info'
 import {
     Header,
     LearnMoreLinks,
@@ -23,10 +16,21 @@ import {
     DebugInstructions,
     ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'
+import * as Sentry from '@sentry/react-native'
 
 import {
-    EXAMPLE
+    SENTRY_DSN,
+    SENTRY_ENV,
 } from '@env'
+
+// Setup Sentry
+if (SENTRY_DSN && SENTRY_ENV) {
+    Sentry.init({
+        release: `brave-alert-app@${DeviceInfo.getVersion()}`, // e.g. brave-alert-app@2.3.0
+        dsn: SENTRY_DSN,
+        environment: SENTRY_ENV,
+    })
+}
 
 export default function App() {
     return (
@@ -48,9 +52,6 @@ export default function App() {
                             <Text style={styles.sectionDescription}>
                                 Edit <Text style={styles.highlight}>App.js</Text> to change this
                                 screen and then come back to see your edits.
-                            </Text>
-                            <Text>
-                                Proving that .env works: {EXAMPLE}
                             </Text>
                         </View>
                         <View style={styles.sectionContainer}>
