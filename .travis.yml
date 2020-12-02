@@ -10,7 +10,9 @@ matrix:
      
       # define environment variables 
       env:
-        - EXAMPLE_TEST=testExample!
+        - STORYBOOK_HOST=
+        - SENTRY_DSN= # left blank so that we do not send Sentry message from Travis builds
+        - SENTRY_ENV=travis
 
       # run secuirty audit, linter, and unit tests
       script:
