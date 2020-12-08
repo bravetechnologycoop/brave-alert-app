@@ -13,7 +13,9 @@ matrix:
         - STORYBOOK_HOST=
         - SENTRY_DSN= # left blank so that we do not send Sentry message from Travis builds
         - SENTRY_ENV=travis
-
+        # FONTAWESOME_NPM_AUTH_TOKEN
+        - secure: "FnMDS/111HvNg5dLZtIVu8zp78AcwY/tKZALJLbhrnrABIR8NFnBRiY2/2KzFVZ4S14TY3q6UzF0ObP6M+O9skCfJ0RtPJnD68ZCzceDkaZ39xK6D7bNgKUsmi5RbQNbpRzpo9nk+uvhGbvJLR5fkkYkXB/fXi54khmtnNixQlgitR2TviEaA5K4a87BvcmS9HdrW4wh+9JLiUc862rdWxEggg6LLyJoj4RdGKbAEKJhdqV8n1wEiSeyHeae4S8BrBHZXwN5e7jZELmDBPnDUTFYTXLU1/36xxtEZk8lNrzRGWQU3tYbwvtKhXxX20vsDDqNh8eMYkvbUKt28JqN3nyQVMjd3bDUXywABl4Kh5MwW4Dy4I6iIvu5rmJQRKkDzCq8vwU6NfQyE8v6d8FjT6R+Pps/nP9bf5S02EeeMfeaDaIzGmU02PIMCocqFtKTDjWRv84x68/eLd+oBAtYcnyasMuJt7rWOmsC5QqEfqt12X/LqNR+TR7NSb0g9TcroY8zRH85peltGn9YlwU2U4gSxoTlsHM4R8GdBtMUMBTq0Y8NRu+1X4HvUe/cqFRRWOfTfs0iAyLIqZqOdaW+Jxl8Lq/DUNJlaXAVXIn0TfKD7McT1WYaKIdV/40hw43YaLFMxCcWZRoeviytP1S2FvrMLY9G+A0ah+3esh4qGzY="
+        
       # run secuirty audit, linter, and unit tests
       script:
         - npm audit --audit-level=moderate

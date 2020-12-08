@@ -19,6 +19,11 @@ jest.mock('react-native-device-info', () => ({
     getVersion: jest.fn()
 }))
 
+// Do not try to render third-party components
+jest.mock('@fortawesome/react-native-fontawesome', () => ({
+    FontAwesomeIcon: ''
+}))
+
 it('renders correctly', () => {
     renderer.create(<App />)
 })
