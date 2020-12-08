@@ -18,6 +18,7 @@ the code was deployed.
 - Storybook (CU-d8qufg).
 - HistoricAlert component (CU-d8qufg).
 - Sentry integration (CU-d8qufg).
+- FontAwesome icons (CU-d8qufg).
 
 ### Removed
 - `yarn.lock` (CU-d8qufg).

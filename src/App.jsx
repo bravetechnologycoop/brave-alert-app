@@ -17,6 +17,12 @@ import {
     ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'
 import * as Sentry from '@sentry/react-native'
+import {
+    FontAwesomeIcon
+} from '@fortawesome/react-native-fontawesome'
+import {
+    faUfoBeam
+} from '@fortawesome/pro-light-svg-icons'
 
 import {
     SENTRY_DSN,
@@ -53,6 +59,7 @@ export default function App() {
                                 Edit <Text style={styles.highlight}>App.js</Text> to change this
                                 screen and then come back to see your edits.
                             </Text>
+                            <FontAwesomeIcon icon={faUfoBeam} size={50} />
                         </View>
                         <View style={styles.sectionContainer}>
                             <Text style={styles.sectionTitle}>See Your Changes</Text>
