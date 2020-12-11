@@ -19,6 +19,7 @@ the code was deployed.
 - HistoricAlert component (CU-d8qufg).
 - Sentry integration (CU-d8qufg).
 - FontAwesome icons (CU-d8qufg).
+- React Navigation with a simple tab navigation bar (CU-d8qufg).
 
 ### Removed
 - `yarn.lock` (CU-d8qufg).
