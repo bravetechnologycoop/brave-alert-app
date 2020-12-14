@@ -2,6 +2,9 @@
 import React from 'react'
 import DeviceInfo from 'react-native-device-info'
 import * as Sentry from '@sentry/react-native'
+import {
+    Provider
+} from 'react-redux'
 
 // In-house dependencies
 import {
@@ -9,6 +12,7 @@ import {
     SENTRY_ENV,
 } from '@env'
 import RootStack from './navigation/RootStack'
+import store from './redux/store'
 
 // Setup Sentry
 if (SENTRY_DSN && SENTRY_ENV) {
@@ -21,6 +25,8 @@ if (SENTRY_DSN && SENTRY_ENV) {
 
 export default function App() {
     return (
-        <RootStack />
+        <Provider store={store}>
+            <RootStack />
+        </Provider>
     )
 }
