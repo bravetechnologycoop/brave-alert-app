@@ -23,6 +23,7 @@ the code was deployed.
 
 ### Removed
 - `yarn.lock` (CU-d8qufg).
+- Jest testing library and example test (CU-d8qufg).
 
 ### Fixed
 - iOS deployment target (CU-d8qufg).
