@@ -6,8 +6,8 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint --ext js,jsx --env jest .",
+    "test": "",
+    "lint": "eslint --ext js,jsx .",
     "prestorybook": "rnstl",
     "storybook": "start-storybook -p 7007",
     "build-storybook": "build-storybook"
@@ -52,21 +52,14 @@
     "@storybook/addon-ondevice-knobs": "^5.3.23",
     "@storybook/react-native": "^5.3.23",
     "@storybook/react-native-server": "^5.3.23",
-    "babel-jest": "^25.1.0",
     "babel-loader": "^8.2.2",
     "eslint": "^7.11.0",
     "eslint-plugin-react": "^7.20.6",
-    "jest": "^25.1.0",
     "metro-react-native-babel-preset": "^0.59.0",
     "react-dom": "^16.13.1",
     "react-native-dev-menu": "^4.0.2",
     "react-native-storybook-loader": "^2.0.2",
-    "react-test-renderer": "16.13.1"
-  },
-  "jest": {
-    "preset": "react-native",
-    "transform": {
-      "^.+\\.[jt]sx?$": "babel-jest"
-    }
+    "react-test-renderer": "16.13.1",
+    "redux-devtools": "^3.7.0"
   }
 }
