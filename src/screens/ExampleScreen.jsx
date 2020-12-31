@@ -24,7 +24,12 @@ import {
 } from '@fortawesome/pro-light-svg-icons'
 import {
     useNavigation
-} from "@react-navigation/native"
+} from '@react-navigation/native'
+
+// In-house dependencies
+import {
+    simulateCrash
+} from '../services/ErrorReportingService'
 
 function ExampleScreen() {
     const navigation = useNavigation()
@@ -53,6 +58,10 @@ function ExampleScreen() {
                             <Button
                                 title="Go to OtherScreen"
                                 onPress={() => navigation.navigate('ExampleScreen2')}
+                            />
+                            <Button
+                                title="Create a Sentry alert"
+                                onPress={() => simulateCrash()}
                             />
                         </View>
                         <View style={styles.sectionContainer}>
