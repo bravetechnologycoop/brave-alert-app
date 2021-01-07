@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 // In-house dependencies
 import MainTabs from './MainTabs'
+import ErrorScreen from '../components/ErrorScreen'
+import SCREEN from './ScreensEnum'
 
 const Stack = createStackNavigator()
 
@@ -13,9 +15,18 @@ function RootStack() {
         <NavigationContainer>
             <Stack.Navigator mode='modal' initialRouteName='Main'>
                 <Stack.Screen
-                    name='Main'
+                    name={SCREEN.MAIN}
                     component={MainTabs}
                     options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name={SCREEN.ERROR}
+                    component={ErrorScreen}
+                    options={{
+                        header: () => {
+                            return null
+                        },
+                    }}
                 />
             </Stack.Navigator>
         </NavigationContainer>

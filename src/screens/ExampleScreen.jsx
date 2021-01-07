@@ -30,6 +30,7 @@ import {
 import {
     simulateCrash
 } from '../services/ErrorReportingService'
+import SCREEN from '../navigation/ScreensEnum'
 
 function ExampleScreen() {
     const navigation = useNavigation()
@@ -57,7 +58,7 @@ function ExampleScreen() {
                             <FontAwesomeIcon icon={faUfoBeam} size={50} />
                             <Button
                                 title="Go to OtherScreen"
-                                onPress={() => navigation.navigate('ExampleScreen2')}
+                                onPress={() => navigation.navigate(SCREEN.EXAMPLE2)}
                             />
                             <Button
                                 title="Create a Sentry alert"
