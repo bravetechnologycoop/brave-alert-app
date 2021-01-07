@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // In-house dependencies
 import ExampleScreen from '../screens/ExampleScreen'
 import ExampleScreen2 from '../screens/ExampleScreen2'
+import SCREEN from './ScreensEnum'
 
 function MainTabs() {
     const Tab = createBottomTabNavigator()
@@ -13,14 +14,14 @@ function MainTabs() {
     return (
         <Tab.Navigator
             headerMode='screen' // See https://reactnavigation.org/docs/stack-navigator#set-headermode-to-screen
-            initialRouteName='ExampleScreen'
+            initialRouteName={SCREEN.EXAMPLE}
         >
             <Tab.Screen
-                name='ExampleScreen'
+                name={SCREEN.EXAMPLE}
                 component={ExampleScreen}
             />
             <Tab.Screen
-                name='ExampleScreen2'
+                name={SCREEN.EXAMPLE2}
                 component={ExampleScreen2}
             />
         </Tab.Navigator>

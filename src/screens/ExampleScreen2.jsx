@@ -20,12 +20,22 @@ import {
     getAlerts,
 } from '../redux/selectors'
 import {
-    alertUrgentified
+    alertUrgentified,
 } from '../redux/slices/alertsSlice'
+import {
+    fakeEndpointRequest,
+    testRequest,
+} from '../services/BraveAlertService'
+import {
+    useSafeHandler,
+} from '../hooks'
+import SCREEN from '../navigation/ScreensEnum'
 
 function ExampleScreen2() {
     const navigation = useNavigation()
     const dispatch = useDispatch()
+    const [fireFakeEndpoint, fireFakeEndpointOptions] = useSafeHandler()
+    const [fireTestRequest, fireTestRequestOptions] = useSafeHandler()
 
     const alerts = useSelector(getAlerts)
 
@@ -42,17 +52,48 @@ function ExampleScreen2() {
         />
     }
 
+    function handleCallFakeEndpoint() {
+        async function _handle() {
+            await fakeEndpointRequest()
+        }
+
+        fireFakeEndpointOptions.reset()
+        fireFakeEndpoint(_handle, {
+            rollbackScreen: SCREEN.EXAMPLE2,
+        })
+    }
+
+    function handleCallTestApi() {
+        async function _handle() {
+            const response = await testRequest()
+            console.log(`*** testResponse *** ${JSON.stringify(response)}`)
+        }
+
+        fireTestRequestOptions.reset()
+        fireTestRequest(_handle, {
+            rollbackScreen: SCREEN.EXAMPLE2,
+        })
+    }
+
     return (
         <>
             <Button
                 title="Go to OtherScreen"
-                onPress={() => navigation.navigate('ExampleScreen')}
+                onPress={() => navigation.navigate(SCREEN.EXAMPLE)}
             />
             <HistoricAlert roomName='Example' time='10:00 AM' category='Overdose' isUrgent='false' />
             {alerts.map(renderAlert)}
             <Button
                 title="Make Urgent"
                 onPress={() => dispatch(alertUrgentified())}
+            />
+            <Button
+                title="Call an API endpoint that doesn't exist"
+                onPress={() => handleCallFakeEndpoint()}
+            />
+            <Button
+                title="Call POST /alert/test"
+                onPress={() => handleCallTestApi()}
             />
         </>
     )

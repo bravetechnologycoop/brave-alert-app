@@ -22,6 +22,7 @@ the code was deployed.
 - React Navigation with a simple tab navigation bar (CU-d8qufg).
 - Redux for handling state (CU-d8qufg).
 - An ErrorReportingServie (CU-d8qufg).
+- API calls (CU-d8qufg).
 
 ### Removed
 - `yarn.lock` (CU-d8qufg).
