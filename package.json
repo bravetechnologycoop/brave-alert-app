@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "",
+    "test": "NODE_ENV=test mocha --require @babel/register --timeout 10000 \"./src/**/*.test.js\"",
     "lint": "eslint --ext js,jsx .",
     "prestorybook": "rnstl",
     "storybook": "start-storybook -p 7007",
@@ -56,13 +56,17 @@
     "@storybook/react-native": "^5.3.23",
     "@storybook/react-native-server": "^5.3.23",
     "babel-loader": "^8.2.2",
+    "chai": "^4.2.0",
     "eslint": "^7.11.0",
     "eslint-plugin-react": "^7.20.6",
     "metro-react-native-babel-preset": "^0.59.0",
+    "mocha": "^8.2.1",
     "react-dom": "^16.13.1",
     "react-native-dev-menu": "^4.0.2",
     "react-native-storybook-loader": "^2.0.2",
     "react-test-renderer": "16.13.1",
-    "redux-devtools": "^3.7.0"
+    "redux-devtools": "^3.7.0",
+    "sinon": "^9.2.3",
+    "sinon-chai": "^3.5.0"
   }
 }

@@ -23,6 +23,7 @@ the code was deployed.
 - Redux for handling state (CU-d8qufg).
 - An ErrorReportingServie (CU-d8qufg).
 - API calls (CU-d8qufg).
+- Mocha/Chai/Sinon test framework and tests (CU-d8qufg).
 
 ### Removed
 - `yarn.lock` (CU-d8qufg).
