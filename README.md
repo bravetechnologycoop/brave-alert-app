@@ -149,3 +149,5 @@ Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-env
 - `package-lock.json` - NPM package description. This is auto-generated and should not be
    edited directly.
 - `README.md` - The README.
+
+Test files live in the same folder the file that they are testing and end with `.test.js`.

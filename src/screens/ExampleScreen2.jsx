@@ -30,6 +30,10 @@ import {
     useSafeHandler,
 } from '../hooks'
 import SCREEN from '../navigation/ScreensEnum'
+import Logger from '../services/Logger'
+
+// Setup logger
+const logger = new Logger('ExampleScreen2')
 
 function ExampleScreen2() {
     const navigation = useNavigation()
@@ -66,7 +70,7 @@ function ExampleScreen2() {
     function handleCallTestApi() {
         async function _handle() {
             const response = await testRequest()
-            console.log(`*** testResponse *** ${JSON.stringify(response)}`)
+            logger.info(`*** testResponse *** ${JSON.stringify(response)}`)
         }
 
         fireTestRequestOptions.reset()

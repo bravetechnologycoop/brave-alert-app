@@ -2,10 +2,14 @@
 
 // Third-party dependencies
 import * as Sentry from '@sentry/react-native'
+import Logger from './Logger'
+
+// Setup logger
+const logger = new Logger('ErrorReportingService')
 
 function safeReportError(error, errorInfo) {
     try {
-        console.log(error)
+        logger.error(error)
 
         Sentry.withScope((scope) => {
             if (errorInfo) {
@@ -14,7 +18,7 @@ function safeReportError(error, errorInfo) {
             Sentry.captureException(error)
         })
     } catch (err) {
-        console.log('Error reporting error', err)
+        logger.error(`Error reporting error: ${JSON.stringify(err)}`)
     }
 }
 
