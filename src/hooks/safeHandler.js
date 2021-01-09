@@ -1,8 +1,15 @@
+// Third-party dependencies
 import { useNavigation } from '@react-navigation/native'
 import { useEffect, useRef, useState } from 'react'
 import { isFunction } from 'lodash'
+
+// In-house dependencies
 import { safeReportError } from '../services/ErrorReportingService'
 import SCREEN from '../navigation/ScreensEnum'
+import Logger from '../services/Logger'
+
+// Setup logger
+const logger = new Logger('safeHandler')
 
 // TODO provide a throttle param, for functions that return very quickly and don't have an obvious/safe
 // hook for reset (e.g. add emergency contact)
@@ -19,7 +26,7 @@ export function useSafeHandler() {
 
     function reset() {
         handlerState.current = 'ready'
-        console.log('handler-state', handlerState.current)            
+        logger.info(`handler-state: ${handlerState.current}`)
     }
 
     async function fire(fn, options = {}) {
@@ -30,15 +37,15 @@ export function useSafeHandler() {
             navigation.navigate(SCREEN.ERROR, { originalScreen : rollbackScreen })
         }
 
-        console.log('handler-state', handlerState.current)
+        logger.info(`handler-state: ${handlerState.current}`)
         if (handlerState.current === 'firing' || handlerState.current === 'canceled') {
-            console.log('Already firing, ignoring')
+            logger.info('Already firing, ignoring')
             return
         }
 
         try {                            
             handlerState.current = 'firing'
-            console.log('handler-state', handlerState.current)
+            logger.info(`handler-state: ${handlerState.current}`)
             if (isFunction(setIsFiring)) {
                 setIsFiring(true)
             }                

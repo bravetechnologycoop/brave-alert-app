@@ -15,6 +15,10 @@ import {
 import FetchServiceClientError from './errors/FetchServiceClientError'
 import FetchServiceError from './errors/FetchServiceError'
 import FetchServiceUnauthorizedClientError from './errors/FetchServiceUnauthorizedClientError'
+import Logger from './Logger'
+
+// Setup logger
+const logger = new Logger('FetchService')
 
 const HTTP_200_OK = 200
 const HTTP_201_CREATED = 201
@@ -147,10 +151,10 @@ function asFetchRequest(method, url, request, headers) {
 async function doSingleFetch(method, headers, baseUrl, request) {
     const url = toUrl(baseUrl, request.uri, request.params)
     const fetchRequest = asFetchRequest(method, url, request, headers)
-    console.log('FETCH REQUEST', fetchRequest, url, headers)
+    logger.debug(`FETCH REQUEST: ${JSON.stringify(fetchRequest)}, ${url}, ${JSON.stringify(headers)}`)
     // eslint-disable-next-line no-undef
     const response = await fetch(url, fetchRequest)
-    console.log('RESPONSE', response)
+    logger.debug(`RESPONSE: ${JSON.stringify(response)}`)
 
     return response
 }

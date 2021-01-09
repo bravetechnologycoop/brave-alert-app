@@ -24,6 +24,7 @@ the code was deployed.
 - An ErrorReportingServie (CU-d8qufg).
 - API calls (CU-d8qufg).
 - Mocha/Chai/Sinon test framework and tests (CU-d8qufg).
+- Standard Logger class (CU-d8qufg).
 
 ### Removed
 - `yarn.lock` (CU-d8qufg).
