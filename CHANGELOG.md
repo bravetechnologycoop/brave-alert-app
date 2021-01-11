@@ -25,6 +25,7 @@ the code was deployed.
 - API calls (CU-d8qufg).
 - Mocha/Chai/Sinon test framework and tests (CU-d8qufg).
 - Standard Logger class (CU-d8qufg).
+- SoundService to be used for alert and message noises (CU-d8qufg).
 
 ### Removed
 - `yarn.lock` (CU-d8qufg).
