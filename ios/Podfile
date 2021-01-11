@@ -9,6 +9,7 @@ target 'BraveAlertApp' do
   use_react_native!(:path => config["reactNativePath"])
 
 
+
   target 'BraveAlertAppTests' do
     inherit! :complete
     # Pods for testing

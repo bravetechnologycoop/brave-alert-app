@@ -30,6 +30,13 @@ import {
     useSafeHandler,
 } from '../hooks'
 import SCREEN from '../navigation/ScreensEnum'
+import {
+    startAlarm,
+    stopAlarm,
+} from '../services/SoundService'
+import {
+    safeReportError,
+} from '../services/ErrorReportingService.js'
 import Logger from '../services/Logger'
 
 // Setup logger
@@ -79,6 +86,22 @@ function ExampleScreen2() {
         })
     }
 
+    function handleStartAlarm() {
+        try {
+            startAlarm()
+        } catch(err) {
+            safeReportError(err)
+        }
+    }
+
+    function handleStopAlarm() {
+        try {
+            stopAlarm()
+        } catch(err) {
+            safeReportError(err)
+        }
+    }
+
     return (
         <>
             <Button
@@ -98,6 +121,14 @@ function ExampleScreen2() {
             <Button
                 title="Call POST /alert/test"
                 onPress={() => handleCallTestApi()}
+            />
+            <Button
+                title="Start alarm"
+                onPress={() => handleStartAlarm()}
+            />
+            <Button
+                title="Stop alarm"
+                onPress={() => handleStopAlarm()}
             />
         </>
     )
