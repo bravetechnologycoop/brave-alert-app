@@ -26,6 +26,7 @@ the code was deployed.
 - Mocha/Chai/Sinon test framework and tests (CU-d8qufg).
 - Standard Logger class (CU-d8qufg).
 - SoundService to be used for alert and message noises (CU-d8qufg).
+- CredentialsService to handle the Brave Alert API's API key (CU-d8qufg).
 
 ### Removed
 - `yarn.lock` (CU-d8qufg).

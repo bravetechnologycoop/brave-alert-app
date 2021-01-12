@@ -15,6 +15,10 @@ import {
 import FetchServiceClientError from './errors/FetchServiceClientError'
 import FetchServiceError from './errors/FetchServiceError'
 import FetchServiceUnauthorizedClientError from './errors/FetchServiceUnauthorizedClientError'
+import {
+    getApiKey,
+    sanitizeApiKey,
+} from './CredentialsService'
 import Logger from './Logger'
 
 // Setup logger
@@ -135,6 +139,7 @@ function withAppHeaders(additionalHeaders = {}) {
     const headers = { ...additionalHeaders }
 
     // Here's where you will add headers that need to be on every request
+    headers['X-API-Key'] = getApiKey()
 
     return omitBy(headers, isNil)
 }
@@ -151,7 +156,7 @@ function asFetchRequest(method, url, request, headers) {
 async function doSingleFetch(method, headers, baseUrl, request) {
     const url = toUrl(baseUrl, request.uri, request.params)
     const fetchRequest = asFetchRequest(method, url, request, headers)
-    logger.debug(`FETCH REQUEST: ${JSON.stringify(fetchRequest)}, ${url}, ${JSON.stringify(headers)}`)
+    logger.debug(`FETCH REQUEST: ${sanitizeApiKey(JSON.stringify(fetchRequest))}, ${url}`)
     // eslint-disable-next-line no-undef
     const response = await fetch(url, fetchRequest)
     logger.debug(`RESPONSE: ${JSON.stringify(response)}`)
