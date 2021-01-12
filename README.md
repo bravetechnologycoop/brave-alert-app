@@ -119,6 +119,7 @@ Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-env
 - `src/`
    - `components/` - UI components and their stories.
    - `hooks/` - React Hooks.
+   - `mocks/` - React Native module mocks used for testing.
    - `navigation/` - React Navigation configuration.
    - `redux/` - React-Redux configuration. This controls the app's state by keeping it in the store
       and using reducers for state changes.

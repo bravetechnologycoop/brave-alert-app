@@ -6,7 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "test": "NODE_ENV=test mocha --require @babel/register --timeout 10000 \"./src/**/*.test.js\"",
+    "test": "APP_ENV=test mocha --require @babel/register --timeout 10000 \"./src/**/*.test.js\"",
     "lint": "eslint --ext js,jsx .",
     "prestorybook": "rnstl",
     "storybook": "start-storybook -p 7007",
