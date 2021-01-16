@@ -22,10 +22,8 @@ import {
 import {
     alertUrgentified,
 } from '../redux/slices/alertsSlice'
-import {
-    fakeEndpointRequest,
-    testRequest,
-} from '../services/BraveAlertService'
+import ButtonsApiService from '../services/ButtonsApiService'
+import SensorApiService from '../services/SensorApiService'
 import {
     useSafeHandler,
 } from '../hooks'
@@ -65,7 +63,7 @@ function ExampleScreen2() {
 
     function handleCallFakeEndpoint() {
         async function _handle() {
-            await fakeEndpointRequest()
+            await SensorApiService.fakeEndpointRequest()
         }
 
         fireFakeEndpointOptions.reset()
@@ -76,7 +74,7 @@ function ExampleScreen2() {
 
     function handleCallTestApi() {
         async function _handle() {
-            const response = await testRequest()
+            const response = await ButtonsApiService.testRequest()
             logger.info(`*** testResponse *** ${JSON.stringify(response)}`)
         }
 
