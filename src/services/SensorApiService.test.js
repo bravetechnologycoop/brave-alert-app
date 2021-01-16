@@ -12,13 +12,10 @@ import {
 chai.use(sinonChai)
 
 // In-house dependencies
-import {
-    fakeEndpointRequest,
-    testRequest,
-} from './BraveAlertService'
+import SensorApiService from './SensorApiService'
 import * as FetchService from './FetchService'
 
-describe('BraveAlertService', () => {
+describe('SensorApiService', () => {
     beforeEach(() => {
         sinon.stub(FetchService, 'post')
     })
@@ -30,10 +27,14 @@ describe('BraveAlertService', () => {
     describe('testRequest', () => {
         it('calls POST with the correct URI', () => {
             const expectedParameters = {
-                uri: '/alert/test'
+                uri: '/alert/test',
+                base: 'https://sensor.com',
+                headers: {
+                    'X-API-KEY': 'DEVICE_ID'
+                },
             }
 
-            testRequest()
+            SensorApiService.testRequest()
 
             expect(FetchService.post).to.have.been.calledWith(expectedParameters)
         })
@@ -42,10 +43,14 @@ describe('BraveAlertService', () => {
     describe('fakeEndpointRequest', () => {
         it('calls POST with the correct URI', () => {
             const expectedParameters = {
-                uri: 'not/in/real/life'
+                uri: 'not/in/real/life',
+                base: 'https://sensor.com',
+                headers: {
+                    'X-API-KEY': 'DEVICE_ID'
+                },
             }
 
-            fakeEndpointRequest()
+            SensorApiService.fakeEndpointRequest()
 
             expect(FetchService.post).to.have.been.calledWith(expectedParameters)
         })

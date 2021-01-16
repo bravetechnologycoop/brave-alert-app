@@ -2,21 +2,14 @@
 
 // Third-party dependencies
 import {
-    omitBy,
-    isNil,
     isFunction,
 } from 'lodash'
 
 // In-house dependencies
-import {
-    BUTTONS_BASE_URL,
-    SENSOR_BASE_URL
-} from '@env'
 import FetchServiceClientError from './errors/FetchServiceClientError'
 import FetchServiceError from './errors/FetchServiceError'
 import FetchServiceUnauthorizedClientError from './errors/FetchServiceUnauthorizedClientError'
 import {
-    getApiKey,
     sanitizeApiKey,
 } from './CredentialsService'
 import Logger from './Logger'
@@ -135,53 +128,29 @@ function toUrl(baseUri, uri, params) {
     return url
 }
 
-function withAppHeaders(additionalHeaders = {}) {
-    const headers = { ...additionalHeaders }
-
-    // Here's where you will add headers that need to be on every request
-    headers['X-API-Key'] = getApiKey()
-
-    return omitBy(headers, isNil)
-}
-
-function asFetchRequest(method, url, request, headers) {
+function asFetchRequest(method, request) {
     return {
         method,
         params: request.params,
         body: request.body ? JSON.stringify(request.body) : undefined,
-        headers,
+        headers: request.headers,
     }
 }
 
-async function doSingleFetch(method, headers, baseUrl, request) {
-    const url = toUrl(baseUrl, request.uri, request.params)
-    const fetchRequest = asFetchRequest(method, url, request, headers)
+async function doFetch(method, request) {
+    const url = toUrl(request.base, request.uri, request.params)
+    const fetchRequest = asFetchRequest(method, request)
     logger.debug(`FETCH REQUEST: ${sanitizeApiKey(JSON.stringify(fetchRequest))}, ${url}`)
+    
     // eslint-disable-next-line no-undef
     const response = await fetch(url, fetchRequest)
     logger.debug(`RESPONSE: ${JSON.stringify(response)}`)
 
-    return response
-}
-
-// eslint-disable-next-line consistent-return
-async function doFetch(method, request) {
-    const headers = withAppHeaders(request.additional_headers)
-    
-    // TODO Talk about this function's logic and see what makes the most sense for sending
-    // to both Buttons and Sensor backends
-    const buttonsResponse = await doSingleFetch(method, headers, BUTTONS_BASE_URL, request)
-    const sensorResponse = await doSingleFetch(method, headers, SENSOR_BASE_URL, request)
-
-    // If we got a good response back from Buttons then use it. Otherwise, use the sensors response.
-    const response = (buttonsResponse.status === HTTP_200_OK) ? buttonsResponse : sensorResponse
-
     const handleResponse = selectResponseHandler(
         response.status,
         DEFAULT_RESPONSE_HANDLERS,
-        request.responseHandlers
+        request.responseHandlers,
     )
-
     return handleResponse(request, response)
 }
 
