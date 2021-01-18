@@ -1,9 +1,7 @@
 // Functions to create and retrieve the device's Brave Alert API key
 
-// Conditional dependencies :-(
-const DeviceInfo = (process.env.APP_ENV === 'test')
-    ? require('../mocks/react-native-device-info')
-    : require('react-native-device-info')
+// Third-party dependencies
+import { getUniqueId } from 'react-native-device-info'
 
 function generateApiKey() {
     // For our current implementation, we don't need to explicitly do this
@@ -13,7 +11,7 @@ function generateApiKey() {
 }
 
 function getApiKey() {
-    return DeviceInfo.getUniqueId()
+    return getUniqueId()
 }
 
 function sanitizeApiKey(input) {
