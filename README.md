@@ -39,6 +39,11 @@
    ```
    npm run ios
    ```
+## How to run on a real device
+
+1. Follow the instructions on https://reactnative.dev/docs/running-on-device
+   for your OS and the target device. Note: you need a Mac in order to run on
+   an iOS device.
 
 ## How to run the tests
 
