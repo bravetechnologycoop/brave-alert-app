@@ -249,7 +249,7 @@ PODS:
     - React-jsi (= 0.63.3)
   - RNCMaskedView (0.1.10):
     - React
-  - RNDeviceInfo (7.2.1):
+  - RNDeviceInfo (7.4.0):
     - React-Core
   - RNDevMenu (4.0.2):
     - React-Core
@@ -261,7 +261,7 @@ PODS:
     - React-Core
   - RNScreens (2.16.1):
     - React-Core
-  - RNSentry (2.0.2):
+  - RNSentry (2.1.0):
     - React-Core
     - Sentry (= 6.0.9)
   - RNSound (0.11.0):
@@ -424,17 +424,17 @@ SPEC CHECKSUMS:
   React-RCTVibration: 8e9fb25724a0805107fc1acc9075e26f814df454
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
   RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
-  RNDeviceInfo: 5700f88012d022ce1307f619b8c4811279b6f120
+  RNDeviceInfo: febcb25b09201a312c66c36ecc1f155c5a43eecc
   RNDevMenu: 9f80d65b80ba1fa84e5361d017b8c854a2f05005
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 45c457af3d2ee9e08fc01e70da87e653d46b1198
-  RNSentry: 5ebc2926dbcbb9b77857ba6df0754a869037123d
+  RNSentry: 51972e3fe50e2fb38ae459af8c87d61f63f364db
   RNSound: c980916b596cc15c8dcd2f6ecd3b13c4881dbe20
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   Sentry: 388c9dc093b2fd3a264466a5c5b21e25959610a9
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
 
-PODFILE CHECKSUM: 6363143607d33d5bfca140bcd95ae48e90c918af
+PODFILE CHECKSUM: 8f3bceef445bf586d04471d0279a959f320ad736
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1
