@@ -1,17 +1,13 @@
 // Nuts and bolts behind how API calls are formed, sent, and handled
 
 // Third-party dependencies
-import {
-    isFunction,
-} from 'lodash'
+import { isFunction } from 'lodash'
 
 // In-house dependencies
 import FetchServiceClientError from './errors/FetchServiceClientError'
 import FetchServiceError from './errors/FetchServiceError'
 import FetchServiceUnauthorizedClientError from './errors/FetchServiceUnauthorizedClientError'
-import {
-    sanitizeApiKey,
-} from './CredentialsService'
+import { sanitizeApiKey } from './CredentialsService'
 import Logger from './Logger'
 
 // Setup logger
@@ -35,44 +31,44 @@ const HTTP_502_BAD_GATEWAY = 502
 const HTTP_503_SERVICE_UNAVAILABLE = 503
 const HTTP_504_GATEWAY_TIMEOUT = 504
 
-let on401Unauthorized = null
+const on401Unauthorized = null
 
-//// Response handlers
+/// / Response handlers
 
 async function handleSuccessWithContent(request, response) {
-    const json = await response.json()
-    if (request.transformResponse) {
-        return request.transformResponse(json)
-    }
-    return json
+  const json = await response.json()
+  if (request.transformResponse) {
+    return request.transformResponse(json)
+  }
+  return json
 }
 
 async function handleSuccessWithoutContent() {
-    return undefined
+  return undefined
 }
 
 async function handleClientError(request, response) {
-    const json = await response.json()
-    if (request.asValidationError) {
-        throw request.asValidationError(json)
-    } else {
-        throw new FetchServiceClientError(JSON.stringify(json))
-    }
+  const json = await response.json()
+  if (request.asValidationError) {
+    throw request.asValidationError(json)
+  } else {
+    throw new FetchServiceClientError(JSON.stringify(json))
+  }
 }
 
 async function handle401Unauthorized(request, response) {
-    const json = await response.json()
+  const json = await response.json()
 
-    if (isFunction(on401Unauthorized)) {
-        on401Unauthorized()
-    }
+  if (isFunction(on401Unauthorized)) {
+    on401Unauthorized()
+  }
 
-    throw new FetchServiceUnauthorizedClientError(JSON.stringify(json))
+  throw new FetchServiceUnauthorizedClientError(JSON.stringify(json))
 }
 
 async function handleServerError(request, response) {
-    const text = await response.text()
-    throw new FetchServiceError(text)
+  const text = await response.text()
+  throw new FetchServiceError(text)
 }
 
 const DEFAULT_RESPONSE_HANDLERS = {}
@@ -93,93 +89,79 @@ DEFAULT_RESPONSE_HANDLERS[HTTP_502_BAD_GATEWAY] = handleServerError
 DEFAULT_RESPONSE_HANDLERS[HTTP_503_SERVICE_UNAVAILABLE] = handleServerError
 DEFAULT_RESPONSE_HANDLERS[HTTP_504_GATEWAY_TIMEOUT] = handleServerError
 
-function selectResponseHandler(
-    status,
-    defaultResponseHandlers,
-    customResponseHandlers
-) {
-    if (customResponseHandlers && customResponseHandlers[status]) {
-        return customResponseHandlers[status]
-    }
+function selectResponseHandler(status, defaultResponseHandlers, customResponseHandlers) {
+  if (customResponseHandlers && customResponseHandlers[status]) {
+    return customResponseHandlers[status]
+  }
 
-    if (!defaultResponseHandlers[status]) {
-        throw new Error(`No response handler for status code ${status}`)
-    }
+  if (!defaultResponseHandlers[status]) {
+    throw new Error(`No response handler for status code ${status}`)
+  }
 
-    return defaultResponseHandlers[status]
+  return defaultResponseHandlers[status]
 }
 
-//// URL manipulation and details of fetch construction
+/// / URL manipulation and details of fetch construction
 
 function toQueryString(params) {
-    const esc = encodeURIComponent
-    return Object.keys(params)
-        .map((key) => `${esc(key)}=${esc(params[key])}`)
-        .join('&')
+  const esc = encodeURIComponent
+  return Object.keys(params)
+    .map(key => `${esc(key)}=${esc(params[key])}`)
+    .join('&')
 }
 
 function toUrl(baseUri, uri, params) {
-    const url = baseUri + uri
-    if (params) {
-        const queryString = toQueryString(params)
-        return `${url}?${queryString}`
-    }
-    
-    return url
+  const url = baseUri + uri
+  if (params) {
+    const queryString = toQueryString(params)
+    return `${url}?${queryString}`
+  }
+
+  return url
 }
 
 function asFetchRequest(method, request) {
-    return {
-        method,
-        params: request.params,
-        body: request.body ? JSON.stringify(request.body) : undefined,
-        headers: request.headers,
-    }
+  return {
+    method,
+    params: request.params,
+    body: request.body ? JSON.stringify(request.body) : undefined,
+    headers: request.headers,
+  }
 }
 
 async function doFetch(method, request) {
-    const url = toUrl(request.base, request.uri, request.params)
-    const fetchRequest = asFetchRequest(method, request)
-    logger.debug(`FETCH REQUEST: ${sanitizeApiKey(JSON.stringify(fetchRequest))}, ${url}`)
-    
-    // eslint-disable-next-line no-undef
-    const response = await fetch(url, fetchRequest)
-    logger.debug(`RESPONSE: ${JSON.stringify(response)}`)
+  const url = toUrl(request.base, request.uri, request.params)
+  const fetchRequest = asFetchRequest(method, request)
+  logger.debug(`FETCH REQUEST: ${sanitizeApiKey(JSON.stringify(fetchRequest))}, ${url}`)
 
-    const handleResponse = selectResponseHandler(
-        response.status,
-        DEFAULT_RESPONSE_HANDLERS,
-        request.responseHandlers,
-    )
-    return handleResponse(request, response)
+  // eslint-disable-next-line no-undef
+  const response = await fetch(url, fetchRequest)
+  logger.debug(`RESPONSE: ${JSON.stringify(response)}`)
+
+  const handleResponse = selectResponseHandler(response.status, DEFAULT_RESPONSE_HANDLERS, request.responseHandlers)
+  return handleResponse(request, response)
 }
 
-////// High-level REST calls:
+/// /// High-level REST calls:
 
 async function get(request) {
-    return doFetch('get', request)
+  return doFetch('get', request)
 }
 
 async function patch(request) {
-    return doFetch('patch', request)
+  return doFetch('patch', request)
 }
 
 async function post(request) {
-    return doFetch('post', request)
+  return doFetch('post', request)
 }
 
 async function put(request) {
-    return doFetch('put', request)
+  return doFetch('put', request)
 }
 
 async function del(request) {
-    return doFetch('delete', request)
+  return doFetch('delete', request)
 }
 
-export {
-    del,
-    get,
-    patch,
-    post,
-    put,
-}
+export { del, get, patch, post, put }

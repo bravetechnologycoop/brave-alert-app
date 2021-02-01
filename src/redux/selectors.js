@@ -1,7 +1,11 @@
-import {
-    get,
-} from 'lodash'
+import { get } from 'lodash'
 
-export function getAlerts(state) {
-    return get(state, 'alerts')
+function getAlerts(state) {
+  return get(state, 'alerts')
 }
+
+function getNotifications(state) {
+  return get(state, 'notifications')
+}
+
+export { getAlerts, getNotifications }

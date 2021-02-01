@@ -11,26 +11,22 @@ import SCREEN from './ScreensEnum'
 const Stack = createStackNavigator()
 
 function RootStack() {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator mode='modal' initialRouteName='Main'>
-                <Stack.Screen
-                    name={SCREEN.MAIN}
-                    component={MainTabs}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name={SCREEN.ERROR}
-                    component={ErrorScreen}
-                    options={{
-                        header: () => {
-                            return null
-                        },
-                    }}
-                />
-            </Stack.Navigator>
-        </NavigationContainer>
-    )
+  return (
+    <NavigationContainer>
+      <Stack.Navigator mode="modal" initialRouteName="Main">
+        <Stack.Screen name={SCREEN.MAIN} component={MainTabs} options={{ headerShown: false }} />
+        <Stack.Screen
+          name={SCREEN.ERROR}
+          component={ErrorScreen}
+          options={{
+            header: () => {
+              return null
+            },
+          }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
 
 export default RootStack
