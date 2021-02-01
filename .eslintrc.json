@@ -1,41 +1,14 @@
 {
-    "env": {
-        "node": true,
-        "es6": true
-    },
-    "extends": "eslint:recommended",
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-        "ecmaVersion": 2018
-        // Uncomment for React-Native projects
-        ,
-        "emcaFeatures": {
-            "jsx": true
-        },
-        "sourceType": "module"     // Needed in order to use ECMAScript modules
-        // END Uncomment for React-Native projects
-    },
-    "rules": {
-        "indent": [
-            "error", 4, {"SwitchCase": 1}
-        ],
-        "linebreak-style": [
-            "error", "unix"
-        ]
-        // Uncomment for React-Native projects
-        ,
-        "react/jsx-uses-react": "error",
-        "react/jsx-uses-vars": "error"
-        // END Uncomment for React-Native projects
+  "extends": ["eslint-config-brave"],
+  "rules": {
+    "import/no-unresolved": ["error", { "ignore": ["@env"] }]
+  },
+  "overrides": [
+    {
+      "files": ["src/redux/slices/*"],
+      "rules": {
+        "no-param-reassign": "off"
+      }
     }
-    // Uncomment for React-Native projects
-    ,
-    "parser": "babel-eslint",
-    "plugins": [
-        "react"
-    ]
-    // END Uncomment for React-Native projects
+  ]
 }

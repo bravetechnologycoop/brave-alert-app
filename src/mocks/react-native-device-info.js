@@ -4,13 +4,18 @@
 // I really don't like this use of require in an otherwise ES6 module project, but coudln't
 // find any other way to have conditional imports. I tried rewire, I tried proxyquire,
 // I tried sinon. I tried react-native-mock. I couldn't get any of them to get in there early
-// enough to stop the import from happening. So for now, this'll have to do. Or we'll need to 
+// enough to stop the import from happening. So for now, this'll have to do. Or we'll need to
 // switch to Jest.
 
 function getUniqueId() {
-    return 'DEVICE_ID'
+  return 'DEVICE_ID'
 }
 
-export {
-    getUniqueId,
+function getVersion() {
+  return '1.3.37'
+}
+
+export default {
+  getUniqueId,
+  getVersion,
 }

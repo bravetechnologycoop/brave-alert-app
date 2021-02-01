@@ -8,25 +8,22 @@ import Logger from './Logger'
 const logger = new Logger('ErrorReportingService')
 
 function safeReportError(error, errorInfo) {
-    try {
-        logger.error(error)
+  try {
+    logger.error(error)
 
-        Sentry.withScope((scope) => {
-            if (errorInfo) {
-                scope.setExtras(errorInfo)
-            }
-            Sentry.captureException(error)
-        })
-    } catch (err) {
-        logger.error(`Error reporting error: ${JSON.stringify(err)}`)
-    }
+    Sentry.withScope(scope => {
+      if (errorInfo) {
+        scope.setExtras(errorInfo)
+      }
+      Sentry.captureException(error)
+    })
+  } catch (err) {
+    logger.error(`Error reporting error: ${JSON.stringify(err)}`)
+  }
 }
 
 function simulateCrash() {
-    throw 'This error was generated to test error handling and can be safely ignored'
+  throw new Error('This error was generated to test error handling and can be safely ignored')
 }
 
-export {
-    safeReportError,
-    simulateCrash,
-}
+export { safeReportError, simulateCrash }
