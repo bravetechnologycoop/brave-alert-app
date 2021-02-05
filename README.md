@@ -4,6 +4,13 @@
 
 1. Install your Android development environment by following the [React Native CLI Quickstart instructions](https://reactnative.dev/docs/environment-setup)
 
+1. Add the environment variable FONTAWESOME_NPM_AUTH_TOKEN.
+   One way to do this is to include the following in your `.zshrc` file and restarting your terminal.
+
+   ```
+   export FONTAWESOME_NPM_AUTH_TOKEN=<value from 1Password>
+   ```
+
 1. In the project root directory, install/update dependencies:
 
    ```
@@ -27,6 +34,13 @@
 **_ Note _** This will only work on a Mac.
 
 1. Install your iOS development environment by following the [React Native CLI Quickstart instructions](https://reactnative.dev/docs/environment-setup)
+
+1. Add the environment variable FONTAWESOME_NPM_AUTH_TOKEN.
+   One way to do this is to include the following in your `.zshrc` file and restarting your terminal.
+
+   ```
+   export FONTAWESOME_NPM_AUTH_TOKEN=<value from 1Password>
+   ```
 
 1. In the project root directory, install/update dependencies:
 
