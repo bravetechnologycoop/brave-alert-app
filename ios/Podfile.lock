@@ -259,9 +259,9 @@ PODS:
     - React-Core
   - RNReanimated (1.13.2):
     - React-Core
-  - RNScreens (2.16.1):
+  - RNScreens (2.17.1):
     - React-Core
-  - RNSentry (2.1.0):
+  - RNSentry (2.1.1):
     - React-Core
     - Sentry (= 6.0.9)
   - RNSound (0.11.0):
@@ -428,8 +428,8 @@ SPEC CHECKSUMS:
   RNDevMenu: 9f80d65b80ba1fa84e5361d017b8c854a2f05005
   RNGestureHandler: 9b7e605a741412e20e13c512738a31bd1611759b
   RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
-  RNScreens: 45c457af3d2ee9e08fc01e70da87e653d46b1198
-  RNSentry: 51972e3fe50e2fb38ae459af8c87d61f63f364db
+  RNScreens: b6c9607e6fe47c1b6e2f1910d2acd46dd7ecea3a
+  RNSentry: 6b46b6fc1d715a378fbaa5d7d43bc9ce99b500e5
   RNSound: c980916b596cc15c8dcd2f6ecd3b13c4881dbe20
   RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   Sentry: 388c9dc093b2fd3a264466a5c5b21e25959610a9
