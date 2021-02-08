@@ -1,27 +1,27 @@
 // In-house dependencies
-import SensorApiService from './SensorApiService'
-import * as FetchService from './FetchService'
+import ButtonsApiService from '../../src/services/ButtonsApiService'
+import * as FetchService from '../../src/services/FetchService'
 
 // Setup mocks for this whole test file
-jest.mock('./FetchService', () => ({
+jest.mock('../../src/services/FetchService', () => ({
   post: jest.fn(),
 }))
-jest.mock('./CredentialsService', () => ({
+jest.mock('../../src/services/CredentialsService', () => ({
   getApiKey: jest.fn().mockReturnValue('API_KEY'),
 }))
 
-describe('SensorApiService', () => {
+describe('ButtonsApiService', () => {
   describe('testRequest', () => {
     it('calls POST with the correct URI, base URL, and headers', () => {
       const expectedParameters = {
         uri: '/alert/test',
-        base: 'https://sensor.com',
+        base: 'https://buttons.com',
         headers: {
           'X-API-KEY': 'API_KEY',
         },
       }
 
-      SensorApiService.testRequest()
+      ButtonsApiService.testRequest()
 
       expect(FetchService.post).toHaveBeenCalledWith(expectedParameters)
     })
@@ -31,13 +31,13 @@ describe('SensorApiService', () => {
     it('calls POST with the correct URI, base URL, and headers', () => {
       const expectedParameters = {
         uri: 'not/in/real/life',
-        base: 'https://sensor.com',
+        base: 'https://buttons.com',
         headers: {
           'X-API-KEY': 'API_KEY',
         },
       }
 
-      SensorApiService.fakeEndpointRequest()
+      ButtonsApiService.fakeEndpointRequest()
 
       expect(FetchService.post).toHaveBeenCalledWith(expectedParameters)
     })

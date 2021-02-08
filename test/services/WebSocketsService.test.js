@@ -1,5 +1,5 @@
 // In-house dependencies
-import * as WebSocketsService from './WebSocketsService'
+import * as WebSocketsService from '../../src/services/WebSocketsService'
 
 describe('WebSocketsService', () => {
   describe('sendText', () => {

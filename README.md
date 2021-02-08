@@ -151,6 +151,8 @@ Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-env
     - `errors/` - Errors that can come up while using the services.
   - `storybook/` - Code to make the Storybook UI interface work. `index.js` sometimes needs
     tweaking, but the rest of these files will probably never been edited.
+  - `test` - Unit tests. Structure within this folder should match
+    the rest of the file structure.
 - `.env.example` - An example `.env` file that can be copied and modified to work in
   the different environments.
 - `.eslintignore` - Used so that ESLint doesn't look in the `/storybook` directory.
@@ -168,5 +170,3 @@ Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-env
 - `package-lock.json` - NPM package description. This is auto-generated and should not be
   edited directly.
 - `README.md` - The README.
-
-Test files live in the same folder the file that they are testing and end with `.test.js`.
