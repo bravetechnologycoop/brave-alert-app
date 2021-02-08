@@ -6,7 +6,7 @@ import { post } from './FetchService'
 import { getApiKey } from './CredentialsService'
 
 const buttonRequest = {
-  base: BUTTONS_BASE_URL,
+  base: `https://${BUTTONS_BASE_URL}`,
   headers: {
     'X-API-KEY': getApiKey(),
   },

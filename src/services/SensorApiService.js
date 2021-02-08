@@ -6,7 +6,7 @@ import { post } from './FetchService'
 import { getApiKey } from './CredentialsService'
 
 const sensorRequest = {
-  base: SENSOR_BASE_URL,
+  base: `https://${SENSOR_BASE_URL}`,
   headers: {
     'X-API-KEY': getApiKey(),
   },
