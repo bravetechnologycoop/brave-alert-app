@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 
+// Logger class to provide consistent, informative log output
+
 import { padEnd, padStart } from 'lodash'
 
 const DEBUG = 'DEBUG'
