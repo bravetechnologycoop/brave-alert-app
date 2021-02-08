@@ -4,7 +4,7 @@
 import sinon from 'sinon' // TODO Use Jest's fake timers instead after upgradeing to Jest 27
 
 // In-house dependencies
-import Logger from './Logger'
+import Logger from '../../src/services/Logger'
 
 // Setup logger
 const logger = new Logger('testFileName')

@@ -2,7 +2,7 @@
 import { getUniqueId } from 'react-native-device-info'
 
 // In-house dependencies
-import * as CredentialsService from './CredentialsService'
+import * as CredentialsService from '../../src/services/CredentialsService'
 
 // Setup mocks for this whole test file
 getUniqueId.mockReturnValue('DEVICE_ID')
