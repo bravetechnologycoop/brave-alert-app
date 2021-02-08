@@ -1,4 +1,4 @@
-// Functions to start and stop sounds for alerts and messagess
+// Functions to start and stop sounds for alerts and notifications
 
 // Third-party dependencies
 import Sound from 'react-native-sound'

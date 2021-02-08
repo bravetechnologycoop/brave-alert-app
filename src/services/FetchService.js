@@ -1,4 +1,4 @@
-// Nuts and bolts behind how API calls are formed, sent, and handled
+// Functions for forming, sending, and handling HTTPS requests
 
 // Third-party dependencies
 import { isFunction } from 'lodash'
