@@ -1,5 +1,59 @@
 # brave-alert-app [![Build Status](https://travis-ci.com/bravetechnologycoop/brave-alert-app.svg?branch=main)](https://travis-ci.com/bravetechnologycoop/brave-alert-app)
 
+## How to deploy a new version
+
+1. Update the `version` field in `package.json` (note that it must be semantically greater than all previous versions), commit, and push
+
+1. Go to https://bitrise.io
+
+1. If you are deploying to **production**, click on the `brave-alert-app` App
+
+   If you are deploying to **staging**, click on the `brave-alert-app-brave1` App
+
+1. Click "Start/Schedule a Build"
+
+1. [Optional] Change the branch that you want to deploy (by default, the `production` branch is used for **production** and the `main` branch is used for **staging**)
+
+1. If you are deploying to **iOS**, select the Workflow "deploy-ios"
+
+   If you are deploying to **Android**, select the Workflow "deploy-android"
+
+   and click "Start Build"
+
+1. Once the "deploy-android" build is complete:
+
+   1. Go to https://play.google.com/console/u/0/developers
+
+   1. TODO: Add instructions on how to have this release reviewed
+
+1. Once the "deploy-ios" build is complete:
+
+   1. Go to https://appstoreconnect.apple.com/apps
+
+   1. If you are deploying to **production**, select the "Alert App" App
+
+      If you are deploying to **staging**, select the "B1 Brave Alert" App
+   
+   1. Click "Test Flight"
+
+   1. Expand the newest version
+
+   1. Click on the "Manage" link in the Status "Missing Compliance Manage"
+
+      1. This app uses HTTPS, so answer "Yes" to "Does your app use encryption?"
+
+      1. Answer "No" for all subsequent questions
+
+         - "Does your app qualify for any of the exemptions provided in Category 5, Part 2 of the U.S. Export Administration Regulations?"
+
+         - "Does your app implement any encryption algorithms that are proprietary or not accepted as standards by international standard bodies (IEEE, IETF, ITU, etc.)?"
+
+         - "Does your app implement any standard encryption algorithms instead of, or in addition to, using or accessing the encryption within Apple’s operating system?"
+      
+      1. Click "Start Internal Testing"
+   
+   1. TODO: Add instructions on how to have this release reviewed
+
 ## How to run locally on an Android emulator
 
 1. Install your Android development environment by following the [React Native CLI Quickstart instructions](https://reactnative.dev/docs/environment-setup)
@@ -162,6 +216,7 @@ Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-env
 - `.travis.yml` - Travis CI configuration.
 - `app.json` - I'm not sure.
 - `babel.config.js` - I'm not sure.
+- `bitrise.yml` - Configuration for our BitRise deployment pipelines.
 - `CHANGELOG.md` - The changelog.
 - `index.js` - Entrypoint into the app.
 - `LICENSE` - Our open source license.
@@ -170,3 +225,287 @@ Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-env
 - `package-lock.json` - NPM package description. This is auto-generated and should not be
   edited directly.
 - `README.md` - The README.
+
+# How to add a new iOS App
+
+1. Create a new Bundle ID
+
+   1. Go to https://developer.apple.com/account/resources/identifiers/list
+
+   1. Click on the "+" button beside "Identifiers"
+
+   1. Select "App IDs" and click "Continue"
+
+   1. Select "App" and click "Continue"
+
+   1. In "Description" provide a short description. In "Bundle ID" provide your new bundle ID (for example `coop.brave.example.bundleid`). Do not select any capabilities (they can be added later, if necessary). Click "Continue"
+
+   1. Review the information and click "Register"
+
+1. Create a new App
+
+   1. Go to https://appstoreconnect.apple.com/apps
+
+   1. Click on the "+" button beside "Apps" and click "New App"
+
+   1. Under "Platforms", select "iOS"
+
+   1. Under "Name", provide a name for the app
+
+   1. Under "Primary language", select a primary language for the app
+
+   1. Under "Bundle ID", select the Bundle ID that you created above
+
+   1. Under "SKU", provide the same value as your Bundle ID
+
+   1. Under "User Access", select "Full Access"
+
+   1. Click "Create"
+
+1. Create a provisioning profile
+
+   1. Go to https://developer.apple.com/account/resources/profiles/list
+
+   1. Click on the "+" button beside "Profiles"
+
+   1. Select "App Store" and click "Continue"
+
+   1. Select the newly created app from the dropdown list and click "Continue"
+
+   1. Select the iOS Distribution certificate that you plan to use for the app
+
+   1. Give the profile a name and click "Generate"
+
+   1. Download the profile by clicking "Download"
+
+# How to add a new App in BitRise
+
+1. Go to https://app.bitrise.io/apps/add
+
+1. Select an owner
+
+   1. Under "Choose Account", select "Brave Technology Coop"
+
+   1. Under "Set Privacy of the App", select "Private"
+
+   1. Click "Next"
+
+1. Choose a repo
+
+   1. Click on "Other/Manual"
+
+   1. Under "Git repository (clone) URL", put "git@github.com:bravetechnologycoop/brave-alert-app.git"
+
+   1. Click "Next"
+
+1. Setup repository access
+
+   1. Click "Add own SSH"
+
+   1. Copy the RSA SSH private key for GitHub from 1Password --> Brave Alert App --> "Alert App GitHub Private SSH Deploy Key (for BitRise)" and paste into the textbox
+
+   1. Click "All done"
+
+1. Choose branch
+
+   1. Select the default branch for the deployments. Note that this branch **must** have a `bitrise.yml` file in its root
+
+   1. Click "Next"
+
+1. Wait for the project scanner to finish
+
+   1. It should recognize it as a React Native project
+
+   1. The "Specify module" textbox should be autofilled with "app"
+
+   1. Click "Next"
+
+   1. In the "Specify Variant" textbox, put "all"
+
+   1. Click "Next"
+
+   1. The "Project or Workspace path" should automatically select "ios/BraveAlertApp.xcworkspace"
+
+   1. The "Scheme name" should automatically select "BraveAlertApp"
+
+   1. For "Select ipa export method", choose "app-store"
+
+   1. If everything looks good, click "Confirm"
+
+1. App icon
+
+   1. Click "Skip for Now"
+
+1. Webhook setup
+
+   1. Click "Skip the Webhook registration"
+
+1. It will automatically kick off a build for you. This build will fail because the Secrets haven't been set yet
+
+1. Navigate to your newly created BitRise App
+
+1. For some reason, it didn't use the `bitrise.yml` in my project, so to fix that
+
+   1. Navigate to Workflow --> bitrise.yml
+
+   1. Click "Store in app repository"
+
+   1. Click "Update settings"
+
+   1. Click "Continue"
+
+1. Add Secrets
+
+   1. Navigate to your app --> Workflow --> Secrets. Add the following values
+
+      - `FONTAWESOME_NPM_AUTH_TOKEN`: get value from 1Password --> Shared --> FontAwesome --> Pro NPM Package Token
+
+      - `SENTRY_AUTH_TOKEN`: get value from https://sentry.io/settings/account/api/auth-tokens/
+
+      - `SENTRY_DSN`: get value from https://sentry.io/settings/brave-technology-coop/projects/brave-alert-app/keys/
+
+      - `SENTRY_ENV`: the Sentry environment that you want to use for all errors sent to Sentry from apps built through these BitRise workflows. For example "production"
+
+      - `TEAM`: get value from https://developer.apple.com/account/#/membership
+
+      - `CODE_SIGNING_IDENTITY`: value should be `iPhone Distribution: Brave Technology Coop ($TEAM)`
+
+      - `PROVISIONING_PROFILE_SPECIFIER`: get the name of the provisioning profile from https://developer.apple.com/account/resources/profiles/list and then the value should be `$TEAM/ProvisioningProfileName`
+
+      - `CF_BUNDLE_IDENTIFIER`: get value from https://appstoreconnect.apple.com/apps --> your app --> App Store --> App Information --> General Information --> Bundle ID
+
+      - `CF_BUNDLE_DISPLAY_NAME`: seems like this can be anything. I'm not sure what it's used for
+
+      - `SENSOR_BASE_URL`: the base URL for API calls to the Sensor server (do not include `https://`) and with no slash at the end, for example `brave-sensor.com`
+
+      - `BUTTONS_BASE_URL`: the base URL for API calls to the Buttons server (do not include `https://`) and with no slash at the end, for example `brave-buttons.com`
+
+      - `BUNDLE_ID`: get value from https://play.google.com/console/u/0/developers . Look at the string immediately below the name of your Android app in the list of apps, for example `coop.brave.example.bundleid`
+
+1. Add Code Signing
+
+   1. Navigate to your app --> Workflow --> Code Signing
+
+   1. Upload your iOS provisioning profile (get from https://developer.apple.com/account/resources/profiles/list). You will see an error message saying that the profile doesn't match the certificate
+
+   1. Upload your iOS Code Signing Certificate
+
+      1. Download your certificate from https://developer.apple.com/account/resources/certificates/list . Note that this must be the same certificate used when the iOS provisioning profile was created
+
+      1. Follow instructions at https://calvium.com/how-to-make-a-p12-file/ starting at STEP 3 to create the corresponding .p12 file. Please put a password!
+
+      1. Upload the file and add its password. You should see the provisioning profile error message disappear
+
+   1. Upload Android Keystore File
+
+      1. Create an Android Keystore File following the instructions here: https://developer.android.com/studio/publish/app-signing#generate-key
+
+      1. Upload the genereated keystore file
+
+      1. Enter the keystore password, the keystore alias, and the key password
+
+      1. Click "Save metadata"
+
+      1. Click "OK"
+
+   1. Upload Service Account JSON Key
+
+      1. Under "File Storage ID", type "SERVICE_ACCOUNT_JSON_KEY"
+
+      1. Upload the Google Service ID. Get this file from 1Password --> Brave Alert App --> Android service account key (Brave Alert App)
+
+1. Update the default Stack
+
+   1. Navigate to your app --> Workflow --> Stack
+
+   1. Under "Default Stack", select "Xcode 12.3.x, on macOS 10.15.6 (Catalina)"
+
+   1. Click "Save"
+
+1. Add your Apple Service Connection
+
+   1. Navigate to your app --> Team
+
+   1. In the "Apple Service connection" section, under "API key authentication (recommended)", select "Brave"
+
+1. Generate your first Android APK
+
+   1. Navigate to your app
+
+   1. Click on "Start/Schedule a Build"
+
+   1. Under "Workflow", select "deploy-android"
+
+   1. Click "Start Build"
+
+   1. Wait for it to successfully finish the "Deploy to Bitrise.io - Apps, Logs, Artifacts" step (Note that it will have failed on the "Google Play Deploy" step. This is normal and expected)
+
+# How to add a new Android App
+
+1. Create new App
+
+   1. Go to https://play.google.com/console/u/0/developers/
+
+   1. Click on "Create app"
+
+   1. Under "App name" provide a name for the app
+
+   1. Under "Default language", select a default language for the app
+
+   1. Under "App or game", select "App"
+
+   1. Under "Free or paid", select "Free"
+
+   1. Under "Declarations", check the boxes
+
+   1. Click "Create app"
+
+1. From the Dashboard, under "Start testing now",
+
+   1. Click "View tasks"
+
+   1. Click "Select testers"
+
+   1. Select your testers
+
+   1. Click "Save changes"
+
+   1. Click "Create a new release"
+
+   1. Click "Manage app signing"
+
+   1. Select "Opt out of Play App Signing"
+
+   1. Click "Update"
+
+   1. Click "Opt out"
+
+   1. Download your first APK from BitRise
+
+      1. Go to https://app.bitrise.io/dashboard
+
+      1. Open the first build of the "deploy-android" workflow that successfully completed the "Deploy to Bitrise.io - Apps, Logs, Artifacts" step (Note that it will have failed on the "Google Play Deploy" step. This is normal and expected)
+
+      1. Click on "Apps & Artifacts"
+
+      1. Download the "app-release-bitrise-signed.apk" file
+
+   1. Under "App bundles and APKs", upload the APK that you just downloaded
+
+   1. Under "Release name", give your release a name
+
+   1. Under "Release notes", give your release some notes
+
+   1. Click "Save"
+
+   1. Click "Review Release"
+
+   1. Click "Start rollout to Internal testing"
+
+   1. Click "Rollout"
+
+1. From the Dashboard, under "Set up your app"
+
+   1. Click "View Tasks"
+
+   1. Complete all the tasks
