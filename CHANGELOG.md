@@ -30,6 +30,7 @@ the code was deployed.
 - SoundService to be used for alert and message noises (CU-d8qufg).
 - CredentialsService to handle the Brave Alert API's API key (CU-d8qufg).
 - Services tests (CU-d8qufg).
+- `bitrise.yml` for deployment using BitRise (CU-d8qujp).
 
 ### Removed
 
