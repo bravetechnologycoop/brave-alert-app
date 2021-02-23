@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     width: 75,
   },
   categoryText: {
-    color: colors.fontMedium,
+    color: colors.greyscaleLight,
     fontSize: 20,
   },
   columnLayout: {
@@ -55,12 +55,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   roomText: {
-    color: colors.fontDarkest,
+    color: colors.greyscaleDarkest,
     fontSize: 30,
     alignContent: 'flex-end',
   },
   separator: {
-    color: colors.fontMedium,
+    color: colors.greyscaleLight,
     fontSize: 20,
     paddingHorizontal: 10,
   },
@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   timeTextNormal: {
-    color: colors.fontAlertNormal,
+    color: colors.alertActive,
   },
   timeTextUrgent: {
-    color: colors.fontAlertUrgent,
+    color: colors.urgentActive,
   },
 })
 

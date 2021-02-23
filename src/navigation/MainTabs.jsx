@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHomeAlt, faExclamationCircle, faCheckSquare, faCommentAlt } from '@fortawesome/pro-light-svg-icons'
 
 // In-house dependencies
+import colors from '../resources/colors'
 import ExampleScreen from '../screens/ExampleScreen'
 import ExampleScreen2 from '../screens/ExampleScreen2'
 import SCREEN from './ScreensEnum'
@@ -17,8 +18,8 @@ function MainTabs() {
       headerMode="screen" // See https://reactnavigation.org/docs/stack-navigator#set-headermode-to-screen
       initialRouteName={SCREEN.EXAMPLE}
       tabBarOptions={{
-        activeTintColor: '#00857A',
-        inactiveTintColor: '#000000',
+        activeTintColor: colors.primaryDark,
+        inactiveTintColor: colors.greyscaleDarkest,
       }}
     >
       <Tab.Screen

@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: colors.backgroundErrors,
+    backgroundColor: colors.urgentActive,
   },
 })
 
