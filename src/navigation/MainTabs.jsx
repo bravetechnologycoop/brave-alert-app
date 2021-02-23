@@ -9,6 +9,7 @@ import colors from '../resources/colors'
 import HomeScreen from '../screens/HomeScreen'
 import ExampleScreen from '../screens/ExampleScreen'
 import ExampleScreen2 from '../screens/ExampleScreen2'
+import ContactScreen from '../screens/ContactScreen'
 import SCREEN from './ScreensEnum'
 
 function MainTabs() {
@@ -49,7 +50,7 @@ function MainTabs() {
       />
       <Tab.Screen
         name={SCREEN.CONTACT}
-        component={ExampleScreen2}
+        component={ContactScreen}
         options={{
           tabBarLabel: 'Contact',
           tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faCommentAlt} size={size} color={color} />,

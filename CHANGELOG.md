@@ -36,6 +36,7 @@ the code was deployed.
 - ContactBraveBoxes component (CU-hjwctk).
 - HomeScreenInstructions component (CU-hjwctk).
 - Roboto font (CU-hjwctk).
+- Contact screen (CU-hjwg2y).
 
 ### Removed
 
