@@ -5,6 +5,7 @@ const SCREEN = {
   EXAMPLE2: 'ExampleScreen2',
   MAIN: 'MainScreen',
   NOTIFICATIONS: 'NotificationsScreen',
+  HOME: 'HomeScreen',
 }
 
 export default SCREEN

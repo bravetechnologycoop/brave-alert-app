@@ -6,6 +6,7 @@ import { faHomeAlt, faExclamationCircle, faCheckSquare, faCommentAlt } from '@fo
 
 // In-house dependencies
 import colors from '../resources/colors'
+import HomeScreen from '../screens/HomeScreen'
 import ExampleScreen from '../screens/ExampleScreen'
 import ExampleScreen2 from '../screens/ExampleScreen2'
 import SCREEN from './ScreensEnum'
@@ -23,8 +24,8 @@ function MainTabs() {
       }}
     >
       <Tab.Screen
-        name={SCREEN.EXAMPLE}
-        component={ExampleScreen}
+        name={SCREEN.HOME}
+        component={HomeScreen}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faHomeAlt} size={size} color={color} />,
