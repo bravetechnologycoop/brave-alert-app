@@ -9,11 +9,13 @@ import colors from '../../resources/colors'
 
 const styles = StyleSheet.create({
   headerText: {
+    color: colors.greyscaleDarker,
     fontFamily: 'Roboto-Medium',
     fontSize: 14,
     marginBottom: 5,
   },
   bodyText: {
+    color: colors.greyscaleDark,
     fontFamily: 'Roboto-Regular',
     fontSize: 14,
   },
