@@ -1,7 +1,7 @@
 // Third-party dependencies
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 
 // In-house dependencies
@@ -16,7 +16,6 @@ import { get, HTTP_STATUS } from '../services/FetchService'
 import { useSafeHandler } from '../hooks'
 import colors from '../resources/colors'
 import SCREEN from '../navigation/ScreensEnum'
-import { setLocationName } from '../redux/slices/locationSlice'
 import { getLocationName } from '../redux/selectors'
 import ButtonWithCheckmark from '../components/ButtonWithCheckmark'
 import FormTextInput from '../components/FormTextInput'
@@ -61,10 +60,6 @@ const styles = StyleSheet.create({
 })
 
 function ContactScreen() {
-  // TODO Remove this when it's done during the real device designation process
-  const dispatch = useDispatch()
-  dispatch(setLocationName('My Fake Location'))
-
   // Using component state for these values because this state doesn't need to be shared and isn't important to retain
   logger.debug('Set default values')
   const defaultValues = {

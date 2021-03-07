@@ -6,6 +6,7 @@ const SCREEN = {
   HOME: 'HomeScreen',
   MAIN: 'MainScreen',
   NOTIFICATIONS: 'NotificationsScreen',
+  ONBOARDING: 'OnboardingScreen',
 }
 
 export default SCREEN
