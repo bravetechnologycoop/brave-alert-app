@@ -6,26 +6,6 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import colors from '../../resources/colors'
 import images from '../../resources/images'
 
-function HistoricAlert(props) {
-  const { roomName, time, category, isUrgent } = props
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.layout}>
-        <Image style={styles.alertIcon} source={isUrgent ? images.alert_icon_urgent : images.alert_icon} />
-        <View style={styles.columnLayout}>
-          <View style={styles.summaryView}>
-            <Text style={styles.categoryText}>{category}</Text>
-            {category !== undefined && <Text style={styles.separator}>|</Text>}
-            <Text style={[styles.timeText, isUrgent ? styles.timeTextUrgent : styles.timeTextNormal]}>{time}</Text>
-          </View>
-          <Text style={styles.roomText}>{roomName}</Text>
-        </View>
-      </View>
-    </View>
-  )
-}
-
 const styles = StyleSheet.create({
   alertIcon: {
     flex: 1,
@@ -78,5 +58,25 @@ const styles = StyleSheet.create({
     color: colors.urgentActive,
   },
 })
+
+function HistoricAlert(props) {
+  const { roomName, time, category, isUrgent } = props
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.layout}>
+        <Image style={styles.alertIcon} source={isUrgent ? images.alert_icon_urgent : images.alert_icon} />
+        <View style={styles.columnLayout}>
+          <View style={styles.summaryView}>
+            <Text style={styles.categoryText}>{category}</Text>
+            {category !== undefined && <Text style={styles.separator}>|</Text>}
+            <Text style={[styles.timeText, isUrgent ? styles.timeTextUrgent : styles.timeTextNormal]}>{time}</Text>
+          </View>
+          <Text style={styles.roomText}>{roomName}</Text>
+        </View>
+      </View>
+    </View>
+  )
+}
 
 export default HistoricAlert

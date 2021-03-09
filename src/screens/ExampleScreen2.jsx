@@ -44,24 +44,24 @@ function ExampleScreen2() {
   }
 
   function handleCallFakeEndpoint() {
-    async function _handle() {
+    async function handle() {
       await SensorApiService.fakeEndpointRequest()
     }
 
     fireFakeEndpointOptions.reset()
-    fireFakeEndpoint(_handle, {
+    fireFakeEndpoint(handle, {
       rollbackScreen: SCREEN.EXAMPLE2,
     })
   }
 
   function handleCallTestApi() {
-    async function _handle() {
+    async function handle() {
       const response = await ButtonsApiService.testRequest()
       logger.info(`*** testResponse *** ${JSON.stringify(response)}`)
     }
 
     fireTestRequestOptions.reset()
-    fireTestRequest(_handle, {
+    fireTestRequest(handle, {
       rollbackScreen: SCREEN.EXAMPLE2,
     })
   }

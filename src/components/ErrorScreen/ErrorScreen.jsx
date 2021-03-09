@@ -3,6 +3,14 @@ import { Button, StyleSheet, Text, View } from 'react-native'
 import { get } from 'lodash'
 import colors from '../../resources/colors'
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: colors.urgentActive,
+  },
+})
+
 function ErrorScreen(props) {
   const { navigation, route } = props
   const originalScreen = get(route, 'params.originalScreen', null)
@@ -24,13 +32,5 @@ function ErrorScreen(props) {
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: colors.urgentActive,
-  },
-})
 
 export default ErrorScreen
