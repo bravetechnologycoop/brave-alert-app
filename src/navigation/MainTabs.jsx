@@ -41,7 +41,7 @@ function MainTabs() {
       />
       <Tab.Screen
         name={SCREEN.NOTIFICATIONS}
-        component={ExampleScreen2}
+        component={ExampleScreen}
         options={{
           tabBarLabel: 'Notifications',
           tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faCheckSquare} size={size} color={color} />,
