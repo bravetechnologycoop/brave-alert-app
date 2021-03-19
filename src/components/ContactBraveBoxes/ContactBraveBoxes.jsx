@@ -24,11 +24,11 @@ function ContactBraveBoxes() {
     <>
       <InfoBox drawBorder faIcon={faPhoneRotary} color={colors.primaryMedium}>
         <Text style={styles.headerText}>Phone Brave</Text>
-        <Text style={styles.bodyText}>+1 222 333 4444</Text>
+        <Text style={styles.bodyText}>+1-833-833-2100</Text>
       </InfoBox>
       <InfoBox drawBorder faIcon={faEnvelope} color={colors.primaryMedium}>
         <Text style={styles.headerText}>Email Brave</Text>
-        <Text style={styles.bodyText}>email@brave.coop</Text>
+        <Text style={styles.bodyText}>contact@brave.coop</Text>
       </InfoBox>
     </>
   )
