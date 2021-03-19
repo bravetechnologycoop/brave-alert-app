@@ -81,12 +81,12 @@ function HomeScreenInstructions(props) {
             <InfoBox faIcon={faSensorOn} color={colors.primaryMedium}>
               <Text style={styles.infoBoxBodyText}>Brave Sensors detect their surroundings and send alerts.</Text>
             </InfoBox>
-            <InfoBox faIcon={faRunning} color={colors.primaryLight} drawIconCircle drawIconSlash>
+            <InfoBox faIcon={faRunning} color={colors.urgentActive} drawIconCircle drawIconSlash>
               <Text style={styles.infoBoxBodyText}>
                 Brave Sensors send this alert when there is <Bold>no movement</Bold> in the space.
               </Text>
             </InfoBox>
-            <InfoBox faIcon={faHourglassEnd} color={colors.primaryDark}>
+            <InfoBox faIcon={faHourglassEnd} color={colors.alertActive} drawIconCircle>
               <Text style={styles.infoBoxBodyText}>Brave Sensors send this alert when the space has been occupied for a long time.</Text>
             </InfoBox>
           </>

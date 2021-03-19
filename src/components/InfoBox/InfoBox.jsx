@@ -50,7 +50,7 @@ function InfoBox(props) {
     <View style={[styles.container, drawBorder ? { borderColor: color, borderWidth: 2 } : null]}>
       <View style={[styles.iconContainer, drawIconCircle ? { borderColor: color, borderWidth: 2 } : null]}>
         {drawIconSlash && <View style={[styles.slashView, { borderColor: color }]} />}
-        <FontAwesomeIcon size={drawIconCircle ? iconSize - 12 : iconSize} icon={faIcon} color={color} />
+        <FontAwesomeIcon size={drawIconCircle ? iconSize - 16 : iconSize} icon={faIcon} color={color} />
       </View>
       <View style={styles.textContainer}>{children}</View>
     </View>
