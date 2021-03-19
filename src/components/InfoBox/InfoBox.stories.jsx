@@ -8,7 +8,7 @@ import { Text, View } from 'react-native'
 import InfoBox from '.'
 
 storiesOf('InfoBox', module)
-  .addDecorator(story => <View style={{height: 160}}>{story()}</View>)
+  .addDecorator(story => <View style={{ height: 160 }}>{story()}</View>)
   .add('Box With Border', () => (
     <InfoBox drawBorder faIcon={faPhoneRotary}>
       <Text>Hello I Am A Phone</Text>

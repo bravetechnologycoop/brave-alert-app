@@ -7,5 +7,5 @@ import { storiesOf } from '@storybook/react-native'
 import ContactBraveBoxes from '.'
 
 storiesOf('ContactBraveBoxes', module)
-  .addDecorator(story => <View style={{height: 300}}>{story()}</View>)
+  .addDecorator(story => <View style={{ height: 300 }}>{story()}</View>)
   .add('Normal', () => <ContactBraveBoxes />)
