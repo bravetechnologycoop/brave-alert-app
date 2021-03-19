@@ -3,14 +3,14 @@ import React from 'react'
 import { Button } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useSelector, useDispatch } from 'react-redux'
+import { BUTTONS_BASE_URL, SENSOR_BASE_URL } from '@env'
 
 // In-house dependencies
 import { ALERT_TYPE } from '../constants'
 import HistoricAlert from '../components/HistoricAlert'
 import { getAlerts } from '../redux/selectors'
 import { alertUrgentified } from '../redux/slices/alertsSlice'
-import ButtonsApiService from '../services/ButtonsApiService'
-import SensorApiService from '../services/SensorApiService'
+import AlertApiService from '../services/AlertApiService'
 import { useSafeHandler } from '../hooks'
 import SCREEN from '../navigation/ScreensEnum'
 import { startAlarm, stopAlarm } from '../services/SoundService'
@@ -45,7 +45,7 @@ function ExampleScreen2() {
 
   function handleCallFakeEndpoint() {
     async function handle() {
-      await SensorApiService.fakeEndpointRequest()
+      await AlertApiService.fakeEndpointRequest(SENSOR_BASE_URL)
     }
 
     fireFakeEndpointOptions.reset()
@@ -56,7 +56,7 @@ function ExampleScreen2() {
 
   function handleCallTestApi() {
     async function handle() {
-      const response = await ButtonsApiService.testRequest()
+      const response = await AlertApiService.testRequest(BUTTONS_BASE_URL)
       logger.info(`*** testResponse *** ${JSON.stringify(response)}`)
     }
 
@@ -67,7 +67,7 @@ function ExampleScreen2() {
   }
 
   function handleCallTestMessage() {
-    ButtonsApiService.testMessage()
+    AlertApiService.testMessage(BUTTONS_BASE_URL)
   }
 
   function handleStartAlarm() {

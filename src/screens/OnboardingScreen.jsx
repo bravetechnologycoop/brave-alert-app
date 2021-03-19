@@ -3,8 +3,11 @@ import React from 'react'
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { faCheckSquare, faExclamationCircle, faRunning } from '@fortawesome/pro-light-svg-icons'
+import { BUTTONS_BASE_URL } from '@env'
 
 // In-house dependencies
+import { useSafeHandler } from '../hooks'
+import AlertApiService from '../services/AlertApiService'
 import SCREEN from '../navigation/ScreensEnum'
 import BasicButton from '../components/BasicButton'
 import Cards from '../components/Cards/Cards'
@@ -51,10 +54,29 @@ const styles = StyleSheet.create({
 
 function OnboardingScreen() {
   const navigation = useNavigation()
+  const [fireDesignateDeviceRequest, fireDesignateDeviceRequestOptions] = useSafeHandler()
 
   function handleButtonPress() {
-    // TODO Change this to open the connection pop-up
-    navigation.navigate(SCREEN.MAIN)
+    async function handle() {
+      // TODO generate a random verification code and put in the store
+      const verificationCode = 'abc123'
+
+      // Log device ID and verification code
+      const promises = [
+        AlertApiService.designateDeviceRequest(BUTTONS_BASE_URL, verificationCode),
+        // TODO hit the Sensor endpoint once it has the right version of brave-alert-lib
+        // AlertApiService.designateDeviceRequest(SENSOR_BASE_URL, verificationCode),
+      ]
+      await Promise.all(promises)
+
+      // TODO Change this to open the connection pop-up
+      navigation.navigate(SCREEN.MAIN)
+    }
+
+    fireDesignateDeviceRequestOptions.reset()
+    fireDesignateDeviceRequest(handle, {
+      rollbackScreen: SCREEN.ONBOARDING,
+    })
   }
 
   return (
