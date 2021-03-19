@@ -15,9 +15,7 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     color: colors.primaryDark,
-    fontFamily: 'Futura',
-    fontStyle: 'normal',
-    fontWeight: 'bold',
+    fontFamily: 'Roboto-Black',
     fontSize: 25,
     lineHeight: 30,
     textAlign: 'center',
