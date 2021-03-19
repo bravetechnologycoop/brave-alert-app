@@ -3,11 +3,13 @@ import React from 'react'
 import DeviceInfo from 'react-native-device-info'
 import * as Sentry from '@sentry/react-native'
 import { Provider } from 'react-redux'
+import { BUTTONS_BASE_URL, SENSOR_BASE_URL } from '@env'
 
 // In-house dependencies
 import { SENTRY_DSN, SENTRY_ENV } from '@env'
 import RootStack from './navigation/RootStack'
 import store from './redux/store'
+import AlertApiService from './services/AlertApiService'
 
 // Setup Sentry
 if (SENTRY_DSN && SENTRY_ENV) {
@@ -17,6 +19,10 @@ if (SENTRY_DSN && SENTRY_ENV) {
     environment: SENTRY_ENV,
   })
 }
+
+// Setup Web Sockets
+AlertApiService.startWebSocket(BUTTONS_BASE_URL)
+AlertApiService.startWebSocket(SENSOR_BASE_URL)
 
 export default function App() {
   return (

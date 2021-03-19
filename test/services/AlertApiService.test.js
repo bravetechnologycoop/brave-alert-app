@@ -1,5 +1,5 @@
 // In-house dependencies
-import ButtonsApiService from '../../src/services/ButtonsApiService'
+import AlertApiService from '../../src/services/AlertApiService'
 import * as FetchService from '../../src/services/FetchService'
 
 // Setup mocks for this whole test file
@@ -10,18 +10,18 @@ jest.mock('../../src/services/CredentialsService', () => ({
   getApiKey: jest.fn().mockReturnValue('API_KEY'),
 }))
 
-describe('ButtonsApiService', () => {
+describe('AlertApiService', () => {
   describe('testRequest', () => {
     it('calls POST with the correct URI, base URL, and headers', () => {
       const expectedParameters = {
+        base: 'https://fakeBaseUrl',
         uri: '/alert/test',
-        base: 'https://buttons.com',
         headers: {
           'X-API-KEY': 'API_KEY',
         },
       }
 
-      ButtonsApiService.testRequest()
+      AlertApiService.testRequest('fakeBaseUrl')
 
       expect(FetchService.post).toHaveBeenCalledWith(expectedParameters)
     })
@@ -30,14 +30,34 @@ describe('ButtonsApiService', () => {
   describe('fakeEndpointRequest', () => {
     it('calls POST with the correct URI, base URL, and headers', () => {
       const expectedParameters = {
-        uri: 'not/in/real/life',
-        base: 'https://buttons.com',
+        base: 'https://fakeBaseUrl',
+        uri: '/not/in/real/life',
         headers: {
           'X-API-KEY': 'API_KEY',
         },
       }
 
-      ButtonsApiService.fakeEndpointRequest()
+      AlertApiService.fakeEndpointRequest('fakeBaseUrl')
+
+      expect(FetchService.post).toHaveBeenCalledWith(expectedParameters)
+    })
+  })
+
+  describe('designateDeviceRequest', () => {
+    it('calls POST with the correct URI, base URL, headers, and body', () => {
+      const expectedParameters = {
+        base: 'https://fakeBaseUrl',
+        uri: '/alert/designatedevice',
+        headers: {
+          'X-API-KEY': 'API_KEY',
+          'Content-Type': 'application/json',
+        },
+        body: {
+          verificationCode: 'fakeVerificationCode',
+        },
+      }
+
+      AlertApiService.designateDeviceRequest('fakeBaseUrl', 'fakeVerificationCode')
 
       expect(FetchService.post).toHaveBeenCalledWith(expectedParameters)
     })
