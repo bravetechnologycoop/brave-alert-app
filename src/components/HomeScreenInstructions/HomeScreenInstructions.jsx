@@ -65,10 +65,14 @@ function HomeScreenInstructions(props) {
               <Text style={styles.infoBoxBodyText}>When a resident presses their Brave button you will receive an alert.</Text>
             </InfoBox>
             <InfoBox faIcon={faBell} color={colors.alertActive} drawIconCircle>
-              <Text style={styles.infoBoxBodyText}>When a button is pressed only one time it is a <Bold>Safety Alert.</Bold></Text>
+              <Text style={styles.infoBoxBodyText}>
+                When a button is pressed only one time it is a <Bold>Safety Alert.</Bold>
+              </Text>
             </InfoBox>
             <InfoBox faIcon={faExclamationCircle} color={colors.urgentActive}>
-              <Text style={styles.infoBoxBodyText}>When a button is pressed two or more times it is an <Bold>Urgent Alert.</Bold></Text>
+              <Text style={styles.infoBoxBodyText}>
+                When a button is pressed two or more times it is an <Bold>Urgent Alert.</Bold>
+              </Text>
             </InfoBox>
           </>
         )}
@@ -78,7 +82,9 @@ function HomeScreenInstructions(props) {
               <Text style={styles.infoBoxBodyText}>Brave Sensors detect their surroundings and send alerts.</Text>
             </InfoBox>
             <InfoBox faIcon={faRunning} color={colors.primaryLight} drawIconCircle drawIconSlash>
-              <Text style={styles.infoBoxBodyText}>Brave Sensors send this alert when there is <Bold>no movement</Bold> in the space.</Text>
+              <Text style={styles.infoBoxBodyText}>
+                Brave Sensors send this alert when there is <Bold>no movement</Bold> in the space.
+              </Text>
             </InfoBox>
             <InfoBox faIcon={faHourglassEnd} color={colors.primaryDark}>
               <Text style={styles.infoBoxBodyText}>Brave Sensors send this alert when the space has been occupied for a long time.</Text>

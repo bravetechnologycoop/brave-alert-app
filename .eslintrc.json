@@ -2,7 +2,8 @@
   "extends": ["eslint-config-brave"],
   "rules": {
     "import/no-unresolved": ["error", { "ignore": ["@env"] }],
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/jsx-one-expression-per-line": "off"
   },
   "overrides": [
     {
