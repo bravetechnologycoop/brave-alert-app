@@ -40,7 +40,7 @@ function MainTabs() {
         }}
       />
       <Tab.Screen
-        name={SCREEN.NOTIFICATIONS}
+        name={SCREEN.EXAMPLE}
         component={ExampleScreen}
         options={{
           tabBarLabel: 'Notifications',
