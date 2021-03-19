@@ -12,7 +12,7 @@ const colors = {
 
   primaryDark: '#00857a',
   primaryMedium: '#009d8f',
-  primaryLight: '#04b616',
+  primaryLight: '#04b6a6',
 
   urgentActive: '#f60909',
   urgentHistoric: '#f86f6f',

@@ -3,6 +3,7 @@ const SCREEN = {
   ERROR: 'ErrorScreen',
   EXAMPLE: 'ExampleScreen',
   EXAMPLE2: 'ExampleScreen2',
+  HOME: 'HomeScreen',
   MAIN: 'MainScreen',
   NOTIFICATIONS: 'NotificationsScreen',
 }

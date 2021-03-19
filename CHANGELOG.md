@@ -31,6 +31,11 @@ the code was deployed.
 - CredentialsService to handle the Brave Alert API's API key (CU-d8qufg).
 - Services tests (CU-d8qufg).
 - `bitrise.yml` for deployment using BitRise (CU-d8qujp).
+- Home Screen (CU-hjwctk).
+- InfoBox component (CU-hjwctk).
+- ContactBraveBoxes component (CU-hjwctk).
+- HomeScreenInstructions component (CU-hjwctk).
+- Roboto font (CU-hjwctk).
 
 ### Removed
 
