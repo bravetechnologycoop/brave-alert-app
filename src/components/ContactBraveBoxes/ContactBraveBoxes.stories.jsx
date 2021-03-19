@@ -1,8 +1,11 @@
 // Third-party dependencies
 import React from 'react'
+import { View } from 'react-native'
 import { storiesOf } from '@storybook/react-native'
 
 // In-house dependencies
 import ContactBraveBoxes from '.'
 
-storiesOf('Contact Brave Boxes', module).add('Normal', () => <ContactBraveBoxes />)
+storiesOf('ContactBraveBoxes', module)
+  .addDecorator(story => <View style={{height: 300}}>{story()}</View>)
+  .add('Normal', () => <ContactBraveBoxes />)
