@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.greyscaleLighter,
     borderRadius: 10,
     width: '90%',
+    paddingHorizontal: 10,
     marginLeft: '5%',
     marginTop: 10,
     marginBottom: 10,
