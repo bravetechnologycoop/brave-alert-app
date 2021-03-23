@@ -1,9 +1,8 @@
 // Third-party dependencies
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
 import { faCheckSquare, faExclamationCircle, faRunning } from '@fortawesome/pro-light-svg-icons'
-import { BUTTONS_BASE_URL } from '@env'
+import { BUTTONS_BASE_URL, SENSOR_BASE_URL } from '@env'
 
 // In-house dependencies
 import { useSafeHandler } from '../hooks'
@@ -12,8 +11,12 @@ import SCREEN from '../navigation/ScreensEnum'
 import BasicButton from '../components/BasicButton'
 import Cards from '../components/Cards/Cards'
 import ImageCard from '../components/Cards/ImageCard'
-import ContactBraveBoxesCard from '../components/Cards/ContactBraveBoxesCard'
+import { ContactBraveBoxesCard } from '../components/Cards'
+import { ModalContainer, ModalView, VerificationCodeModal } from '../components/Modals'
 import colors from '../resources/colors'
+import Logger from '../services/Logger'
+
+const logger = new Logger('OnboardingScreen')
 
 const styles = StyleSheet.create({
   alertText: {
@@ -53,31 +56,41 @@ const styles = StyleSheet.create({
 })
 
 function OnboardingScreen() {
-  const navigation = useNavigation()
   const [fireDesignateDeviceRequest, fireDesignateDeviceRequestOptions] = useSafeHandler()
+  const [numVisibleModals, setNumVisibleModals] = useState(0)
+  const [verificationCode, setVerificationCode] = useState('initial')
 
   function handleButtonPress() {
+    function openModal() {
+      setNumVisibleModals(1)
+    }
+
     async function handle() {
-      // TODO generate a random verification code and put in the store
-      const verificationCode = 'abc123'
+      // Generate a 5-character random verification code (ref: https://gist.github.com/6174/6062387)
+      const vCode = Math.random().toString(36).substring(2, 7).toUpperCase()
+      setVerificationCode(vCode)
 
       // Log device ID and verification code
       const promises = [
-        AlertApiService.designateDeviceRequest(BUTTONS_BASE_URL, verificationCode),
-        // TODO hit the Sensor endpoint once it has the right version of brave-alert-lib
-        // AlertApiService.designateDeviceRequest(SENSOR_BASE_URL, verificationCode),
+        AlertApiService.designateDeviceRequest(BUTTONS_BASE_URL, vCode),
+        AlertApiService.designateDeviceRequest(SENSOR_BASE_URL, vCode),
       ]
       await Promise.all(promises)
 
-      // TODO Change this to open the connection pop-up
-      navigation.navigate(SCREEN.MAIN)
+      openModal()
     }
 
-    fireDesignateDeviceRequestOptions.reset()
     fireDesignateDeviceRequest(handle, {
       rollbackScreen: SCREEN.ONBOARDING,
     })
   }
+
+  useEffect(() => {
+    if (numVisibleModals === 0) {
+      logger.debug('Re-enable the Connect To App button after the verification code modal is closed')
+      fireDesignateDeviceRequestOptions.reset()
+    }
+  }, [numVisibleModals])
 
   return (
     <>
@@ -111,6 +124,12 @@ function OnboardingScreen() {
           </BasicButton>
         </View>
       </SafeAreaView>
+
+      <ModalContainer isModalVisible={numVisibleModals > 0}>
+        <ModalView backgroundColor={colors.greyscaleLightest} hasCloseButton setNumVisibleModals={setNumVisibleModals}>
+          <VerificationCodeModal verificationCode={`${verificationCode}`} setNumVisibleModals={setNumVisibleModals} />
+        </ModalView>
+      </ModalContainer>
     </>
   )
 }

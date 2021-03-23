@@ -48,7 +48,6 @@
     "@storybook/client-api": "^6.1.21",
     "@storybook/react-native": "^5.3.25",
     "lodash": "^4.17.20",
-    "mock-socket": "^9.0.3",
     "react": "16.13.1",
     "react-hook-form": "^6.15.4",
     "react-native": "0.63.3",

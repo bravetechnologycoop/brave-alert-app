@@ -9,6 +9,7 @@ const colors = {
   greyscaleLight: '#6c6b6b',
   greyscaleLighter: '#f4f3f3',
   greyscaleLightest: '#ffffff',
+  greyscaleTransparent: 'rgba(0, 0, 0, 0.5)',
 
   primaryDark: '#00857a',
   primaryMedium: '#009d8f',

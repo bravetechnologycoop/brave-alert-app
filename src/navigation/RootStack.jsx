@@ -26,7 +26,7 @@ function RootStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator mode="modal" initialRouteName={initialRouteName}>
-        <Stack.Screen name={SCREEN.MAIN} component={MainTabs} options={{ headerShown: false }} />
+        <Stack.Screen name={SCREEN.MAIN} component={MainTabs} options={{ headerShown: false, animationEnabled: false }} />
         <Stack.Screen
           name={SCREEN.ONBOARDING}
           component={OnboardingScreen}

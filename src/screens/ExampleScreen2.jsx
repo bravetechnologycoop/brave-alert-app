@@ -66,10 +66,6 @@ function ExampleScreen2() {
     })
   }
 
-  function handleCallTestMessage() {
-    AlertApiService.testMessage(BUTTONS_BASE_URL)
-  }
-
   function handleStartAlarm() {
     try {
       startAlarm()
@@ -94,7 +90,6 @@ function ExampleScreen2() {
       <Button title="Make Urgent" onPress={() => dispatch(alertUrgentified())} />
       <Button title="Call an API endpoint that doesn't exist" onPress={() => handleCallFakeEndpoint()} />
       <Button title="Call POST /alert/test" onPress={() => handleCallTestApi()} />
-      <Button title="Call a WebSocket endpoint" onPress={() => handleCallTestMessage()} />
       <Button title="Start alarm" onPress={() => handleStartAlarm()} />
       <Button title="Stop alarm" onPress={() => handleStopAlarm()} />
     </>

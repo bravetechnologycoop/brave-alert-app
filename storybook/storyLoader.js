@@ -19,6 +19,8 @@ function loadStories() {
   require('../src/components/HomeScreenInstructions/HomeScreenInstructions.stories')
   require('../src/components/InfoBox/InfoBox.stories')
   require('../src/components/InlineStack/InlineStack.stories')
+  require('../src/components/Modals/ModalContainer.stories')
+  require('../src/components/Modals/ModalView.stories')
   require('../src/components/PageHeader/PageHeader.stories')
 }
 
@@ -38,6 +40,8 @@ const stories = [
   '../src/components/HomeScreenInstructions/HomeScreenInstructions.stories',
   '../src/components/InfoBox/InfoBox.stories',
   '../src/components/InlineStack/InlineStack.stories',
+  '../src/components/Modals/ModalContainer.stories',
+  '../src/components/Modals/ModalView.stories',
   '../src/components/PageHeader/PageHeader.stories',
 ]
 

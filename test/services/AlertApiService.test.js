@@ -21,7 +21,7 @@ describe('AlertApiService', () => {
         },
       }
 
-      AlertApiService.testRequest('fakeBaseUrl')
+      AlertApiService.testRequest('https://fakeBaseUrl')
 
       expect(FetchService.post).toHaveBeenCalledWith(expectedParameters)
     })
@@ -37,7 +37,7 @@ describe('AlertApiService', () => {
         },
       }
 
-      AlertApiService.fakeEndpointRequest('fakeBaseUrl')
+      AlertApiService.fakeEndpointRequest('https://fakeBaseUrl')
 
       expect(FetchService.post).toHaveBeenCalledWith(expectedParameters)
     })
@@ -57,7 +57,7 @@ describe('AlertApiService', () => {
         },
       }
 
-      AlertApiService.designateDeviceRequest('fakeBaseUrl', 'fakeVerificationCode')
+      AlertApiService.designateDeviceRequest('https://fakeBaseUrl', 'fakeVerificationCode')
 
       expect(FetchService.post).toHaveBeenCalledWith(expectedParameters)
     })

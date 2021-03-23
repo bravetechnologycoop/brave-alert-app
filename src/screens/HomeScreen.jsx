@@ -1,9 +1,11 @@
 // Third-party dependencies
 import React from 'react'
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, Text, View } from 'react-native'
+import { useSelector } from 'react-redux'
 
 // In-house dependencies
 import colors from '../resources/colors'
+import { getIsButtonsLocation, getIsSensorLocation } from '../redux/selectors'
 import HomeScreenInstructions from '../components/HomeScreenInstructions'
 
 const styles = StyleSheet.create({
@@ -36,6 +38,9 @@ const styles = StyleSheet.create({
 })
 
 function HomeScreen() {
+  const renderButtonsInstructions = useSelector(getIsButtonsLocation)
+  const renderSensorsInstructions = useSelector(getIsSensorLocation)
+
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -47,8 +52,7 @@ function HomeScreen() {
             {/* TODO: dynamically replace this text with notification and/or alert components as needed */}
             <Text style={styles.noNewNotificationsText}>You have no new notifications or active alerts.</Text>
 
-            {/* TODO: render instructions based on installation details */}
-            <HomeScreenInstructions renderButtonsInstructions renderSensorsInstructions />
+            <HomeScreenInstructions renderButtonsInstructions={renderButtonsInstructions} renderSensorsInstructions={renderSensorsInstructions} />
           </View>
         </ScrollView>
       </SafeAreaView>
