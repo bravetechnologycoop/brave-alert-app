@@ -21,17 +21,20 @@ const styles = StyleSheet.create({
   },
 })
 
-function ContactBraveBoxes() {
+function ContactBraveBoxes(props) {
+  const { hideEmail } = props
   return (
     <>
       <InfoBox drawBorder faIcon={faPhoneRotary} color={colors.primaryMedium}>
         <Text style={styles.headerText}>Phone Brave</Text>
         <Text style={styles.bodyText}>+1-833-833-2100</Text>
       </InfoBox>
-      <InfoBox drawBorder faIcon={faEnvelope} color={colors.primaryMedium}>
-        <Text style={styles.headerText}>Email Brave</Text>
-        <Text style={styles.bodyText}>contact@brave.coop</Text>
-      </InfoBox>
+      {!hideEmail && (
+        <InfoBox drawBorder faIcon={faEnvelope} color={colors.primaryMedium}>
+          <Text style={styles.headerText}>Email Brave</Text>
+          <Text style={styles.bodyText}>contact@brave.coop</Text>
+        </InfoBox>
+      )}
     </>
   )
 }

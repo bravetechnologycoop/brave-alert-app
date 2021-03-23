@@ -4,6 +4,18 @@ function getAlerts(state) {
   return get(state, 'alerts')
 }
 
+function getIsButtonsLocation(state) {
+  return get(state, 'location.isButtonsLocation')
+}
+
+function getIsDemo(state) {
+  return get(state, 'location.isDemo')
+}
+
+function getIsSensorLocation(state) {
+  return get(state, 'location.isSensorLocation')
+}
+
 function getLocation(state) {
   return get(state, 'location')
 }
@@ -16,4 +28,4 @@ function getNotifications(state) {
   return get(state, 'notifications')
 }
 
-export { getAlerts, getLocation, getLocationName, getNotifications }
+export { getAlerts, getIsButtonsLocation, getIsDemo, getIsSensorLocation, getLocation, getLocationName, getNotifications }
