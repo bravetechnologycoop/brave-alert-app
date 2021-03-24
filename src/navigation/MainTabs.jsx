@@ -18,7 +18,7 @@ function MainTabs() {
   return (
     <Tab.Navigator
       headerMode="screen" // See https://reactnavigation.org/docs/stack-navigator#set-headermode-to-screen
-      initialRouteName={SCREEN.EXAMPLE}
+      initialRouteName={SCREEN.HOME}
       tabBarOptions={{
         activeTintColor: colors.primaryDark,
         inactiveTintColor: colors.greyscaleDarkest,
