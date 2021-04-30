@@ -4,6 +4,7 @@ const SCREEN = {
   EXAMPLE: 'ExampleScreen',
   EXAMPLE2: 'ExampleScreen2',
   HOME: 'HomeScreen',
+  SPLASH: 'SplashScreen',
   MAIN: 'MainScreen',
   NOTIFICATIONS: 'NotificationsScreen',
   ONBOARDING: 'OnboardingScreen',
