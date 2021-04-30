@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import MainTabs from './MainTabs'
 import OnboardingScreen from '../screens/OnboardingScreen'
 import ErrorScreen from '../components/ErrorScreen'
+import SplashScreen from '../screens/SplashScreen'
 import SCREEN from './ScreensEnum'
 import { getLocationName } from '../redux/selectors'
 import Logger from '../services/Logger'
@@ -21,12 +22,21 @@ function RootStack() {
   const org = useSelector(getLocationName)
   logger.info(`Got organization from global location state: ${org}`)
 
-  const initialRouteName = org ? SCREEN.MAIN : SCREEN.ONBOARDING
+  const initialRouteName = SCREEN.SPLASH
 
   return (
     <NavigationContainer>
       <Stack.Navigator mode="modal" initialRouteName={initialRouteName}>
         <Stack.Screen name={SCREEN.MAIN} component={MainTabs} options={{ headerShown: false, animationEnabled: false }} />
+        <Stack.Screen
+          name={SCREEN.SPLASH}
+          component={SplashScreen}
+          options={{
+            header: () => {
+              return null
+            },
+          }}
+        />
         <Stack.Screen
           name={SCREEN.ONBOARDING}
           component={OnboardingScreen}
