@@ -4,11 +4,9 @@ import { Button, SafeAreaView, ScrollView, StyleSheet, StatusBar, Text, View } f
 import { Colors, DebugInstructions, Header, LearnMoreLinks, ReloadInstructions } from 'react-native/Libraries/NewAppScreen'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faUfoBeam } from '@fortawesome/pro-light-svg-icons'
-import { useNavigation } from '@react-navigation/native'
 
 // In-house dependencies
 import { simulateCrash } from '../services/ErrorReportingService'
-import SCREEN from '../navigation/ScreensEnum'
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -50,8 +48,6 @@ const styles = StyleSheet.create({
 })
 
 function ExampleScreen() {
-  const navigation = useNavigation()
-
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -72,7 +68,6 @@ function ExampleScreen() {
                 to change this screen and then come back to see your edits.
               </Text>
               <FontAwesomeIcon icon={faUfoBeam} size={50} />
-              <Button title="Go to OtherScreen" onPress={() => navigation.navigate(SCREEN.EXAMPLE2)} />
               <Button title="Create a Sentry alert" onPress={() => simulateCrash()} />
             </View>
             <View style={styles.sectionContainer}>

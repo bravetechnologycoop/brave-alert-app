@@ -5,7 +5,7 @@ import { faSensorOn, faHourglassEnd, faRunning, faBell, faExclamationCircle, faC
 
 // In-house dependencies
 import colors from '../../resources/colors'
-import InfoBox from '../InfoBox'
+import { InfoBox, InfoBoxMainContent } from '../InfoBox'
 import ContactBraveBoxes from '../ContactBraveBoxes'
 
 const styles = StyleSheet.create({
@@ -62,38 +62,52 @@ function HomeScreenInstructions(props) {
         <Text style={styles.questionsIntroText}>Questions? Learn more:</Text>
         {renderButtonsInstructions && (
           <>
-            <InfoBox faIcon={faHandPointer} color={colors.primaryMedium}>
-              <Text style={styles.infoBoxBodyText}>When a resident presses their Brave button you will receive an alert.</Text>
+            <InfoBox>
+              <InfoBoxMainContent faIcon={faHandPointer} color={colors.primaryMedium}>
+                <Text style={styles.infoBoxBodyText}>When a resident presses their Brave button you will receive an alert.</Text>
+              </InfoBoxMainContent>
             </InfoBox>
-            <InfoBox faIcon={faBell} color={colors.alertActive} drawIconCircle>
-              <Text style={styles.infoBoxBodyText}>
-                When a button is pressed only one time it is a <Bold>Safety Alert.</Bold>
-              </Text>
+            <InfoBox>
+              <InfoBoxMainContent faIcon={faBell} color={colors.alertActive} drawIconCircle>
+                <Text style={styles.infoBoxBodyText}>
+                  When a button is pressed only one time it is a <Bold>Safety Alert.</Bold>
+                </Text>
+              </InfoBoxMainContent>
             </InfoBox>
-            <InfoBox faIcon={faExclamationCircle} color={colors.urgentActive}>
-              <Text style={styles.infoBoxBodyText}>
-                When a button is pressed two or more times it is an <Bold>Urgent Alert.</Bold>
-              </Text>
+            <InfoBox>
+              <InfoBoxMainContent faIcon={faExclamationCircle} color={colors.urgentActive}>
+                <Text style={styles.infoBoxBodyText}>
+                  When a button is pressed two or more times it is an <Bold>Urgent Alert.</Bold>
+                </Text>
+              </InfoBoxMainContent>
             </InfoBox>
           </>
         )}
         {renderSensorsInstructions && (
           <>
-            <InfoBox faIcon={faSensorOn} color={colors.primaryMedium}>
-              <Text style={styles.infoBoxBodyText}>Brave Sensors detect their surroundings and send alerts.</Text>
+            <InfoBox>
+              <InfoBoxMainContent faIcon={faSensorOn} color={colors.primaryMedium}>
+                <Text style={styles.infoBoxBodyText}>Brave Sensors detect their surroundings and send alerts.</Text>
+              </InfoBoxMainContent>
             </InfoBox>
-            <InfoBox faIcon={faRunning} color={colors.urgentActive} drawIconCircle drawIconSlash>
-              <Text style={styles.infoBoxBodyText}>
-                Brave Sensors send this alert when there is <Bold>no movement</Bold> in the space.
-              </Text>
+            <InfoBox>
+              <InfoBoxMainContent faIcon={faRunning} color={colors.urgentActive} drawIconCircle drawIconSlash>
+                <Text style={styles.infoBoxBodyText}>
+                  Brave Sensors send this alert when there is <Bold>no movement</Bold> in the space.
+                </Text>
+              </InfoBoxMainContent>
             </InfoBox>
-            <InfoBox faIcon={faHourglassEnd} color={colors.alertActive} drawIconCircle>
-              <Text style={styles.infoBoxBodyText}>Brave Sensors send this alert when the space has been occupied for a long time.</Text>
+            <InfoBox>
+              <InfoBoxMainContent faIcon={faHourglassEnd} color={colors.alertActive} drawIconCircle>
+                <Text style={styles.infoBoxBodyText}>Brave Sensors send this alert when the space has been occupied for a long time.</Text>
+              </InfoBoxMainContent>
             </InfoBox>
           </>
         )}
-        <InfoBox faIcon={faClipboardList} color={colors.primaryMedium}>
-          <Text style={styles.infoBoxBodyText}>After responding, you will categorize the event in an Incident Report.</Text>
+        <InfoBox>
+          <InfoBoxMainContent faIcon={faClipboardList} color={colors.primaryMedium}>
+            <Text style={styles.infoBoxBodyText}>After responding, you will categorize the event in an Incident Report.</Text>
+          </InfoBoxMainContent>
         </InfoBox>
         <Text style={styles.contactBraveText}>More questions? Contact Brave:</Text>
         <ContactBraveBoxes />
