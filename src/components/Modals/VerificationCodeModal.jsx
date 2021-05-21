@@ -11,7 +11,6 @@ import { setIsButtonsLocation, setIsDemo, setIsSensorLocation, setLocationName }
 import BasicButton from '../BasicButton'
 import ContactBraveBoxes from '../ContactBraveBoxes'
 import InlineStack from '../InlineStack'
-import FormErrorLabel from '../FormErrorLabel'
 import colors from '../../resources/colors'
 import AlertApiService from '../../services/AlertApiService'
 import SCREEN from '../../navigation/ScreensEnum'
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   contactContainer: {
-    height: 90,
+    minHeight: 100,
     marginBottom: 35,
   },
   demoText: {
@@ -34,6 +33,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 14,
     textDecorationLine: 'underline',
+  },
+  errorText: {
+    color: colors.urgentActive,
+    fontFamily: 'Roboto-Regular',
+    fontSize: 16,
+    marginTop: 10,
+    marginBottom: 25,
+    width: 190,
+    textAlign: 'center',
+    alignSelf: 'center',
   },
   text: {
     color: colors.greyscaleDark,
@@ -158,7 +167,7 @@ function VerificationCodeModal(props) {
           <Text>Connect Now</Text>
         </BasicButton>
       </View>
-      {isConnectionError && <FormErrorLabel>Sorry, your device could not connect. Please contact Brave.</FormErrorLabel>}
+      {isConnectionError && <Text style={styles.errorText}>Sorry, your device could not connect. Please contact Brave.</Text>}
       <BasicButton
         backgroundColor={colors.greyscaleLightest}
         borderColor={colors.primaryMedium}

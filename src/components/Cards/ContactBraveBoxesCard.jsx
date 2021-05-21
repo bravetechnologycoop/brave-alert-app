@@ -5,7 +5,7 @@ import { faInfoCircle } from '@fortawesome/pro-light-svg-icons'
 
 // In-house dependencies
 import ContactBraveBoxes from '../ContactBraveBoxes'
-import InfoBox from '../InfoBox'
+import { InfoBox, InfoBoxMainContent } from '../InfoBox'
 import colors from '../../resources/colors'
 
 const styles = StyleSheet.create({
@@ -13,11 +13,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   contactBraveContainer: {
-    height: 185,
+    minHeight: 200,
     width: 300,
   },
   infoBoxContainer: {
-    height: 90,
+    minHeight: 100,
     width: 300,
   },
   infoBoxHeaderText: {
@@ -46,9 +46,11 @@ function ContactBraveBoxesCard() {
       <Text style={styles.text}>Still have questions? We have answers.</Text>
 
       <View style={styles.infoBoxContainer}>
-        <InfoBox drawBorder faIcon={faInfoCircle} color={colors.primaryMedium}>
-          <Text style={styles.infoBoxHeaderText}>Learn more</Text>
-          <Text style={styles.infoBoxText}>bravesensor.com/alertfaq</Text>
+        <InfoBox drawBorder color={colors.primaryMedium}>
+          <InfoBoxMainContent faIcon={faInfoCircle} color={colors.primaryMedium}>
+            <Text style={styles.infoBoxHeaderText}>Learn more</Text>
+            <Text style={styles.infoBoxText}>bravesensor.com/alertfaq</Text>
+          </InfoBoxMainContent>
         </InfoBox>
       </View>
 

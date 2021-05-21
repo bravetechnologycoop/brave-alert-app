@@ -5,17 +5,21 @@ import { faPhoneRotary, faRunning } from '@fortawesome/pro-light-svg-icons'
 import { Text, View } from 'react-native'
 
 // In-house dependencies
-import InfoBox from '.'
+import { InfoBox, InfoBoxMainContent } from '.'
 
 storiesOf('InfoBox', module)
   .addDecorator(story => <View style={{ height: 160 }}>{story()}</View>)
   .add('Box With Border', () => (
-    <InfoBox drawBorder faIcon={faPhoneRotary}>
-      <Text>Hello I Am A Phone</Text>
+    <InfoBox drawBorder>
+      <InfoBoxMainContent faIcon={faPhoneRotary}>
+        <Text>Hello I Am A Phone</Text>
+      </InfoBoxMainContent>
     </InfoBox>
   ))
   .add('Box With Border, Colour, and Icon Slash', () => (
-    <InfoBox drawBorder drawIconCircle drawIconSlash color="#FF0000" faIcon={faRunning}>
-      <Text>No Running Allowed</Text>
+    <InfoBox drawBorder color="#FF0000">
+      <InfoBoxMainContent drawIconCircle drawIconSlash color="#FF0000" faIcon={faRunning}>
+        <Text>No Running Allowed</Text>
+      </InfoBoxMainContent>
     </InfoBox>
   ))
