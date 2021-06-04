@@ -65,6 +65,12 @@
    export FONTAWESOME_NPM_AUTH_TOKEN=<value from 1Password>
    ```
 
+   On Windows machines the following command works for the duration of the terminal session:
+
+   ```
+   $env:FONTAWESOME_NPM_AUTH_TOKEN = '<value from 1Password>'
+   ```
+
 1. In the project root directory, install/update dependencies:
 
    ```
