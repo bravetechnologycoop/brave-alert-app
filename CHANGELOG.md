@@ -38,6 +38,7 @@ the code was deployed.
 - Roboto font (CU-hjwctk).
 - Contact screen (CU-hjwg2y).
 - audit-ci for security audit of dependencies on Travis.
+- Historic Alert screen (CU-hjwfx2).
 
 ### Removed
 

@@ -29,6 +29,21 @@ async function getLocation(baseUrl) {
   })
 }
 
+async function getHistoricAlerts(baseUrl, maxHistoricAlerts) {
+  return get({
+    base: baseUrl,
+    uri: `/alert/historicAlerts`,
+    params: {
+      maxHistoricAlerts,
+    },
+    headers: {
+      'X-API-KEY': getApiKey(),
+      'Content-Type': 'application/json',
+    },
+    transformResponse: JSON.parse,
+  })
+}
+
 async function testRequest(baseUrl) {
   return post({
     base: baseUrl,
@@ -52,6 +67,7 @@ async function fakeEndpointRequest(baseUrl) {
 export default {
   designateDeviceRequest,
   fakeEndpointRequest,
+  getHistoricAlerts,
   getLocation,
   testRequest,
 }

@@ -1,126 +1,141 @@
 // Third-party dependencies
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView, ScrollView, StyleSheet, StatusBar, View } from 'react-native'
+import React, { useCallback, useState } from 'react'
+import { ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, StatusBar, Text, View } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
+import { BUTTONS_BASE_URL } from '@env'
 
 // In-house dependencies
-import { ALERT_TYPE, ALERT_STATUS } from '../constants'
 import HistoricAlert from '../components/HistoricAlert'
+import AlertApiService from '../services/AlertApiService'
+import PageHeader from '../components/PageHeader'
 import { useSafeHandler } from '../hooks'
 import SCREEN from '../navigation/ScreensEnum'
-import { formatTimeString } from '../helpers'
+import { formatTimeString, isSameYearMonthDate } from '../helpers'
 import colors from '../resources/colors'
+import Logger from '../services/Logger'
+
+const logger = new Logger('AlertHistoryScreen')
+
+const numHistoricAlertsToDisplay = 20
 
 const styles = StyleSheet.create({
-  infoBoxContainer: {
-    borderRadius: 10,
-    width: '90%',
-    paddingHorizontal: 10,
-    marginLeft: '5%',
-    marginTop: 10,
-    marginBottom: 10,
+  container: {
+    flex: 1,
+  },
+  dateText: {
+    color: colors.greyscaleDarker,
+    fontSize: 16,
+    fontFamily: 'Roboto-Regular',
+    marginBottom: 15,
   },
   scrollView: {
     backgroundColor: colors.greyscaleLighter,
+    marginHorizontal: '5%',
+  },
+  spinnerContainer: {
+    flex: 1,
+    alignContent: 'center',
+    justifyContent: 'center',
   },
 })
 
 function AlertHistoryScreen() {
-  const [fireGetHistoricAlertsRequest] = useSafeHandler()
-  const [alerts, setAlerts] = useState([])
+  const [fireGetHistoricAlertsRequest, fireGetHistoricAlertsRequestOptions] = useSafeHandler()
+  const [alerts, setAlerts] = useState(null)
 
-  useEffect(() => {
-    setAlerts([
-      {
-        id: 'abc-123-guid-1',
-        alertStatus: ALERT_STATUS.RESPONDING,
-        location: 'Room 101',
-        category: 'Accidental',
-        alertType: ALERT_TYPE.BUTTONS_NOT_URGENT,
-        numButtonPresses: 2,
-        createdTimestamp: '2020-10-10T16:00:00.000Z',
-        respondedTimestamp: '2020-10-10T16:01:45.000Z',
-      },
-      {
-        id: 'abc-123-guid-2',
-        alertStatus: ALERT_STATUS.RESPONDING,
-        location: 'Room 101',
-        category: 'Mental Health Alert Long Name',
-        alertType: ALERT_TYPE.BUTTONS_URGENT,
-        numButtonPresses: 2,
-        createdTimestamp: '2020-10-10T16:00:00.000Z',
-        respondedTimestamp: '2020-10-11T16:01:45.000Z',
-      },
-      {
-        id: 'abc-123-guid-3',
-        alertStatus: ALERT_STATUS.RESPONDING,
-        location: 'Room 101',
-        category: 'Accidental',
-        alertType: ALERT_TYPE.SENSOR_DURATION,
-        createdTimestamp: '2020-10-10T16:00:00.000Z',
-      },
-      {
-        id: 'abc-123-guid-4',
-        alertStatus: ALERT_STATUS.RESPONDING,
-        location: 'Fourteenth Floor Second Women Washroom',
-        alertType: ALERT_TYPE.SENSOR_NO_MOTION,
-        createdTimestamp: '2020-10-10T16:00:00.000Z',
-        respondedTimestamp: '2020-10-10T16:01:45.000Z',
-      },
-    ])
+  useFocusEffect(
+    useCallback(() => {
+      async function handle() {
+        logger.debug('Try to get the historic alerts from both Buttons and Sensors')
+        // TODO uncomment sensors
+        const promises = [
+          AlertApiService.getHistoricAlerts(BUTTONS_BASE_URL, numHistoricAlertsToDisplay),
+          // AlertApiService.getHistoricAlerts(SENSOR_BASE_URL, numHistoricAlertsToDisplay),
+        ]
+        const [buttonsHistoricAlerts /* , sensorsHistoriAlerts */] = await Promise.all(promises)
+        const sensorsHistoriAlerts = []
 
-    async function handle() {
-      // TODO On page load, call the APIs to get the Alert History instead of using the hardcoded `alerts`
-    }
-    fireGetHistoricAlertsRequest(handle, {
-      rollbackScreen: SCREEN.HOME,
-    })
-  }, [])
+        // Combine the results
+        const historicAlerts = buttonsHistoricAlerts.concat(sensorsHistoriAlerts)
+
+        // Sort by createdTimestamp and only keep the first numHistoricAlertsToDisplay of them
+        historicAlerts.sort((alert1, alert2) => alert1.createdTimestamp < alert2.createdTimestamp).slice(0, numHistoricAlertsToDisplay)
+
+        setAlerts(historicAlerts)
+      }
+
+      fireGetHistoricAlertsRequest(handle, {
+        rollbackScreen: SCREEN.HOME,
+      })
+
+      fireGetHistoricAlertsRequestOptions.reset()
+    }, []),
+  )
 
   function formatRespondedTimeString(createdTimestamp, respondedTimestamp) {
     if (!respondedTimestamp) {
       return 'No response'
     }
 
-    const createdTime = new Date(createdTimestamp)
-    const respondedTime = new Date(respondedTimestamp)
     const formattedRespondedTime = formatTimeString(respondedTimestamp)
 
     // If it was responded to on the same date, in local time
-    if (
-      createdTime.getFullYear() === respondedTime.getFullYear() &&
-      createdTime.getMonth() === respondedTime.getMonth() &&
-      createdTime.getDate() === respondedTime.getDate()
-    ) {
+    if (isSameYearMonthDate(createdTimestamp, respondedTimestamp)) {
       return formattedRespondedTime
     }
 
+    const respondedTime = new Date(respondedTimestamp)
     return `${respondedTime.toLocaleDateString()} ${formattedRespondedTime}`
   }
 
-  function renderAlert(alert) {
+  function renderAlert(alert, index, array) {
     const alertTimeString = formatTimeString(alert.createdTimestamp)
     const responseTimeString = formatRespondedTimeString(alert.createdTimestamp, alert.respondedTimestamp)
 
+    // If it's the first Historic Alert or if it has a different local date than the previous Historic Alert, then display the date string
+    let dateString = null
+    if (index === 0 || !isSameYearMonthDate(alert.createdTimestamp, array[index - 1].createdTimestamp)) {
+      if (isSameYearMonthDate(alert.createdTimestamp, new Date())) {
+        dateString = 'Today'
+      } else {
+        dateString = new Date(alert.createdTimestamp).toLocaleDateString()
+      }
+    }
+
     return (
-      <HistoricAlert
-        alertType={alert.alertType}
-        roomName={alert.location}
-        alertTime={alertTimeString}
-        responseTime={responseTimeString}
-        category={alert.category}
-        numButtonPresses={alert.numButtonPresses}
-        key={alert.id}
-      />
+      <View key={alert.id}>
+        {dateString && <Text style={styles.dateText}>{dateString}</Text>}
+        <HistoricAlert
+          alertType={alert.alertType}
+          deviceName={alert.deviceName}
+          alertTime={alertTimeString}
+          responseTime={responseTimeString}
+          category={alert.category}
+          numButtonPresses={alert.numButtonPresses}
+        />
+      </View>
     )
   }
 
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
-          <View style={styles.infoBoxContainer}>{alerts.map(renderAlert)}</View>
-        </ScrollView>
+      <SafeAreaView style={styles.container}>
+        {fireGetHistoricAlertsRequestOptions.isFiring && (
+          <>
+            <PageHeader>Alert History</PageHeader>
+            <View style={styles.spinnerContainer}>
+              <ActivityIndicator size="large" color={colors.primaryMedium} />
+            </View>
+          </>
+        )}
+        {!fireGetHistoricAlertsRequestOptions.isFiring && (
+          <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
+            <PageHeader>Alert History</PageHeader>
+            {alerts && alerts.length === 0 && <Text style={styles.dateText}>No historic alerts.</Text>}
+            {alerts && alerts.map(renderAlert)}
+          </ScrollView>
+        )}
       </SafeAreaView>
     </>
   )
