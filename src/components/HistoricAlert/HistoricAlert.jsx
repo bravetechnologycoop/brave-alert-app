@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
 })
 
 function HistoricAlert(props) {
-  const { alertType, roomName, alertTime, category, responseTime, numButtonPresses } = props
+  const { alertType, deviceName, alertTime, category, responseTime, numButtonPresses } = props
   const [isExpanded, setIsExpanded] = useState(false)
   const [expandedHeight] = useState(new Animated.Value(0))
   const [expandedOpacity] = useState(new Animated.Value(0))
@@ -115,7 +115,7 @@ function HistoricAlert(props) {
               <Text style={[styles.textStartTime, { color }]}>{alertTime}</Text>
             </View>
             <View style={styles.room}>
-              <Text style={styles.textRoom}>{roomName}</Text>
+              <Text style={styles.textRoom}>{deviceName}</Text>
               <FontAwesomeIcon icon={isExpanded ? faChevronUp : faChevronDown} size={20} />
             </View>
           </View>

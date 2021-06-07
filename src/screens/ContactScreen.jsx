@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flexWrap: 'nowrap',
     backgroundColor: colors.greyscaleLighter,
-    marginTop: 40,
     marginHorizontal: 21,
   },
   radioButtonGroupContainer: {

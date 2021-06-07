@@ -8,12 +8,13 @@ import colors from '../../resources/colors'
 const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
+    marginBottom: 40,
+    marginTop: 30,
   },
   title: {
     color: colors.primaryDark,
     fontFamily: 'Roboto-Bold',
     fontSize: 16,
-    marginBottom: 40,
     textAlign: 'center',
   },
 })
