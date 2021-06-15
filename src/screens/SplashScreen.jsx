@@ -1,6 +1,6 @@
 // Third-party dependencies
 import React, { useEffect } from 'react'
-import { SafeAreaView, StyleSheet, StatusBar, Text } from 'react-native'
+import { ActivityIndicator, SafeAreaView, StyleSheet, StatusBar, Text } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch } from 'react-redux'
 import { BUTTONS_BASE_URL, SENSOR_BASE_URL } from '@env'
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     letterSpacing: 6,
-    marginBottom: 100,
+    marginBottom: 80,
   },
   braveText: {
     color: colors.greyscaleLightest,
@@ -37,13 +37,6 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     backgroundColor: colors.primaryMedium,
-  },
-  loadingText: {
-    fontFamily: 'Roboto-Regular',
-    fontSize: 20,
-    color: colors.greyscaleLightest,
-    textAlign: 'center',
-    textAlignVertical: 'center',
   },
 })
 
@@ -88,7 +81,7 @@ function SplashScreen() {
       <SafeAreaView style={styles.container}>
         <Text style={styles.braveText}>BRAVE</Text>
         <Text style={styles.alertText}>ALERT</Text>
-        <Text style={styles.loadingText}>Loading...</Text>
+        <ActivityIndicator size="large" color={colors.greyscaleLighter} />
       </SafeAreaView>
     </>
   )
