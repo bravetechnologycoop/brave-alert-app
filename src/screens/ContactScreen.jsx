@@ -121,7 +121,7 @@ function ContactScreen() {
     }
 
     fireFormSubmission(handle, {
-      rollbackScreen: SCREEN.CONTACT,
+      rollbackScreen: SCREEN.HOME,
     })
   }
 
