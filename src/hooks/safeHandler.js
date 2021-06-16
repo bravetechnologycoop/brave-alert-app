@@ -32,7 +32,7 @@ export function useSafeHandler() {
   }
 
   async function fire(fn, options = {}) {
-    const { rollbackScreen = SCREEN.EXAMPLE } = options
+    const { rollbackScreen = SCREEN.ONBOARDING } = options
 
     function handleError(error) {
       safeReportError(error)
