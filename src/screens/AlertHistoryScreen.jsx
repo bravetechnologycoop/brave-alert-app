@@ -2,7 +2,7 @@
 import React, { useCallback, useState } from 'react'
 import { ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, StatusBar, Text, View } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
-import { BUTTONS_BASE_URL } from '@env'
+import { BUTTONS_BASE_URL, SENSOR_BASE_URL } from '@env'
 
 // In-house dependencies
 import HistoricAlert from '../components/HistoricAlert'
@@ -47,21 +47,21 @@ function AlertHistoryScreen() {
     useCallback(() => {
       async function handle() {
         logger.debug('Try to get the historic alerts from both Buttons and Sensors')
-        // TODO uncomment sensors
         const promises = [
           AlertApiService.getHistoricAlerts(BUTTONS_BASE_URL, numHistoricAlertsToDisplay),
-          // AlertApiService.getHistoricAlerts(SENSOR_BASE_URL, numHistoricAlertsToDisplay),
+          AlertApiService.getHistoricAlerts(SENSOR_BASE_URL, numHistoricAlertsToDisplay),
         ]
-        const [buttonsHistoricAlerts /* , sensorsHistoriAlerts */] = await Promise.all(promises)
-        const sensorsHistoriAlerts = []
+        const [buttonsHistoricAlerts, sensorsHistoricAlerts] = await Promise.all(promises)
 
         // Combine the results
-        const historicAlerts = buttonsHistoricAlerts.concat(sensorsHistoriAlerts)
+        const historicAlerts = buttonsHistoricAlerts.concat(sensorsHistoricAlerts)
 
         // Sort by createdTimestamp and only keep the first numHistoricAlertsToDisplay of them
-        historicAlerts.sort((alert1, alert2) => alert1.createdTimestamp < alert2.createdTimestamp).slice(0, numHistoricAlertsToDisplay)
+        const sortedHistoricAlerts = historicAlerts
+          .sort((alert1, alert2) => alert1.createdTimestamp < alert2.createdTimestamp)
+          .slice(0, numHistoricAlertsToDisplay)
 
-        setAlerts(historicAlerts)
+        setAlerts(sortedHistoricAlerts)
       }
 
       fireGetHistoricAlertsRequest(handle, {

@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faBell, faChevronDown, faChevronUp, faExclamationCircle, faHourglassEnd, faRunning } from '@fortawesome/pro-light-svg-icons'
+import { faBell, faChevronDown, faChevronUp, faExclamationCircle, faHourglassEnd, faRunning, faSensorOn } from '@fortawesome/pro-light-svg-icons'
 
 // In-house dependencies
 import { InfoBox, InfoBoxMainContent, InfoBoxExpandedContent } from '../InfoBox'
@@ -74,11 +74,15 @@ function HistoricAlert(props) {
     icon = faHourglassEnd
     color = colors.alertHistoric
     drawIconCircle = true
-  } else if (alertType === ALERT_TYPE.SENSOR_NO_MOTION) {
+  } else if (alertType === ALERT_TYPE.SENSOR_STILLNESS) {
     icon = faRunning
     color = colors.urgentHistoric
     drawIconCircle = true
     drawIconSlash = true
+  } else if (alertType === ALERT_TYPE.SENSOR_UNKNOWN) {
+    icon = faSensorOn
+    color = colors.urgentHistoric
+    drawIconCircle = true
   }
 
   // Expansion animation from https://stackoverflow.com/questions/45633818/how-do-you-animate-the-height-in-react-native-when-you-dont-know-the-size-of-th#answer-64797961
