@@ -13,6 +13,8 @@ import Logger from './Logger'
 // Setup logger
 const logger = new Logger('FetchService')
 
+const DEFAULT_TIMEOUT_IN_MS = 25000
+
 const HTTP_STATUS = {}
 HTTP_STATUS.OK_200 = 200
 HTTP_STATUS.CREATED_201 = 201
@@ -135,9 +137,20 @@ async function doFetch(method, request) {
   const fetchRequest = asFetchRequest(method, request)
   logger.debug(`FETCH REQUEST: ${sanitizeApiKey(JSON.stringify(fetchRequest))}, ${url}`)
 
+  // Timeout code from https://dmitripavlutin.com/timeout-fetch-request/
   // eslint-disable-next-line no-undef
-  const response = await fetch(url, fetchRequest)
+  const controller = new AbortController()
+  const timeoutInMs = request.timeout || DEFAULT_TIMEOUT_IN_MS
+  const timeoutId = setTimeout(() => {
+    logger.error(`Request timed out: ${JSON.stringify(request)}`)
+    controller.abort()
+  }, timeoutInMs)
+
+  // eslint-disable-next-line no-undef
+  const response = await fetch(url, { ...fetchRequest, signal: controller.signal })
   logger.debug(`RESPONSE: ${JSON.stringify(response)}`)
+
+  clearTimeout(timeoutId)
 
   const handleResponse = selectResponseHandler(response.status, DEFAULT_RESPONSE_HANDLERS, request.responseHandlers)
   return handleResponse(request, response)
