@@ -1,6 +1,6 @@
 {
   "name": "BraveAlertApp",
-  "version": "1.0.65",
+  "version": "1.0.67",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
