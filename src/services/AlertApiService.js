@@ -44,6 +44,17 @@ async function getHistoricAlerts(baseUrl, maxHistoricAlerts) {
   })
 }
 
+async function getNewNotificationsCountRequest(baseUrl) {
+  return get({
+    base: baseUrl,
+    uri: '/alert/newNotificationsCount',
+    headers: {
+      'X-API-KEY': getApiKey(),
+    },
+    transformResponse: JSON.parse,
+  })
+}
+
 async function testRequest(baseUrl) {
   return post({
     base: baseUrl,
@@ -66,6 +77,7 @@ async function fakeEndpointRequest(baseUrl) {
 
 export default {
   designateDeviceRequest,
+  getNewNotificationsCountRequest,
   fakeEndpointRequest,
   getHistoricAlerts,
   getLocation,
