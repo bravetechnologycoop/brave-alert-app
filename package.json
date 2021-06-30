@@ -1,11 +1,12 @@
 {
   "name": "BraveAlertApp",
-  "version": "1.0.69",
+  "version": "1.0.70",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "iphone6": "react-native run-ios --simulator=\"iPhone 6\"",
+    "iphone8": "react-native run-ios --simulator=\"iPhone 8 (14.4)\"",
     "start": "react-native start",
     "test": "NODE_ENV=test jest --no-cache",
     "lint": "eslint --ext .js,.jsx .",

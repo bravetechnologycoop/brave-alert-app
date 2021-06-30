@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     letterSpacing: 6,
-    marginBottom: 25,
   },
   braveText: {
     color: colors.primaryMedium,
@@ -33,25 +32,30 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     letterSpacing: 7,
-    marginBottom: 10,
+    marginBottom: 6,
   },
   button: {
-    marginBottom: 41,
-  },
-  cards: {
-    marginBottom: 25,
+    flexGrow: 1,
+    justifyContent: 'center',
   },
   container: {
     backgroundColor: colors.greyscaleLightest,
-    height: '100%',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  modalContainer: {
+    flex: 0, // Do not take up any vertical space on the non-modal part of the screen
+  },
+  welcomeContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
   },
   welcomeText: {
     color: colors.greyscaleDark,
     fontFamily: 'Roboto-Regular',
     fontSize: 16,
     textAlign: 'center',
-    marginTop: 60,
-    marginBottom: 20,
+    marginBottom: 6,
   },
 })
 
@@ -96,11 +100,13 @@ function OnboardingScreen() {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
-        <Text style={styles.welcomeText}>Welcome to</Text>
-        <Text style={styles.braveText}>BRAVE</Text>
-        <Text style={styles.alertText}>ALERT</Text>
+        <View style={styles.welcomeContainer}>
+          <Text style={styles.welcomeText}>Welcome to</Text>
+          <Text style={styles.braveText}>BRAVE</Text>
+          <Text style={styles.alertText}>ALERT</Text>
+        </View>
 
-        <View style={styles.cards}>
+        <View>
           <Cards>
             <ImageCard icon={faRunning} text="First time using Brave Alert? Swipe to learn more, or connect to the app right away." />
             <ImageCard icon={faExclamationCircle} text="Brave Alert will notify you if someone needs support." />
@@ -125,11 +131,13 @@ function OnboardingScreen() {
         </View>
       </SafeAreaView>
 
-      <ModalContainer isModalVisible={numVisibleModals > 0}>
-        <ModalView backgroundColor={colors.greyscaleLightest} hasCloseButton setNumVisibleModals={setNumVisibleModals}>
-          <VerificationCodeModal verificationCode={`${verificationCode}`} setNumVisibleModals={setNumVisibleModals} />
-        </ModalView>
-      </ModalContainer>
+      <View style={styles.modalContainer}>
+        <ModalContainer isModalVisible={numVisibleModals > 0}>
+          <ModalView backgroundColor={colors.greyscaleLightest} hasCloseButton setNumVisibleModals={setNumVisibleModals}>
+            <VerificationCodeModal verificationCode={`${verificationCode}`} setNumVisibleModals={setNumVisibleModals} />
+          </ModalView>
+        </ModalContainer>
+      </View>
     </>
   )
 }

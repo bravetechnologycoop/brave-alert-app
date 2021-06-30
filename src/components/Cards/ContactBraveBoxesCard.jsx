@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto-Regular',
     fontSize: 14,
     textAlign: 'center',
-    marginBottom: 25,
+    marginBottom: 15,
   },
 })
 
