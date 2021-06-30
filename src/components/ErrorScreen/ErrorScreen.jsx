@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
 function ErrorScreen(props) {
   const { navigation, route } = props
   const originalScreen = get(route, 'params.originalScreen', null)
+  const error = get(route, 'params.error', null)
+  console.log(`*********************TKD in ErrorScreen: ${error.toString()} ***********`)
 
   function handleDismiss() {
     if (originalScreen) {
@@ -55,14 +57,18 @@ function ErrorScreen(props) {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
-        <Text style={styles.heading}>Something went wrong.</Text>
+        {error && <Text>{error.toString()}</Text>}
+        {!error === 0 && (
+          <>
+            <Text style={styles.heading}>Something went wrong.</Text>
 
-        <Text style={styles.bodyText}>Please try again, or contact Brave.</Text>
+            <Text style={styles.bodyText}>Please try again, or contact Brave.</Text>
 
-        <View style={styles.contactBraveContainer}>
-          <ContactBraveBoxes />
-        </View>
-
+            <View style={styles.contactBraveContainer}>
+              <ContactBraveBoxes />
+            </View>
+          </>
+        )}
         <BasicButton
           onPress={handleDismiss}
           backgroundColor={colors.primaryDark}

@@ -35,8 +35,9 @@ export function useSafeHandler() {
     const { rollbackScreen = SCREEN.EXAMPLE } = options
 
     function handleError(error) {
+      console.log(`*******************TKD in handleError: ${error}`)
       safeReportError(error)
-      navigation.navigate(SCREEN.ERROR, { originalScreen: rollbackScreen })
+      navigation.navigate(SCREEN.ERROR, { originalScreen: rollbackScreen, error: error })
     }
 
     logger.info(`handler-state: ${handlerState.current}`)

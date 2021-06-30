@@ -21,7 +21,7 @@ async function designateDeviceRequest(baseUrl, verificationCode) {
 async function getLocation(baseUrl) {
   return get({
     base: baseUrl,
-    uri: '/alert/location',
+    uri: '/alert/locations',
     headers: {
       'X-API-KEY': getApiKey(),
     },
