@@ -51,7 +51,7 @@
     "lodash": "^4.17.20",
     "react": "16.13.1",
     "react-hook-form": "^6.15.4",
-    "react-native": "0.63.3",
+    "react-native": "^0.64.2",
     "react-native-dev-menu": "^4.0.2",
     "react-native-device-info": "^7.2.1",
     "react-native-dotenv": "^2.5.0",
