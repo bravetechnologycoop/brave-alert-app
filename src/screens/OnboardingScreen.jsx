@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native'
 import { faCheckSquare, faExclamationCircle, faRunning } from '@fortawesome/pro-light-svg-icons'
+import OneSignal from 'react-native-onesignal'
 import { BUTTONS_BASE_URL, SENSOR_BASE_URL } from '@env'
 
 // In-house dependencies
@@ -74,10 +75,16 @@ function OnboardingScreen() {
       const vCode = Math.random().toString(36).substring(2, 7).toUpperCase()
       setVerificationCode(vCode)
 
+      // Retrieve OneSignal's player ID
+      const oneSignalDeviceState = await OneSignal.getDeviceState()
+      console.log(`***************TKD ${JSON.stringify(oneSignalDeviceState)}`)
+      const oneSignalPlayerId = oneSignalDeviceState.userId
+
       // Log device ID and verification code
       const promises = [
-        AlertApiService.designateDeviceRequest(BUTTONS_BASE_URL, vCode),
-        AlertApiService.designateDeviceRequest(SENSOR_BASE_URL, vCode),
+        AlertApiService.designateDeviceRequest(BUTTONS_BASE_URL, vCode, oneSignalPlayerId),
+        // TODO uncomment when change is also on Sensors
+        //AlertApiService.designateDeviceRequest(SENSOR_BASE_URL, vCode, oneSignalPlayerId),
       ]
       await Promise.all(promises)
 
