@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* BraveAlertAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BraveAlertAppTests.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -16,14 +17,14 @@
 		2DCD954D1E0B4F2C00145EB5 /* BraveAlertAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* BraveAlertAppTests.m */; };
 		4593F543379BA42E26BE41C4 /* libPods-BraveAlertApp-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 36442CAFC3D2D523DFC1CB52 /* libPods-BraveAlertApp-tvOS.a */; };
 		542A5CC57A3CEB5491BEE4EE /* libPods-BraveAlertApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE573B0ECFDBD723636DE7E1 /* libPods-BraveAlertApp.a */; };
+		66507F643382448EB8576142 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3DDC781136A4C17AAF71C54 /* Roboto-Black.ttf */; };
+		6D4D39E230AF479BA135AD99 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1721408DE9724916B055108E /* Roboto-Bold.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8538A93325ACE41B0073DA55 /* alarm_army.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8538A93225ACE41B0073DA55 /* alarm_army.mp3 */; };
-		904F162A578C01C47C0603E4 /* libPods-BraveAlertApp-BraveAlertAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFB42F1FA2CB850BB0B9205 /* libPods-BraveAlertApp-BraveAlertAppTests.a */; };
-		F005F83FA4F7091F95C6D252 /* libPods-BraveAlertApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13B0A75968866BD0884D9F0B /* libPods-BraveAlertApp-tvOSTests.a */; };
-		6D4D39E230AF479BA135AD99 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1721408DE9724916B055108E /* Roboto-Bold.ttf */; };
 		85FE81A21B6B46E48BCE6410 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B6D594BCC584DC2B929192F /* Roboto-Medium.ttf */; };
 		8F5B8D4882444DB894541DE2 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2021FD0546F24C67AEC85DDB /* Roboto-Regular.ttf */; };
-		66507F643382448EB8576142 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3DDC781136A4C17AAF71C54 /* Roboto-Black.ttf */; };
+		904F162A578C01C47C0603E4 /* libPods-BraveAlertApp-BraveAlertAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFB42F1FA2CB850BB0B9205 /* libPods-BraveAlertApp-BraveAlertAppTests.a */; };
+		F005F83FA4F7091F95C6D252 /* libPods-BraveAlertApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13B0A75968866BD0884D9F0B /* libPods-BraveAlertApp-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +57,9 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BraveAlertApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BraveAlertApp/main.m; sourceTree = "<group>"; };
 		13B0A75968866BD0884D9F0B /* libPods-BraveAlertApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BraveAlertApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1721408DE9724916B055108E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/resources/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		1E912DF029FF3AD07C0A02F0 /* Pods-BraveAlertApp-BraveAlertAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BraveAlertApp-BraveAlertAppTests.debug.xcconfig"; path = "Target Support Files/Pods-BraveAlertApp-BraveAlertAppTests/Pods-BraveAlertApp-BraveAlertAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2021FD0546F24C67AEC85DDB /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../src/resources/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		2750FD50B9B6CC39D1AD479F /* Pods-BraveAlertApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BraveAlertApp.debug.xcconfig"; path = "Target Support Files/Pods-BraveAlertApp/Pods-BraveAlertApp.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* BraveAlertApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BraveAlertApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* BraveAlertApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BraveAlertApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +68,8 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BraveAlertApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8469E54B5E0A62F564586BEC /* Pods-BraveAlertApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BraveAlertApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-BraveAlertApp-tvOS/Pods-BraveAlertApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		8538A93225ACE41B0073DA55 /* alarm_army.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_army.mp3; path = ../android/app/src/main/res/raw/alarm_army.mp3; sourceTree = "<group>"; };
+		9B6D594BCC584DC2B929192F /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../src/resources/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		A3DDC781136A4C17AAF71C54 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../src/resources/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		CE573B0ECFDBD723636DE7E1 /* libPods-BraveAlertApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BraveAlertApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D150F3D963CC6F8C504A0B1A /* Pods-BraveAlertApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BraveAlertApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-BraveAlertApp-tvOSTests/Pods-BraveAlertApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		D37DDE4273812516C4FC42A5 /* Pods-BraveAlertApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BraveAlertApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-BraveAlertApp-tvOS/Pods-BraveAlertApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -72,10 +77,6 @@
 		EADDA1BCC09C03F9829776DC /* Pods-BraveAlertApp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BraveAlertApp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-BraveAlertApp-tvOSTests/Pods-BraveAlertApp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		1721408DE9724916B055108E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; name = "Roboto-Bold.ttf"; path = "../src/resources/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9B6D594BCC584DC2B929192F /* Roboto-Medium.ttf */ = {isa = PBXFileReference; name = "Roboto-Medium.ttf"; path = "../src/resources/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2021FD0546F24C67AEC85DDB /* Roboto-Regular.ttf */ = {isa = PBXFileReference; name = "Roboto-Regular.ttf"; path = "../src/resources/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A3DDC781136A4C17AAF71C54 /* Roboto-Black.ttf */ = {isa = PBXFileReference; name = "Roboto-Black.ttf"; path = "../src/resources/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +194,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		85A01A76E58A4A0D82C99B26 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1721408DE9724916B055108E /* Roboto-Bold.ttf */,
+				9B6D594BCC584DC2B929192F /* Roboto-Medium.ttf */,
+				2021FD0546F24C67AEC85DDB /* Roboto-Regular.ttf */,
+				A3DDC781136A4C17AAF71C54 /* Roboto-Black.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		EEF37F7843B50A7A1506819C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,18 +221,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		85A01A76E58A4A0D82C99B26 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				1721408DE9724916B055108E /* Roboto-Bold.ttf */,
-				9B6D594BCC584DC2B929192F /* Roboto-Medium.ttf */,
-				2021FD0546F24C67AEC85DDB /* Roboto-Regular.ttf */,
-				A3DDC781136A4C17AAF71C54 /* Roboto-Black.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -232,6 +233,7 @@
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
 				F1D28371008ED95796081E43 /* [CP] Copy Pods Resources */,
+				D2B637DB5713080C63514B08 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -255,6 +257,7 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				80D3694622394BDB8E94C42E /* Upload Debug Symbols to Sentry */,
 				F9BCB3FB126FBB7BA390FAC8 /* [CP] Copy Pods Resources */,
+				A8107D3848B4A99245D0DBF7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -522,6 +525,42 @@
 			shellPath = /bin/sh;
 			shellScript = "export SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym";
 		};
+		A8107D3848B4A99245D0DBF7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BraveAlertApp/Pods-BraveAlertApp-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignal/OneSignal.framework/OneSignal",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignal.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BraveAlertApp/Pods-BraveAlertApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2B637DB5713080C63514B08 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BraveAlertApp-BraveAlertAppTests/Pods-BraveAlertApp-BraveAlertAppTests-frameworks.sh",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignal/OneSignal.framework/OneSignal",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignal.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BraveAlertApp-BraveAlertAppTests/Pods-BraveAlertApp-BraveAlertAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F1D28371008ED95796081E43 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -666,7 +705,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "coop.brave.alert.example";
+				PRODUCT_BUNDLE_IDENTIFIER = coop.brave.alert.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BraveAlertApp.app/BraveAlertApp";
 			};
@@ -686,7 +725,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "coop.brave.alert.example";
+				PRODUCT_BUNDLE_IDENTIFIER = coop.brave.alert.example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BraveAlertApp.app/BraveAlertApp";
 			};
@@ -709,7 +748,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "coop.brave.alert.example";
+				PRODUCT_BUNDLE_IDENTIFIER = coop.brave.alert.example;
 				PRODUCT_NAME = BraveAlertApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -734,7 +773,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "coop.brave.alert.example";
+				PRODUCT_BUNDLE_IDENTIFIER = coop.brave.alert.example;
 				PRODUCT_NAME = BraveAlertApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

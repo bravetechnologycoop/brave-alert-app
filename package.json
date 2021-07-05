@@ -1,6 +1,6 @@
 {
   "name": "BraveAlertApp",
-  "version": "1.0.70",
+  "version": "1.0.71",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -56,6 +56,7 @@
     "react-native-device-info": "^7.2.1",
     "react-native-dotenv": "^2.5.0",
     "react-native-gesture-handler": "^1.9.0",
+    "react-native-onesignal": "^4.1.1",
     "react-native-reanimated": "^2.0.0",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.16.1",
