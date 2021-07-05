@@ -80,6 +80,7 @@ workflows:
         - gradlew_path: ./android/gradlew
     - android-build@0:
         inputs:
+        - variant: $VARIANT
         - project_location: ./android
     - sign-apk@1: {}
     - deploy-to-bitrise-io@1: {}
@@ -148,7 +149,7 @@ app:
     MODULE: app
   - opts:
       is_expand: false
-    VARIANT: all
+    VARIANT: Release
   - opts:
       is_expand: false
     BITRISE_PROJECT_PATH: ios/BraveAlertApp.xcworkspace

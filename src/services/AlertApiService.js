@@ -4,12 +4,13 @@
 import { post, get } from './FetchService'
 import { getApiKey } from './CredentialsService'
 
-async function designateDeviceRequest(baseUrl, verificationCode) {
+async function designateDeviceRequest(baseUrl, verificationCode, responderPushId) {
   return post({
     base: baseUrl,
     uri: '/alert/designatedevice',
     body: {
       verificationCode,
+      responderPushId,
     },
     headers: {
       'X-API-KEY': getApiKey(),
