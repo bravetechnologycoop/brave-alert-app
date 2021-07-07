@@ -37,6 +37,7 @@ the code was deployed.
 - HomeScreenInstructions component (CU-hjwctk).
 - Roboto font (CU-hjwctk).
 - Contact screen (CU-hjwg2y).
+- audit-ci for security audit of dependencies on Travis.
 
 ### Removed
 
