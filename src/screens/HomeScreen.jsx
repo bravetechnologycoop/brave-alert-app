@@ -83,11 +83,11 @@ function HomeScreen() {
         <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
           <View style={styles.body}>
             <Text style={styles.welcomeText}>WELCOME</Text>
-            {/* eslint-disable prettier/prettier */}
-            {newNotificationsCount > 0 
-              ? <HomeScreenNotificationsButton newNotificationsCount={newNotificationsCount} onPress={onPress} />
-              : <Text style={styles.noNewNotificationsText}>You have no new notifications or active alerts.</Text> }
-            {/* eslint-enable prettier/prettier */}
+            {newNotificationsCount > 0 ? (
+              <HomeScreenNotificationsButton newNotificationsCount={newNotificationsCount} onPress={onPress} />
+            ) : (
+              <Text style={styles.noNewNotificationsText}>You have no new notifications or active alerts.</Text>
+            )}
             <HomeScreenInstructions renderButtonsInstructions={renderButtonsInstructions} renderSensorsInstructions={renderSensorsInstructions} />
           </View>
         </ScrollView>

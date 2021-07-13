@@ -1,7 +1,7 @@
 // Third-party dependencies
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = null
+const initialState = 0
 
 const newNotificationsCountSlice = createSlice({
   name: 'newNotificationsCount',
