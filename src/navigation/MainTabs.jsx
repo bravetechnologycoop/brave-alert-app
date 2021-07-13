@@ -1,6 +1,7 @@
 // Third-party dependencies
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { faHomeAlt, faExclamationCircle, faCheckSquare, faCommentAlt } from '@fortawesome/pro-light-svg-icons'
 
@@ -11,9 +12,14 @@ import AlertHistoryScreen from '../screens/AlertHistoryScreen'
 import ExampleScreen from '../screens/ExampleScreen'
 import ContactScreen from '../screens/ContactScreen'
 import SCREEN from './ScreensEnum'
+import { getNewNotificationsCount } from '../redux/selectors'
 
 function MainTabs() {
   const Tab = createBottomTabNavigator()
+  const newNotificationsCount = useSelector(getNewNotificationsCount)
+
+  // setting tabBarBadge to null removes the badge (see below)
+  const notificationsTabBadge = newNotificationsCount > 0 ? newNotificationsCount : null
 
   return (
     <Tab.Navigator
@@ -41,11 +47,12 @@ function MainTabs() {
         }}
       />
       <Tab.Screen
-        name={SCREEN.EXAMPLE}
+        name={SCREEN.NOTIFICATIONS}
         component={ExampleScreen}
         options={{
           tabBarLabel: 'Notifications',
           tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faCheckSquare} size={size} color={color} />,
+          tabBarBadge: notificationsTabBadge,
         }}
       />
       <Tab.Screen

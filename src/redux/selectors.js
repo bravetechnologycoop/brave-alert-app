@@ -24,8 +24,8 @@ function getLocationName(state) {
   return get(state, 'location.name')
 }
 
-function getNotifications(state) {
-  return get(state, 'notifications')
+function getNewNotificationsCount(state) {
+  return get(state, 'newNotificationsCount')
 }
 
-export { getAlerts, getIsButtonsLocation, getIsDemo, getIsSensorLocation, getLocation, getLocationName, getNotifications }
+export { getAlerts, getIsButtonsLocation, getIsDemo, getIsSensorLocation, getLocation, getLocationName, getNewNotificationsCount }
