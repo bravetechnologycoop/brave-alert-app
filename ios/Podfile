@@ -33,3 +33,7 @@ post_install do |installer|
     config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET' # Suppress warnings resulting
   end
 end
+
+target 'OneSignalNotificationServiceExtension' do
+  pod 'OneSignal', '>= 3.0', '< 4.0'
+end

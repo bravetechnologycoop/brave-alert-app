@@ -19,6 +19,7 @@ PODS:
     - DoubleConversion
     - glog
   - glog (0.3.5)
+  - OneSignal (3.6.2)
   - OneSignalXCFramework (3.4.4)
   - RCTRequired (0.63.3)
   - RCTTypeSafety (0.63.3):
@@ -313,6 +314,7 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../node_modules/react-native/Libraries/FBReactNativeSpec`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - OneSignal (< 4.0, >= 3.0)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../node_modules/react-native/Libraries/TypeSafety`)
   - React (from `../node_modules/react-native/`)
@@ -351,6 +353,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - boost-for-react-native
+    - OneSignal
     - OneSignalXCFramework
     - Sentry
 
@@ -437,6 +440,7 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 7da9338acfb98d4ef9e5536805a0704572d33c2f
   Folly: b73c3869541e86821df3c387eb0af5f65addfab4
   glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
+  OneSignal: a61c6c6bc66d2a0a7565eafee6fca941d6fce121
   OneSignalXCFramework: eaf286b7438aa1f030f03e5fa9f1c79ede5d8f04
   RCTRequired: 48884c74035a0b5b76dbb7a998bd93bcfc5f2047
   RCTTypeSafety: edf4b618033c2f1c5b7bc3d90d8e085ed95ba2ab
@@ -472,6 +476,6 @@ SPEC CHECKSUMS:
   Sentry: 9d055e2de30a77685e86b219acf02e59b82091fc
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
 
-PODFILE CHECKSUM: 8f3bceef445bf586d04471d0279a959f320ad736
+PODFILE CHECKSUM: 8798050a26ead8d91501bab17371c9ff87b5c089
 
 COCOAPODS: 1.10.1
