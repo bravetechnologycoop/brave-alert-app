@@ -39,6 +39,7 @@ the code was deployed.
 - Contact screen (CU-hjwg2y).
 - audit-ci for security audit of dependencies on Travis.
 - Historic Alert screen (CU-hjwfx2).
+- Push Notifications (CU-hjwjfj, CU-10xfkhr).
 
 ### Removed
 

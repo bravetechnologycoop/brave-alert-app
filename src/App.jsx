@@ -26,24 +26,27 @@ if (SENTRY_DSN && SENTRY_ENV) {
 // OneSignal Init Code
 OneSignal.setLogLevel(6, 0)
 OneSignal.setAppId(ONESIGNAL_APP_ID)
-// END OneSignal Init Code
 
-//Prompt for push on iOS
-// OneSignal.promptForPushNotificationsWithUserResponse(response => {
-//   console.log('Prompt response:', response)
-// })
+// Prompt for push on iOS
+OneSignal.promptForPushNotificationsWithUserResponse(response => {
+  logger.debug('Prompt response:', response)
+})
 
 // Method for handling notifications received while app in foreground
 OneSignal.setNotificationWillShowInForegroundHandler(notificationReceivedEvent => {
-  let notification = notificationReceivedEvent.getNotification()
+  const notification = notificationReceivedEvent.getNotification()
   logger.info('notification: ', notification)
-  const data = notification.additionalData
 
   // TODO update global state, which will render the Alert(s)
   Alert.alert('Alert', notification.body)
 
   // Don't show the native notification
   notificationReceivedEvent.complete(null)
+})
+
+// Method for handling notifications opened
+OneSignal.setNotificationOpenedHandler(notification => {
+  logger.debug('OneSignal: notification opened:', notification)
 })
 
 export default function App() {

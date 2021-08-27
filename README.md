@@ -33,7 +33,7 @@
    1. If you are deploying to **production**, select the "Alert App" App
 
       If you are deploying to **staging**, select the "B1 Brave Alert" App
-   
+
    1. Click "Test Flight"
 
    1. Expand the newest version
@@ -49,9 +49,9 @@
          - "Does your app implement any encryption algorithms that are proprietary or not accepted as standards by international standard bodies (IEEE, IETF, ITU, etc.)?"
 
          - "Does your app implement any standard encryption algorithms instead of, or in addition to, using or accessing the encryption within Apple’s operating system?"
-      
+
       1. Click "Start Internal Testing"
-   
+
    1. TODO: Add instructions on how to have this release reviewed
 
 ## How to run locally on an Android emulator
@@ -178,9 +178,22 @@
 
 Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-environment-variables
 
-1. Download the Travis CLI `brew install travis` or `gem install travis`
+1. Download the Travis CLI `gem install travis`
 
 1. cd to anywhere in this repo
+
+1. temporarily create a personal access token on GitHub https://github.com/settings/tokens with the following permissions:
+
+   - `repo`
+   - `read:packages`
+   - `read:org`
+   - `read:public_key`
+   - `read:repo_hook`
+   - `user`
+   - `read:discussion`
+   - `read:enterprise`
+
+1. login using `travis login --pro --github-token <token from github>`
 
 1. For a given `VAR_NAME` that you want to have value `secret_value`, run
    `travis encrypt --pro VAR_NAME=secret_value`
@@ -188,6 +201,8 @@ Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-env
    output your encrypted variable
 
 1. Copy the encrypted variable into `.travis.yml`
+
+1. Delete your personal access token from GitHub
 
 # Repository organization
 
@@ -244,7 +259,21 @@ Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-env
 
    1. Select "App" and click "Continue"
 
-   1. In "Description" provide a short description. In "Bundle ID" provide your new bundle ID (for example `coop.brave.example.bundleid`). Do not select any capabilities (they can be added later, if necessary). Click "Continue"
+   1. In "Description" provide a short description. In "Bundle ID" provide your new bundle ID (for example `coop.brave.example.bundleid`). Under "Capabilities" select "App Groups" and "Push Notifications". Click "Continue"
+
+   1. Review the information and click "Register"
+
+1. Create a new Bundle ID for the OneSignalNotificationService
+
+      1. Go to https://developer.apple.com/account/resources/identifiers/list
+
+   1. Click on the "+" button beside "Identifiers"
+
+   1. Select "App IDs" and click "Continue"
+
+   1. Select "App" and click "Continue"
+
+   1. In "Description" provide a short description. In "Bundle ID" provide the same Bundle ID from the previous step with `.OneSignalNotificationServiceExtension` appended to it (for example `coop.brave.example.bundleid.OneSignalNotificationServiceExtension`). Under "Capabilities" select "App Groups". Click "Continue"
 
    1. Review the information and click "Register"
 
@@ -276,13 +305,67 @@ Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-env
 
    1. Select "App Store" and click "Continue"
 
-   1. Select the newly created app from the dropdown list and click "Continue"
+   1. Select the app's Bundle ID from the dropdown list (for example: `coop.brave.example.bundleid`) and click "Continue"
 
    1. Select the iOS Distribution certificate that you plan to use for the app
 
    1. Give the profile a name and click "Generate"
 
    1. Download the profile by clicking "Download"
+
+1. Create a provisioning profile for the OneSignalNotificationService
+
+   1. Go to https://developer.apple.com/account/resources/profiles/list
+
+   1. Click on the "+" button beside "Profiles"
+
+   1. Select "App Store" and click "Continue"
+
+   1. Select the OneSignalNotificationService's Bundle ID from the dropdown list (for example: `coop.brave.example.bundleid.OneSignalNotificationService`) and click "Continue"
+
+   1. Select the iOS Distribution certificate that you plan to use for the app (should be the same as the previous step)
+
+   1. Give the profile a name and click "Generate"
+
+# How to configure push notifications
+
+1. Create a Push Notification Certificate for iOS
+
+   1. For security reasons, change your Apple ID password
+
+   1. Use the OneSignal Push Notifications Certificate Wizard: https://onesignal.com/provisionator to add your Push Notification Certificate and generate a .p12 certificate file (and password)
+
+   1. Save the resulting .p12 file and its password in 1password --> "Brave Alert App" vault
+
+   1. For security reasons, change your Apple ID password again and sign out of all other devices
+
+   1. Go to https://developer.apple.com/account/resources/profiles/list and you will see that your two provisioning profiles have the expiration "Invalid". To validate them, they just needs to be re-saved by doing the following for each of the two provisioning profiles
+
+      1. Click on the profile
+
+      1. Click "Edit"
+
+      1. Click "Save"
+
+1. Set up a Firebase project using these instructions: https://documentation.onesignal.com/docs/generate-a-google-server-api-key
+
+1. Create a new project in OneSignal (https://app.onesignal.com/)
+
+   1. Pick a name for the project, choose to set up the iOS platform, click "Next"
+
+   1. Upload the .p12 certificate generated in the first step to OneSignal as described here: https://documentation.onesignal.com/docs/generate-an-ios-push-certificate#step-3-upload-your-push-certificate-to-onesignal , click "Save & Continue"
+
+   1. Choose "React Native / Expo" as your target SDK, click "Save & Continue"
+
+   1. Click "Done"
+
+   1. Select "Google Android"
+
+   1. Add the Firebase Server Key and Sender ID from Firebase following these instructions: https://documentation.onesignal.com/docs/generate-a-google-server-api-key#step-2-getting-your-firebase-cloud-messaging-token-and-sender-id , click "Save & Continue"
+
+   1. Choose "React Native / Expo" as your target SDK, click "Save & Continue"
+
+   1. Click "Done"
 
 # How to add a new App in BitRise
 
@@ -376,9 +459,13 @@ Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-env
 
       - `CODE_SIGNING_IDENTITY`: value should be `iPhone Distribution: Brave Technology Coop ($TEAM)`
 
-      - `PROVISIONING_PROFILE_SPECIFIER`: get the name of the provisioning profile from https://developer.apple.com/account/resources/profiles/list and then the value should be `$TEAM/ProvisioningProfileName`
+      - `ALERT_APP_PROVISIONING_PROFILE_SPECIFIER`: get the name of the environment's Alert App provisioning profile from https://developer.apple.com/account/resources/profiles/list
+
+      - `ONESIGNAL_PROVISIONING_PROFILE_SPECIFIER`: get the name of the environment's OneSignal Notification Service provisioning profile from https://developer.apple.com/account/resources/profiles/list
 
       - `CF_BUNDLE_IDENTIFIER`: get value from https://appstoreconnect.apple.com/apps --> your app --> App Store --> App Information --> General Information --> Bundle ID
+
+      - `CF_ONESIGNAL_BUNDLE_IDENTIFIER`: get value from 'IDENTIFIER' column on https://developer.apple.com/account/resources/identifiers/list for the environment's OneSignal Notification Service
 
       - `CF_BUNDLE_DISPLAY_NAME`: seems like this can be anything. I'm not sure what it's used for
 
@@ -388,11 +475,23 @@ Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-env
 
       - `BUNDLE_ID`: get value from https://play.google.com/console/u/0/developers . Look at the string immediately below the name of your Android app in the list of apps, for example `coop.brave.example.bundleid`
 
+      - `CONTACT_FORM_URI`: get by following the instructions in `.env.test`
+
+      - `CONTACT_FORM_NAME_QUESTION_ID`: get by following the instructions in `.env.test`
+
+      - `CONTACT_FORM_ORG_QUESTION_ID`: get by following the instructions in `.env.test`
+
+      - `CONTACT_FORM_MESSAGE_QUESTION_ID`: get by following the instructions in `.env.test`
+
+      - `CONTACT_FORM_CONTACT_METHOD_QUESTION_ID`: get by following the instructions in `.env.test`
+
+      - `ONESIGNAL_APP_ID`: get value from https://app.onesignal.com/ --> Settings --> Keys & IDs --> OneSignal App ID
+
 1. Add Code Signing
 
    1. Navigate to your app --> Workflow --> Code Signing
 
-   1. Upload your iOS provisioning profile (get from https://developer.apple.com/account/resources/profiles/list). You will see an error message saying that the profile doesn't match the certificate
+   1. Upload your two iOS provisioning profiles (one for the app and the other for the OneSignalNotificationService) (get them from https://developer.apple.com/account/resources/profiles/list). You will see an error message saying that the profile doesn't match the certificate
 
    1. Upload your iOS Code Signing Certificate
 

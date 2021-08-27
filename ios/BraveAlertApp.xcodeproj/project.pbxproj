@@ -20,11 +20,14 @@
 		66507F643382448EB8576142 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3DDC781136A4C17AAF71C54 /* Roboto-Black.ttf */; };
 		6D4D39E230AF479BA135AD99 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1721408DE9724916B055108E /* Roboto-Bold.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		8519EDAF26D9926800DE4D4B /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8519EDAE26D9926800DE4D4B /* NotificationService.swift */; };
+		8519EDB326D9926800DE4D4B /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8519EDAC26D9926800DE4D4B /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8538A93325ACE41B0073DA55 /* alarm_army.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8538A93225ACE41B0073DA55 /* alarm_army.mp3 */; };
 		85FE81A21B6B46E48BCE6410 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B6D594BCC584DC2B929192F /* Roboto-Medium.ttf */; };
 		8F5B8D4882444DB894541DE2 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2021FD0546F24C67AEC85DDB /* Roboto-Regular.ttf */; };
 		904F162A578C01C47C0603E4 /* libPods-BraveAlertApp-BraveAlertAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DAFB42F1FA2CB850BB0B9205 /* libPods-BraveAlertApp-BraveAlertAppTests.a */; };
 		F005F83FA4F7091F95C6D252 /* libPods-BraveAlertApp-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13B0A75968866BD0884D9F0B /* libPods-BraveAlertApp-tvOSTests.a */; };
+		FBBA6B51F7935B001B140183 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A483EC7127DE9576BD8335E /* libPods-OneSignalNotificationServiceExtension.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +45,28 @@
 			remoteGlobalIDString = 2D02E47A1E0B4A5D006451C7;
 			remoteInfo = "BraveAlertApp-tvOS";
 		};
+		8519EDB126D9926800DE4D4B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8519EDAB26D9926800DE4D4B;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8519EDB726D9926800DE4D4B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8519EDB326D9926800DE4D4B /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -57,19 +81,27 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = BraveAlertApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = BraveAlertApp/main.m; sourceTree = "<group>"; };
 		13B0A75968866BD0884D9F0B /* libPods-BraveAlertApp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BraveAlertApp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1721408DE9724916B055108E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/resources/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		1721408DE9724916B055108E /* Roboto-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Bold.ttf"; path = "../src/resources/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		1E912DF029FF3AD07C0A02F0 /* Pods-BraveAlertApp-BraveAlertAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BraveAlertApp-BraveAlertAppTests.debug.xcconfig"; path = "Target Support Files/Pods-BraveAlertApp-BraveAlertAppTests/Pods-BraveAlertApp-BraveAlertAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2021FD0546F24C67AEC85DDB /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../src/resources/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		2021FD0546F24C67AEC85DDB /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../src/resources/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		2750FD50B9B6CC39D1AD479F /* Pods-BraveAlertApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BraveAlertApp.debug.xcconfig"; path = "Target Support Files/Pods-BraveAlertApp/Pods-BraveAlertApp.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* BraveAlertApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BraveAlertApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* BraveAlertApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BraveAlertApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36442CAFC3D2D523DFC1CB52 /* libPods-BraveAlertApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BraveAlertApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EC826DAE9CCAFDCDF33F623 /* Pods-BraveAlertApp-BraveAlertAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BraveAlertApp-BraveAlertAppTests.release.xcconfig"; path = "Target Support Files/Pods-BraveAlertApp-BraveAlertAppTests/Pods-BraveAlertApp-BraveAlertAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		77E2545EC8FAB24E4B07E9CD /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BraveAlertApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8469E54B5E0A62F564586BEC /* Pods-BraveAlertApp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BraveAlertApp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-BraveAlertApp-tvOS/Pods-BraveAlertApp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		8519EDA726D9918100DE4D4B /* BraveAlertApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = BraveAlertApp.entitlements; path = BraveAlertApp/BraveAlertApp.entitlements; sourceTree = "<group>"; };
+		8519EDAC26D9926800DE4D4B /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8519EDAE26D9926800DE4D4B /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		8519EDB026D9926800DE4D4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8538A93225ACE41B0073DA55 /* alarm_army.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = alarm_army.mp3; path = ../android/app/src/main/res/raw/alarm_army.mp3; sourceTree = "<group>"; };
-		9B6D594BCC584DC2B929192F /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../src/resources/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		A3DDC781136A4C17AAF71C54 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../src/resources/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
+		85829DE126D99BEC004C680D /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
+		93530A9976FFFC2CCF7F78C0 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		9A483EC7127DE9576BD8335E /* libPods-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B6D594BCC584DC2B929192F /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../src/resources/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		A3DDC781136A4C17AAF71C54 /* Roboto-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Black.ttf"; path = "../src/resources/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
 		CE573B0ECFDBD723636DE7E1 /* libPods-BraveAlertApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BraveAlertApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D150F3D963CC6F8C504A0B1A /* Pods-BraveAlertApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BraveAlertApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-BraveAlertApp-tvOSTests/Pods-BraveAlertApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		D37DDE4273812516C4FC42A5 /* Pods-BraveAlertApp-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BraveAlertApp-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-BraveAlertApp-tvOS/Pods-BraveAlertApp-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -112,6 +144,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8519EDA926D9926800DE4D4B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBBA6B51F7935B001B140183 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -135,6 +175,7 @@
 		13B07FAE1A68108700A75B9A /* BraveAlertApp */ = {
 			isa = PBXGroup;
 			children = (
+				8519EDA726D9918100DE4D4B /* BraveAlertApp.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -155,6 +196,7 @@
 				DAFB42F1FA2CB850BB0B9205 /* libPods-BraveAlertApp-BraveAlertAppTests.a */,
 				36442CAFC3D2D523DFC1CB52 /* libPods-BraveAlertApp-tvOS.a */,
 				13B0A75968866BD0884D9F0B /* libPods-BraveAlertApp-tvOSTests.a */,
+				9A483EC7127DE9576BD8335E /* libPods-OneSignalNotificationServiceExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -173,6 +215,7 @@
 				13B07FAE1A68108700A75B9A /* BraveAlertApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* BraveAlertAppTests */,
+				8519EDAD26D9926800DE4D4B /* OneSignalNotificationServiceExtension */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				EEF37F7843B50A7A1506819C /* Pods */,
@@ -190,8 +233,19 @@
 				00E356EE1AD99517003FC87E /* BraveAlertAppTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* BraveAlertApp-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* BraveAlertApp-tvOSTests.xctest */,
+				8519EDAC26D9926800DE4D4B /* OneSignalNotificationServiceExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8519EDAD26D9926800DE4D4B /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				85829DE126D99BEC004C680D /* OneSignalNotificationServiceExtension.entitlements */,
+				8519EDAE26D9926800DE4D4B /* NotificationService.swift */,
+				8519EDB026D9926800DE4D4B /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
 			sourceTree = "<group>";
 		};
 		85A01A76E58A4A0D82C99B26 /* Resources */ = {
@@ -203,7 +257,6 @@
 				A3DDC781136A4C17AAF71C54 /* Roboto-Black.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		EEF37F7843B50A7A1506819C /* Pods */ = {
@@ -217,6 +270,8 @@
 				8469E54B5E0A62F564586BEC /* Pods-BraveAlertApp-tvOS.release.xcconfig */,
 				EADDA1BCC09C03F9829776DC /* Pods-BraveAlertApp-tvOSTests.debug.xcconfig */,
 				D150F3D963CC6F8C504A0B1A /* Pods-BraveAlertApp-tvOSTests.release.xcconfig */,
+				93530A9976FFFC2CCF7F78C0 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
+				77E2545EC8FAB24E4B07E9CD /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -258,10 +313,12 @@
 				80D3694622394BDB8E94C42E /* Upload Debug Symbols to Sentry */,
 				F9BCB3FB126FBB7BA390FAC8 /* [CP] Copy Pods Resources */,
 				A8107D3848B4A99245D0DBF7 /* [CP] Embed Pods Frameworks */,
+				8519EDB726D9926800DE4D4B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8519EDB226D9926800DE4D4B /* PBXTargetDependency */,
 			);
 			name = BraveAlertApp;
 			productName = BraveAlertApp;
@@ -307,12 +364,31 @@
 			productReference = 2D02E4901E0B4A5D006451C7 /* BraveAlertApp-tvOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		8519EDAB26D9926800DE4D4B /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8519EDB426D9926800DE4D4B /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				8CD4CF94C660B59E6E773CF5 /* [CP] Check Pods Manifest.lock */,
+				8519EDA826D9926800DE4D4B /* Sources */,
+				8519EDA926D9926800DE4D4B /* Frameworks */,
+				8519EDAA26D9926800DE4D4B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			productName = OneSignalNotificationServiceExtension;
+			productReference = 8519EDAC26D9926800DE4D4B /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -320,6 +396,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = "";
 						LastSwiftMigration = 1120;
 						ProvisioningStyle = Manual;
 					};
@@ -331,6 +408,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2D02E47A1E0B4A5D006451C7;
+					};
+					8519EDAB26D9926800DE4D4B = {
+						CreatedOnToolsVersion = 12.4;
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -351,6 +433,7 @@
 				00E356ED1AD99517003FC87E /* BraveAlertAppTests */,
 				2D02E47A1E0B4A5D006451C7 /* BraveAlertApp-tvOS */,
 				2D02E48F1E0B4A5D006451C7 /* BraveAlertApp-tvOSTests */,
+				8519EDAB26D9926800DE4D4B /* OneSignalNotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -386,6 +469,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		2D02E48E1E0B4A5D006451C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8519EDAA26D9926800DE4D4B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -524,6 +614,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym";
+		};
+		8CD4CF94C660B59E6E773CF5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		A8107D3848B4A99245D0DBF7 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -672,6 +784,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8519EDA826D9926800DE4D4B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8519EDAF26D9926800DE4D4B /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -684,6 +804,11 @@
 			isa = PBXTargetDependency;
 			target = 2D02E47A1E0B4A5D006451C7 /* BraveAlertApp-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
+		};
+		8519EDB226D9926800DE4D4B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8519EDAB26D9926800DE4D4B /* OneSignalNotificationServiceExtension */;
+			targetProxy = 8519EDB126D9926800DE4D4B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -735,8 +860,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2750FD50B9B6CC39D1AD479F /* Pods-BraveAlertApp.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = BraveAlertApp/BraveAlertApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -750,7 +878,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = coop.brave.alert.example;
 				PRODUCT_NAME = BraveAlertApp;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Alert App Provisioning Profile";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -761,8 +889,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0B39CB8C8AEAE508F7418464 /* Pods-BraveAlertApp.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = BraveAlertApp/BraveAlertApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
@@ -775,7 +906,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = coop.brave.alert.example;
 				PRODUCT_NAME = BraveAlertApp;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "Alert App Provisioning Profile";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1006,6 +1137,71 @@
 			};
 			name = Release;
 		};
+		8519EDB526D9926800DE4D4B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93530A9976FFFC2CCF7F78C0 /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = coop.brave.alert.example.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Provisioning Profile";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
+			};
+			name = Debug;
+		};
+		8519EDB626D9926800DE4D4B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77E2545EC8FAB24E4B07E9CD /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = coop.brave.alert.example.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "OneSignal Provisioning Profile";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1050,6 +1246,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8519EDB426D9926800DE4D4B /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8519EDB526D9926800DE4D4B /* Debug */,
+				8519EDB626D9926800DE4D4B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
