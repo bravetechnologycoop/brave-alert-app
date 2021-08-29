@@ -61,13 +61,12 @@ function HomeScreen() {
   useFocusEffect(
     useCallback(() => {
       async function handle() {
-        // TODO: enable sensors request
         const promises = [
           AlertApiService.getNewNotificationsCountRequest(BUTTONS_BASE_URL),
-          // AlertApiService.getNewNotificationsCountRequest(SENSOR_BASE_URL),
+          AlertApiService.getNewNotificationsCountRequest(SENSOR_BASE_URL),
         ]
-        const [buttonsResult /* , sensorsResult */] = await Promise.all(promises)
-        dispatch(setNewNotificationsCount(buttonsResult /* + sensorsResult */))
+        const [buttonsResult, sensorsResult] = await Promise.all(promises)
+        dispatch(setNewNotificationsCount(buttonsResult + sensorsResult))
       }
 
       fireGetNewNotificationsCountRequest(handle, {

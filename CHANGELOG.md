@@ -40,6 +40,7 @@ the code was deployed.
 - audit-ci for security audit of dependencies on Travis.
 - Historic Alert screen (CU-hjwfx2).
 - Push Notifications (CU-hjwjfj, CU-10xfkhr).
+- new notifications counting (CU-hjwcwk).
 
 ### Removed
 
