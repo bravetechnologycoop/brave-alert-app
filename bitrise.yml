@@ -1,200 +1,180 @@
 ---
 format_version: '8'
-default_step_lib_source: 'https://github.com/bitrise-io/bitrise-steplib.git'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: react-native
 workflows:
   deploy-ios:
     description: iOS-specific part of the deployment
     steps:
-      - set-ios-info-plist-unified@1:
-          inputs:
-            - bundle_identifier: $CF_BUNDLE_IDENTIFIER
-            - bundle_version: $BITRISE_BUILD_NUMBER
-            - bundle_version_short: $PRODUCT_VERSION
-            - bundle_display_name: $CF_BUNDLE_DISPLAY_NAME
-            - info_plist_file: $BITRISE_SOURCE_DIR/ios/BraveAlertApp/Info.plist
-      - set-ios-info-plist-unified@1:
-          inputs:
-            - bundle_identifier: $CF_ONESIGNAL_BUNDLE_IDENTIFIER
-            - bundle_version: $BITRISE_BUILD_NUMBER
-            - bundle_version_short: $PRODUCT_VERSION
-            - bundle_display_name: $CF_BUNDLE_DISPLAY_NAME
-            - info_plist_file: $BITRISE_SOURCE_DIR/ios/OneSignalNotificationServiceExtension/Info.plist
-      - script@1:
-          title: Update project.pbxproj
-          inputs:
-            - content: >-
-                #!/usr/bin/env bash
+    - set-ios-info-plist-unified@1:
+        inputs:
+        - bundle_identifier: "$CF_BUNDLE_IDENTIFIER"
+        - bundle_version: "$BITRISE_BUILD_NUMBER"
+        - bundle_version_short: "$PRODUCT_VERSION"
+        - bundle_display_name: "$CF_BUNDLE_DISPLAY_NAME"
+        - info_plist_file: "$BITRISE_SOURCE_DIR/ios/BraveAlertApp/Info.plist"
+    - set-ios-info-plist-unified@1:
+        inputs:
+        - bundle_identifier: "$CF_ONESIGNAL_BUNDLE_IDENTIFIER"
+        - bundle_version: "$BITRISE_BUILD_NUMBER"
+        - bundle_version_short: "$PRODUCT_VERSION"
+        - bundle_display_name: "$CF_BUNDLE_DISPLAY_NAME"
+        - info_plist_file: "$BITRISE_SOURCE_DIR/ios/OneSignalNotificationServiceExtension/Info.plist"
+    - script@1:
+        title: Update project.pbxproj
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -e
+            set -x
+            sed -i '' 's/coop.brave.alert.example.OneSignalNotificationServiceExtension/$CF_ONESIGNAL_BUNDLE_IDENTIFIER/g' $BITRISE_SOURCE_DIR/ios/BraveAlertApp.xcodeproj/project.pbxproj
 
-                set -e
+            sed -i '' 's/coop.brave.alert.example/$CF_BUNDLE_IDENTIFIER/g' $BITRISE_SOURCE_DIR/ios/BraveAlertApp.xcodeproj/project.pbxproj
 
-                set -x
+            sed -i '' 's/Alert App Provisioning Profile/$ALERT_APP_PROVISIONING_PROFILE_SPECIFIER/g' $BITRISE_SOURCE_DIR/ios/BraveAlertApp.xcodeproj/project.pbxproj
 
-                sed -i '' 's/coop.brave.alert.example.OneSignalNotificationServiceExtension/$CF_ONESIGNAL_BUNDLE_IDENTIFIER/g'
-                $BITRISE_SOURCE_DIR/ios/BraveAlertApp.xcodeproj/project.pbxproj
+            sed -i '' 's/OneSignal Provisioning Profile/$ONESIGNAL_PROVISIONING_PROFILE_SPECIFIER/g' $BITRISE_SOURCE_DIR/ios/BraveAlertApp.xcodeproj/project.pbxproj
 
-
-                sed -i '' 's/coop.brave.alert.example/$CF_BUNDLE_IDENTIFIER/g'
-                $BITRISE_SOURCE_DIR/ios/BraveAlertApp.xcodeproj/project.pbxproj
-
-
-                sed -i '' 's/Alert App Provisioning Profile/$ALERT_APP_PROVISIONING_PROFILE_SPECIFIER/g'
-                $BITRISE_SOURCE_DIR/ios/BraveAlertApp.xcodeproj/project.pbxproj
-
-
-                sed -i '' 's/OneSignal Provisioning Profile/$ONESIGNAL_PROVISIONING_PROFILE_SPECIFIER/g'
-                $BITRISE_SOURCE_DIR/ios/BraveAlertApp.xcodeproj/project.pbxproj
-
-
-                echo
-                "org.reactjs.native.example.BraveAlertApp/$CF_BUNDLE_IDENTIFIER"
-
-                echo
-                "$BITRISE_SOURCE_DIR/ios/BraveAlertApp.xcodeproj/project.pbxproj"
-      - change-value@1:
-          inputs:
-            - old_value: 'coop.brave.alert.example'
-            - new_value: '$CF_BUNDLE_IDENTIFIER'
-            - file: $BITRISE_SOURCE_DIR/ios/BraveAlertApp/BraveAlertApp.entitlements
-          title: Update bundle id in BraveAlertApp.entitlements
-      - change-value@1:
-          inputs:
-            - old_value: 'coop.brave.alert.example'
-            - new_value: '$CF_BUNDLE_IDENTIFIER'
-            - file: $BITRISE_SOURCE_DIR/ios/OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements
-          title: Update bundle id in OneSignalNotificationServiceExtension.entitlements
-      - cocoapods-install@1: {}
-      - certificate-and-profile-installer@1: {}
-      - xcode-archive@3:
-          inputs:
-            - project_path: $BITRISE_PROJECT_PATH
-            - scheme: $BITRISE_SCHEME
-            - export_method: $BITRISE_EXPORT_METHOD
-            - team_id: $TEAM
-            - force_team_id: $TEAM
-            - force_code_sign_identity: $CODE_SIGNING_IDENTITY
-            - configuration: Release
-      - deploy-to-bitrise-io@1: {}
-      - deploy-to-itunesconnect-application-loader@1:
-          inputs:
-            - connection: api_key
+            echo "org.reactjs.native.example.BraveAlertApp/$CF_BUNDLE_IDENTIFIER"
+            echo "$BITRISE_SOURCE_DIR/ios/BraveAlertApp.xcodeproj/project.pbxproj"
+    - change-value@1:
+        inputs:
+        - old_value: coop.brave.alert.example
+        - new_value: "$CF_BUNDLE_IDENTIFIER"
+        - file: "$BITRISE_SOURCE_DIR/ios/BraveAlertApp/BraveAlertApp.entitlements"
+        title: Update bundle id in BraveAlertApp.entitlements
+    - change-value@1:
+        inputs:
+        - old_value: coop.brave.alert.example
+        - new_value: "$CF_BUNDLE_IDENTIFIER"
+        - file: "$BITRISE_SOURCE_DIR/ios/OneSignalNotificationServiceExtension/OneSignalNotificationServiceExtension.entitlements"
+        title: Update bundle id in OneSignalNotificationServiceExtension.entitlements
+    - cocoapods-install@1: {}
+    - certificate-and-profile-installer@1: {}
+    - xcode-archive@3:
+        inputs:
+        - project_path: "$BITRISE_PROJECT_PATH"
+        - scheme: "$BITRISE_SCHEME"
+        - export_method: "$BITRISE_EXPORT_METHOD"
+        - team_id: "$TEAM"
+        - force_team_id: "$TEAM"
+        - force_code_sign_identity: "$CODE_SIGNING_IDENTITY"
+        - configuration: Release
+    - deploy-to-bitrise-io@1: {}
+    - deploy-to-itunesconnect-application-loader@1:
+        inputs:
+        - connection: api_key
     before_run:
-      - pre-deploy
+    - pre-deploy
   deploy-android:
     description: Android-specific part of the deployment
     steps:
-      - change-value@1:
-          inputs:
-            - old_value: applicationId "com.bravealertapp"
-            - new_value: applicationId "$BUNDLE_ID"
-            - file: $BITRISE_SOURCE_DIR/android/app/build.gradle
-          title: Update applicationId in build.gradle
-      - script@1.1.6:
-          title: Update app_name in strings.xml
-          inputs:
-            - working_dir: $BITRISE_SOURCE_DIR/android/app/src/main/res/values
-            - content: |-
-                #!/usr/bin/env bash
-                set -e
-                set -x
-                echo "DISPLAY_NAME=$CF_BUNDLE_DISPLAY_NAME"
-                sed -i '' "s/BraveAlertApp/$CF_BUNDLE_DISPLAY_NAME/g" strings.xml
-                cat strings.xml
-      - change-android-versioncode-and-versionname@1.2.3:
-          inputs:
-            - build_gradle_path: $BITRISE_SOURCE_DIR/android/app/build.gradle
-            - new_version_name: $PRODUCT_VERSION
-      - install-missing-android-tools@2:
-          inputs:
-            - ndk_revision: 21d
-            - gradlew_path: ./android/gradlew
-      - android-build@0:
-          inputs:
-            - variant: $VARIANT
-            - project_location: ./android
-      - sign-apk@1: {}
-      - deploy-to-bitrise-io@1: {}
-      - google-play-deploy@3:
-          inputs:
-            - service_account_json_key_path: $BITRISEIO_SERVICE_ACCOUNT_JSON_KEY_URL
-            - track: $GOOGLE_PLAY_STORE_TRACK
-            - package_name: $BUNDLE_ID
+    - change-value@1:
+        inputs:
+        - old_value: applicationId "com.bravealertapp"
+        - new_value: applicationId "$BUNDLE_ID"
+        - file: "$BITRISE_SOURCE_DIR/android/app/build.gradle"
+        title: Update applicationId in build.gradle
+    - script@1.1.6:
+        title: Update app_name in strings.xml
+        inputs:
+        - working_dir: "$BITRISE_SOURCE_DIR/android/app/src/main/res/values"
+        - content: |-
+            #!/usr/bin/env bash
+            set -e
+            set -x
+            echo "DISPLAY_NAME=$CF_BUNDLE_DISPLAY_NAME"
+            sed -i '' "s/BraveAlertApp/$CF_BUNDLE_DISPLAY_NAME/g" strings.xml
+            cat strings.xml
+    - change-android-versioncode-and-versionname@1.2.3:
+        inputs:
+        - build_gradle_path: "$BITRISE_SOURCE_DIR/android/app/build.gradle"
+        - new_version_name: "$PRODUCT_VERSION"
+    - install-missing-android-tools@2:
+        inputs:
+        - ndk_revision: 21d
+        - gradlew_path: "./android/gradlew"
+    - android-build@0:
+        inputs:
+        - variant: "$VARIANT"
+        - project_location: "./android"
+    - sign-apk@1: {}
+    - deploy-to-bitrise-io@1: {}
+    - google-play-deploy@3:
+        inputs:
+        - service_account_json_key_path: "$BITRISEIO_SERVICE_ACCOUNT_JSON_KEY_URL"
+        - track: "$GOOGLE_PLAY_STORE_TRACK"
+        - package_name: "$BUNDLE_ID"
     before_run:
-      - pre-deploy
+    - pre-deploy
   pre-deploy:
-    description: >-
-      Quick tasks that are run. before both the deploy-android and deploy-ios
+    description: Quick tasks that are run. before both the deploy-android and deploy-ios
       workflows.
     steps:
-      - activate-ssh-key@4:
-          run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-      - git-clone@4: {}
-      - script@1.1.6:
-          title: Install jq
-          inputs:
-            - content: |-
-                #!/usr/bin/env bash
-                set -e
-                set -x
-                brew install jq
-      - script@1.1.6:
-          title: Set PRODUCT_VERSION
-          inputs:
-            - working_dir: $BITRISE_SOURCE_DIR
-            - content: >-
-                #!/usr/bin/env bash
-
-                set -e
-
-                set -x
-
-                NPM_PACKAGE_VERSION=`cat "package.json" | jq -r '.version |
-                select(type == "string")'`
-
-                echo "Found package version: ${NPM_PACKAGE_VERSION}"
-
-                envman add --key "PRODUCT_VERSION" --value "${NPM_PACKAGE_VERSION}"
-      - script@1:
-          title: Create .env file
-          inputs:
-            - content: |-
-                #!/usr/bin/env bash
-                set -e
-                set -x
-                echo "SENTRY_DSN=$SENTRY_DSN" >> .env
-                echo "SENTRY_ENV=$SENTRY_ENVIRONMENT" >> .env
-                echo "SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN" >> .env
-                echo "FONTAWESOME_NPM_AUTH_TOKEN=$FONTAWESOME_NPM_AUTH_TOKEN" >> .env
-                echo "BUTTONS_BASE_URL=$BUTTONS_BASE_URL" >> .env
-                echo "SENSOR_BASE_URL=$SENSOR_BASE_URL" >> .env
-                echo "CONTACT_FORM_URI=$CONTACT_FORM_URI" >> .env
-                echo "CONTACT_FORM_NAME_QUESTION_ID=$CONTACT_FORM_NAME_QUESTION_ID" >> .env
-                echo "CONTACT_FORM_ORG_QUESTION_ID=$CONTACT_FORM_ORG_QUESTION_ID" >> .env
-                echo "CONTACT_FORM_MESSAGE_QUESTION_ID=$CONTACT_FORM_MESSAGE_QUESTION_ID" >> .env
-                echo "CONTACT_FORM_CONTACT_METHOD=$CONTACT_FORM_CONTACT_METHOD" >> .env
-                echo "ONESIGNAL_APP_ID=$ONESIGNAL_APP_ID" >> .env
-                cat .env
-      - npm@1:
-          inputs:
-            - command: ci
-          title: Run npm ci
+    - activate-ssh-key@4:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4: {}
+    - script@1.1.6:
+        title: Install jq
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -e
+            set -x
+            brew install jq
+    - script@1.1.6:
+        title: Set PRODUCT_VERSION
+        inputs:
+        - working_dir: "$BITRISE_SOURCE_DIR"
+        - content: |-
+            #!/usr/bin/env bash
+            set -e
+            set -x
+            NPM_PACKAGE_VERSION=`cat "package.json" | jq -r '.version | select(type == "string")'`
+            echo "Found package version: ${NPM_PACKAGE_VERSION}"
+            envman add --key "PRODUCT_VERSION" --value "${NPM_PACKAGE_VERSION}"
+    - script@1:
+        title: Create .env file
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -e
+            set -x
+            echo "SENTRY_DSN=$SENTRY_DSN" >> .env
+            echo "SENTRY_ENV=$SENTRY_ENVIRONMENT" >> .env
+            echo "SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN" >> .env
+            echo "FONTAWESOME_NPM_AUTH_TOKEN=$FONTAWESOME_NPM_AUTH_TOKEN" >> .env
+            echo "BUTTONS_BASE_URL=$BUTTONS_BASE_URL" >> .env
+            echo "SENSOR_BASE_URL=$SENSOR_BASE_URL" >> .env
+            echo "CONTACT_FORM_URI=$CONTACT_FORM_URI" >> .env
+            echo "CONTACT_FORM_NAME_QUESTION_ID=$CONTACT_FORM_NAME_QUESTION_ID" >> .env
+            echo "CONTACT_FORM_ORG_QUESTION_ID=$CONTACT_FORM_ORG_QUESTION_ID" >> .env
+            echo "CONTACT_FORM_MESSAGE_QUESTION_ID=$CONTACT_FORM_MESSAGE_QUESTION_ID" >> .env
+            echo "CONTACT_FORM_CONTACT_METHOD=$CONTACT_FORM_CONTACT_METHOD" >> .env
+            echo "ONESIGNAL_APP_ID=$ONESIGNAL_APP_ID" >> .env
+            cat .env
+    - npm@1:
+        inputs:
+        - command: ci
+        title: Run npm ci
 app:
   envs:
-    - opts:
-        is_expand: false
-      MODULE: app
-    - opts:
-        is_expand: false
-      VARIANT: Release
-    - opts:
-        is_expand: false
-      BITRISE_PROJECT_PATH: ios/BraveAlertApp.xcworkspace
-    - opts:
-        is_expand: false
-      BITRISE_SCHEME: BraveAlertApp
-    - opts:
-        is_expand: false
-      BITRISE_EXPORT_METHOD: app-store
-    - opts:
-        is_expand: false
-      GOOGLE_PLAY_STORE_TRACK: internal
+  - opts:
+      is_expand: false
+    MODULE: app
+  - opts:
+      is_expand: false
+    VARIANT: Release
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: ios/BraveAlertApp.xcworkspace
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: BraveAlertApp
+  - opts:
+      is_expand: false
+    BITRISE_EXPORT_METHOD: app-store
+  - opts:
+      is_expand: false
+    GOOGLE_PLAY_STORE_TRACK: internal
+
