@@ -265,7 +265,7 @@ Reference: https://docs.travis-ci.com/user/environment-variables/#encrypting-env
 
 1. Create a new Bundle ID for the OneSignalNotificationService
 
-      1. Go to https://developer.apple.com/account/resources/identifiers/list
+   1. Go to https://developer.apple.com/account/resources/identifiers/list
 
    1. Click on the "+" button beside "Identifiers"
 

@@ -26,11 +26,11 @@ const styles = StyleSheet.create({
 })
 
 function ButtonWithCheckmark(props) {
-  const { onPress, children, backgroundColor, borderColor, fontColor, width } = props
+  const { onPress, children, backgroundColor, borderColor, fontColor, width, margin } = props
 
   return (
     <View style={styles.buttonContainer}>
-      <TouchableOpacity style={[styles.button, { backgroundColor, width, borderColor }]} onPress={onPress}>
+      <TouchableOpacity style={[styles.button, { backgroundColor, width, margin, borderColor }]} onPress={onPress}>
         <Text style={[styles.buttonText, { color: fontColor }]}>{children}</Text>
       </TouchableOpacity>
     </View>
