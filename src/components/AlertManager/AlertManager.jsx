@@ -30,21 +30,11 @@ function AlertManager() {
 
   // Prompt for push on iOS
   OneSignal.promptForPushNotificationsWithUserResponse(response => {
-    logger.debug('Prompt response:', response)
+    logger.debug('OneSignal: prompt response:', response)
   })
 
-  // Method for handling notifications opened
-  OneSignal.setNotificationOpenedHandler(notification => {
-    logger.debug('OneSignal: notification opened:', notification)
-  })
-
-  // Method for handling notifications received while app in foreground
-  OneSignal.setNotificationWillShowInForegroundHandler(notificationReceivedEvent => {
-    const notification = notificationReceivedEvent.getNotification()
-    logger.info('notification: ', notification)
-
-    // TODO update global state, which will render the Alert(s)
-
+  function displayAlerts() {
+    // TODO get from API call
     dispatch(
       setAlerts([
         {
@@ -77,9 +67,24 @@ function AlertManager() {
         },
       ]),
     )
+  }
+
+  // Method for handling notifications opened
+  OneSignal.setNotificationOpenedHandler(notification => {
+    logger.debug('OneSignal: notification opened:', notification)
+
+    displayAlerts()
+  })
+
+  // Method for handling notifications received while app in foreground
+  OneSignal.setNotificationWillShowInForegroundHandler(notificationReceivedEvent => {
+    const notification = notificationReceivedEvent.getNotification()
+    logger.info('OneSignal: notification: ', notification)
 
     // Don't show the native notification
     notificationReceivedEvent.complete(null)
+
+    displayAlerts()
   })
 
   function renderAlert(alert) {
