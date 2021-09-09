@@ -2,7 +2,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Portal from '@burstware/react-native-portal'
-import { isEmpty } from 'lodash'
+import { isEmpty, map } from 'lodash'
 import OneSignal from 'react-native-onesignal'
 import { Alert } from 'react-native'
 import { ONESIGNAL_APP_ID } from '@env'
@@ -49,61 +49,62 @@ function AlertManager() {
       setAlerts([
         {
           id: 'guid-123-abc',
+          alertStatus: ALERT_STATUS.NEW,
+          location: 'Room 302',
+          alertType: ALERT_TYPE.BUTTONS_NOT_URGENT,
+          categories: ['Safer Use', 'Overdose', 'Mental Health', 'Other'],
+        },
+        {
+          id: 'guid-123-abc2',
+          alertStatus: ALERT_STATUS.REMINDING,
+          location: 'Room 302',
+          alertType: ALERT_TYPE.SENSOR_DURATION,
+          categories: ['Safer Use', 'Overdose', 'Mental Health', 'Other'],
+        },
+        {
+          id: 'guid-123-abc3',
           alertStatus: ALERT_STATUS.RESPONDING,
           location: 'Room 302',
-          category: 'Accidental',
           alertType: ALERT_TYPE.BUTTONS_NOT_URGENT,
-          numButtonPresses: 2,
-          createdTimestamp: 1602327600000, // 2020-10-10 04:00:00
-          respondedTimestamp: 1602327630000, // 2020-10-10T04:00:30
-          fallbackTimestamp: 1602327840000, // 2020-10-10T04:04:00
+          categories: ['Safer Use', 'Overdose', 'Mental Health', 'Other'],
+        },
+        {
+          id: 'guid-123-abc4',
+          alertStatus: ALERT_STATUS.REPORTING,
+          location: 'Room 302',
+          alertType: ALERT_TYPE.BUTTONS_NOT_URGENT,
           categories: ['Safer Use', 'Overdose', 'Mental Health', 'Other'],
         },
       ]),
     )
-    Alert.alert('Alert', notification.body)
 
     // Don't show the native notification
     notificationReceivedEvent.complete(null)
   })
+
+  function renderAlert(alert) {
+    const borderColor =
+      alert.alertType === ALERT_TYPE.BUTTONS_NOT_URGENT || alert.alertType === ALERT_TYPE.SENSOR_DURATION
+        ? colors.alertHistoric
+        : colors.urgentHistoric
+
+    const borderWidth = alert.alertStatus === ALERT_STATUS.REMINDING ? 6 : 0
+
+    return (
+      <ModalView backgroundColor={colors.greyscaleLightest} borderColor={borderColor} borderWidth={borderWidth} key={alert.id}>
+        <AlertModal
+          alertType={alert.alertType}
+          deviceName={alert.location}
+          alertStatus={alert.alertStatus}
+          incidentTypes={alert.categories}
+          key={alert.id}
+        />
+      </ModalView>
+    )
+  }
   return (
     <Portal>
-      {!isEmpty(alerts) && (
-        <ModalContainer isModalVisible>
-          <ModalView backgroundColor={colors.greyscaleLightest}>
-            <AlertModal
-              alertType={ALERT_TYPE.BUTTONS_NOT_URGENT}
-              deviceName="Room 211"
-              alertStatus={ALERT_STATUS.NEW}
-              incidentTypes={incidentTypes}
-            />
-          </ModalView>
-          <ModalView backgroundColor={colors.greyscaleLightest}>
-            <AlertModal
-              alertType={ALERT_TYPE.BUTTONS_URGENT}
-              deviceName="Room 211"
-              alertStatus={ALERT_STATUS.REMINDING}
-              incidentTypes={incidentTypes}
-            />
-          </ModalView>
-          <ModalView backgroundColor={colors.greyscaleLightest}>
-            <AlertModal
-              alertType={ALERT_TYPE.SENSOR_DURATION}
-              deviceName="Room 211"
-              alertStatus={ALERT_STATUS.RESPONDING}
-              incidentTypes={incidentTypes}
-            />
-          </ModalView>
-          <ModalView backgroundColor={colors.greyscaleLightest}>
-            <AlertModal
-              alertType={ALERT_TYPE.SENSOR_STILLNESS}
-              deviceName="Room 211"
-              alertStatus={ALERT_STATUS.REPORTING}
-              incidentTypes={incidentTypes}
-            />
-          </ModalView>
-        </ModalContainer>
-      )}
+      <ModalContainer isModalVisible={!isEmpty(alerts)}>{alerts.map(renderAlert)}</ModalContainer>
     </Portal>
   )
 }

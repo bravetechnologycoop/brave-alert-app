@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 })
 
 function ModalView(props) {
-  const { children, backgroundColor, hasCloseButton, setNumVisibleModals } = props
+  const { children, backgroundColor, hasCloseButton, setNumVisibleModals, borderColor, borderWidth } = props
 
   const [isVisible, setIsVisible] = useState(true)
 
@@ -33,7 +33,7 @@ function ModalView(props) {
   return (
     <>
       {isVisible && (
-        <View style={[styles.container, { backgroundColor }]}>
+        <View style={[styles.container, { backgroundColor, borderColor, borderWidth }]}>
           {hasCloseButton && (
             <Pressable onPress={onCloseButtonPress}>
               <FontAwesomeIcon style={styles.closeIcon} icon={faTimes} size={26} />
