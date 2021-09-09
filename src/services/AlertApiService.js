@@ -56,31 +56,40 @@ async function getNewNotificationsCountRequest(baseUrl) {
   })
 }
 
-async function testRequest(baseUrl) {
+async function acknowledgeAlertSessionRequest(baseUrl, sessionId) {
   return post({
     base: baseUrl,
-    uri: '/alert/test',
+    uri: '/alert/acknowledgeAlertSession',
+    body: {
+      sessionId,
+    },
     headers: {
       'X-API-KEY': getApiKey(),
+      'Content-Type': 'application/json',
     },
   })
 }
 
-async function fakeEndpointRequest(baseUrl) {
+async function setIncidentCategoryRequest(baseUrl, sessionId, incidentCategory) {
   return post({
     base: baseUrl,
-    uri: '/not/in/real/life',
+    uri: '/alert/setIncidentCategory',
+    body: {
+      sessionId,
+      incidentCategory,
+    },
     headers: {
       'X-API-KEY': getApiKey(),
+      'Content-Type': 'application/json',
     },
   })
 }
 
 export default {
+  acknowledgeAlertSessionRequest,
   designateDeviceRequest,
-  getNewNotificationsCountRequest,
-  fakeEndpointRequest,
   getHistoricAlerts,
   getLocation,
-  testRequest,
+  getNewNotificationsCountRequest,
+  setIncidentCategoryRequest,
 }
