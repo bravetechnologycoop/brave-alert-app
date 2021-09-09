@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import colors from '../../resources/colors'
 import BasicButton from '../BasicButton'
 import { ALERT_STATUS, ALERT_TYPE } from '../../constants'
+import IncidentCategoryModal from './IncidentCategoryModal'
 
 const iconSize = 50
 
@@ -52,20 +53,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     textAlign: 'center',
     marginBottom: 30,
-  },
-  fallbackText: {
-    color: colors.greyscaleDark,
-    fontFamily: 'Roboto-Regular',
-    fontSize: 14,
-    textAlign: 'center',
-    marginBottom: 5,
-  },
-  fallbackCountdownText: {
-    color: colors.greyscaleDarkest,
-    fontFamily: 'Roboto-Regular',
-    fontSize: 16,
-    textAlign: 'center',
-    marginBottom: 21,
   },
   instructionsText: {
     color: colors.greyscaleDarkest,
@@ -129,21 +116,6 @@ function AlertModal(props) {
     drawIconCircle = true
   }
 
-  function renderIncidentTypeButton(incidentType) {
-    return (
-      <BasicButton
-        backgroundColor={colors.primaryMedium}
-        borderColor={colors.primaryMedium}
-        fontColor={colors.greyscaleLightest}
-        width={125}
-        margin={3}
-        key={incidentType}
-      >
-        {incidentType}
-      </BasicButton>
-    )
-  }
-
   return (
     <>
       {(alertStatus === ALERT_STATUS.NEW || alertStatus === ALERT_STATUS.REMINDING) && (
@@ -156,10 +128,6 @@ function AlertModal(props) {
           <Text style={[styles.subtitleText, { color }]}>{subtitle}</Text>
           <Text style={styles.respondToText}>Respond to</Text>
           <Text style={styles.deviceNameText}>{deviceName}</Text>
-          <View>
-            <Text style={styles.fallbackText}>Fallback will be contacted in</Text>
-            <Text style={styles.fallbackCountdownText}>04:00</Text>
-          </View>
           <View style={styles.buttonView}>
             <BasicButton backgroundColor={buttonColor} borderColor={buttonColor} fontColor={colors.greyscaleDarkest} width={140}>
               On my way!
@@ -184,20 +152,7 @@ function AlertModal(props) {
           </View>
         </>
       )}
-      {alertStatus === ALERT_STATUS.REPORTING && (
-        <>
-          <Text style={[styles.titleText, { color: colors.primaryMedium }]}>INCIDENT REPORT</Text>
-          <Text style={styles.respondToText}>You responded to:</Text>
-          <Text style={styles.deviceNameText}>{deviceName}</Text>
-          <Text style={styles.instructionsText}>Choose the option which best describes the incident:</Text>
-          <View style={styles.incidentTypesButtonView}>{incidentTypes.map(renderIncidentTypeButton)}</View>
-          <View style={styles.buttonView}>
-            <BasicButton backgroundColor={colors.greyscaleLightest} borderColor={colors.primaryMedium} fontColor={colors.primaryMedium} width={140}>
-              Done
-            </BasicButton>
-          </View>
-        </>
-      )}
+      {alertStatus === ALERT_STATUS.REPORTING && <IncidentCategoryModal deviceName={deviceName} incidentTypes={incidentTypes} />}
     </>
   )
 }
