@@ -8,7 +8,6 @@ import { SENTRY_DSN, SENTRY_ENV } from '@env'
 
 // In-house dependencies
 import RootStack from './navigation/RootStack'
-import AlertManager from './components/AlertManager'
 import store from './redux/store'
 
 // Setup Sentry
@@ -25,7 +24,6 @@ export default function App() {
     <Provider store={store}>
       <Portal.Host>
         <RootStack />
-        <AlertManager />
       </Portal.Host>
     </Provider>
   )
