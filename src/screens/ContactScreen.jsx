@@ -22,6 +22,7 @@ import FormTextInput from '../components/FormTextInput'
 import FormRadioButtonGroup from '../components/FormRadioButtonGroup'
 import PageHeader from '../components/PageHeader'
 import ContactBraveBoxes from '../components/ContactBraveBoxes'
+import AlertManager from '../components/AlertManager'
 import Logger from '../services/Logger'
 
 // Setup logger
@@ -145,6 +146,7 @@ function ContactScreen() {
 
   return (
     <>
+      <AlertManager />
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView contentInsetAdjustmentBehavior="automatic">

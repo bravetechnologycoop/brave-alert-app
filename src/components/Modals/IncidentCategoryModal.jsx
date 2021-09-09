@@ -6,8 +6,6 @@ import { StyleSheet, Text, View } from 'react-native'
 import colors from '../../resources/colors'
 import BasicButton from '../BasicButton'
 
-const iconSize = 50
-
 const styles = StyleSheet.create({
   titleText: {
     fontFamily: 'Roboto-Bold',
