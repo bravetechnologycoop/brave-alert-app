@@ -1,10 +1,18 @@
 // Third-party dependencies
 import React, { useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { StackActions, useNavigation } from '@react-navigation/native'
+import { BUTTONS_BASE_URL /* , SENSOR_BASE_URL */ } from '@env'
 
 // In-house dependencies
+import { useSafeHandler } from '../../hooks'
 import colors from '../../resources/colors'
 import BasicButton from '../BasicButton'
+import AlertApiService from '../../services/AlertApiService'
+import Logger from '../../services/Logger'
+import { setAlerts } from '../../redux/slices/alertsSlice'
+
+const logger = new Logger('IncidentCategoryModal')
 
 const styles = StyleSheet.create({
   titleText: {
@@ -46,9 +54,39 @@ const styles = StyleSheet.create({
 })
 
 function IncidentCategoryModal(props) {
-  const { deviceName, incidentTypes } = props
+  const { deviceName, incidentTypes, id } = props
 
+  const navigation = useNavigation()
+
+  const [fireSetIncidentCategoryRequest, fireSetIncidentCategoryRequestOptions] = useSafeHandler()
   const [selected, setSelected] = useState()
+
+  function handleDone() {
+    async function handle() {
+      logger.debug(`Submit incidentCategory ${selected} for ${deviceName}`)
+
+      const promises = [
+        AlertApiService.setIncidentCategoryRequest(BUTTONS_BASE_URL, id, selected),
+        /* AlertApiService.setIncidentCategoryRequest(SENSOR_BASE_URL, id, selected), */
+      ]
+
+      // TODO update when the backend is working as expected
+      const sensorsAlerts = []
+      const buttonsAlerts = []
+      /* const [buttonsAlerts , sensorsAlerts] = */ await Promise.all(promises)
+
+      // Combine the results
+      setAlerts(buttonsAlerts.concat(sensorsAlerts))
+
+      // TODO close only this modal
+      const popAction = StackActions.pop(1)
+      navigation.dispatch(popAction)
+    }
+
+    fireSetIncidentCategoryRequest(handle)
+
+    fireSetIncidentCategoryRequestOptions.reset()
+  }
 
   return (
     <>
@@ -72,7 +110,13 @@ function IncidentCategoryModal(props) {
         ))}
       </View>
       <View style={styles.buttonView}>
-        <BasicButton backgroundColor={colors.greyscaleLightest} borderColor={colors.primaryMedium} fontColor={colors.primaryMedium} width={140}>
+        <BasicButton
+          backgroundColor={colors.greyscaleLightest}
+          borderColor={colors.primaryMedium}
+          fontColor={colors.primaryMedium}
+          width={140}
+          onPress={handleDone}
+        >
           Done
         </BasicButton>
       </View>

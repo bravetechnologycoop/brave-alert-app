@@ -3,7 +3,6 @@ import React from 'react'
 import DeviceInfo from 'react-native-device-info'
 import * as Sentry from '@sentry/react-native'
 import { Provider } from 'react-redux'
-import Portal from '@burstware/react-native-portal'
 import { SENTRY_DSN, SENTRY_ENV } from '@env'
 
 // In-house dependencies
@@ -22,9 +21,7 @@ if (SENTRY_DSN && SENTRY_ENV) {
 export default function App() {
   return (
     <Provider store={store}>
-      <Portal.Host>
-        <RootStack />
-      </Portal.Host>
+      <RootStack />
     </Provider>
   )
 }

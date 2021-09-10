@@ -1,14 +1,22 @@
 // Third-party dependencies
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { StackActions, useNavigation } from '@react-navigation/native'
 import { faBell, faExclamationCircle, faHourglassEnd, faRunning, faSensorOn } from '@fortawesome/pro-light-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { BUTTONS_BASE_URL /* , SENSOR_BASE_URL */ } from '@env'
 
 // In-house dependencies
+import AlertApiService from '../../services/AlertApiService'
+import { useSafeHandler } from '../../hooks'
 import colors from '../../resources/colors'
 import BasicButton from '../BasicButton'
 import { ALERT_STATUS, ALERT_TYPE } from '../../constants'
 import IncidentCategoryModal from './IncidentCategoryModal'
+import { setAlerts } from '../../redux/slices/alertsSlice'
+import Logger from '../../services/Logger'
+
+const logger = new Logger('AlertModal')
 
 const iconSize = 50
 
@@ -73,7 +81,11 @@ const styles = StyleSheet.create({
 })
 
 function AlertModal(props) {
-  const { alertType, deviceName, alertStatus, incidentTypes } = props
+  const { alertStatus, alertType, deviceName, id, incidentTypes } = props
+
+  const navigation = useNavigation()
+
+  const [fireAcknowledgeAlertSessionRequest, fireAcknowledgeAlertSessionRequestOptions] = useSafeHandler()
 
   let icon
   let color
@@ -116,6 +128,39 @@ function AlertModal(props) {
     drawIconCircle = true
   }
 
+  function handleOnMyWay() {
+    async function handle() {
+      logger.debug(`Acknowledge alert for ${deviceName}`)
+
+      const promises = [
+        AlertApiService.acknowledgeAlertSessionRequest(BUTTONS_BASE_URL, id),
+        /* AlertApiService.acknowledgeAlertSessionRequest(SENSOR_BASE_URL, id), */
+      ]
+
+      // TODO update when the backend is working as expected
+      const sensorsAlerts = []
+      const buttonsAlerts = []
+      /* const [buttonsAlerts , sensorsAlerts] = */ await Promise.all(promises)
+
+      // Combine the results
+      setAlerts(buttonsAlerts.concat(sensorsAlerts))
+
+      // TODO close only this modal
+      const popAction = StackActions.pop(1)
+      navigation.dispatch(popAction)
+    }
+
+    fireAcknowledgeAlertSessionRequest(handle)
+
+    fireAcknowledgeAlertSessionRequestOptions.reset()
+  }
+
+  function handleCompleted() {
+    // TODO close only this modal
+    const popAction = StackActions.pop(1)
+    navigation.dispatch(popAction)
+  }
+
   return (
     <>
       {(alertStatus === ALERT_STATUS.NEW || alertStatus === ALERT_STATUS.REMINDING) && (
@@ -129,7 +174,13 @@ function AlertModal(props) {
           <Text style={styles.respondToText}>Respond to</Text>
           <Text style={styles.deviceNameText}>{deviceName}</Text>
           <View style={styles.buttonView}>
-            <BasicButton backgroundColor={buttonColor} borderColor={buttonColor} fontColor={colors.greyscaleDarkest} width={140}>
+            <BasicButton
+              backgroundColor={buttonColor}
+              borderColor={buttonColor}
+              fontColor={colors.greyscaleDarkest}
+              width={140}
+              onPress={handleOnMyWay}
+            >
               On my way!
             </BasicButton>
           </View>
@@ -146,13 +197,19 @@ function AlertModal(props) {
           <Text style={styles.respondToText}>Now responding to</Text>
           <Text style={styles.deviceNameText}>{deviceName}</Text>
           <View style={styles.buttonView}>
-            <BasicButton backgroundColor={buttonColor} borderColor={buttonColor} fontColor={colors.greyscaleDarkest} width={140}>
+            <BasicButton
+              backgroundColor={buttonColor}
+              borderColor={buttonColor}
+              fontColor={colors.greyscaleDarkest}
+              width={140}
+              onPress={handleCompleted}
+            >
               Completed
             </BasicButton>
           </View>
         </>
       )}
-      {alertStatus === ALERT_STATUS.REPORTING && <IncidentCategoryModal deviceName={deviceName} incidentTypes={incidentTypes} />}
+      {alertStatus === ALERT_STATUS.REPORTING && <IncidentCategoryModal deviceName={deviceName} incidentTypes={incidentTypes} id={id} />}
     </>
   )
 }
