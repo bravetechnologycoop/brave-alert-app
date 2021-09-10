@@ -14,7 +14,6 @@ import AlertApiService from '../services/AlertApiService'
 import SCREEN from '../navigation/ScreensEnum'
 import HomeScreenInstructions from '../components/HomeScreenInstructions'
 import HomeScreenNotificationsButton from '../components/HomeScreenNotificationsButton'
-import AlertManager from '../components/AlertManager'
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -79,7 +78,6 @@ function HomeScreen() {
 
   return (
     <>
-      <AlertManager />
       <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>

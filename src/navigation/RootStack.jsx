@@ -9,6 +9,7 @@ import MainTabs from './MainTabs'
 import OnboardingScreen from '../screens/OnboardingScreen'
 import ErrorScreen from '../components/ErrorScreen'
 import SplashScreen from '../screens/SplashScreen'
+import AlertScreen from '../screens/AlertScreen'
 import SCREEN from './ScreensEnum'
 import { getLocationName } from '../redux/selectors'
 import Logger from '../services/Logger'
@@ -53,6 +54,16 @@ function RootStack() {
             header: () => {
               return null
             },
+          }}
+        />
+        <Stack.Screen
+          name={SCREEN.ALERT}
+          component={AlertScreen}
+          options={{
+            header: () => {
+              return null
+            },
+            presentation: 'transparentModal',
           }}
         />
       </Stack.Navigator>

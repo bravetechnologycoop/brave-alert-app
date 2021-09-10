@@ -12,7 +12,6 @@ import { useSafeHandler } from '../hooks'
 import SCREEN from '../navigation/ScreensEnum'
 import { formatTimeString, isSameYearMonthDate } from '../helpers'
 import colors from '../resources/colors'
-import AlertManager from '../components/AlertManager'
 import Logger from '../services/Logger'
 
 const logger = new Logger('AlertHistoryScreen')
@@ -120,7 +119,6 @@ function AlertHistoryScreen() {
 
   return (
     <>
-      <AlertManager />
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
         {fireGetHistoricAlertsRequestOptions.isFiring && (

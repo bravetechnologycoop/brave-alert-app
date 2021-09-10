@@ -92,35 +92,37 @@ function SplashScreen() {
     dispatch(
       setAlerts([
         {
-          id: 'guid-123-abc',
+          id: 'e5a727c5-ddc0-439f-bc98-6c99773ca91a',
           alertStatus: ALERT_STATUS.NEW,
-          location: 'Room 302',
+          location: 'Room A',
           alertType: ALERT_TYPE.BUTTONS_NOT_URGENT,
           categories: ['Safer Use', 'Overdose', 'Mental Health', 'Other'],
         },
         {
-          id: 'guid-123-abc2',
+          id: 'e5a727c5-ddc0-439f-bc98-6c99773ca91b',
           alertStatus: ALERT_STATUS.REMINDING,
-          location: 'Room 302',
+          location: 'Room B',
           alertType: ALERT_TYPE.SENSOR_DURATION,
           categories: ['Safer Use', 'Overdose', 'Mental Health', 'Other'],
         },
         {
-          id: 'guid-123-abc3',
+          id: 'e5a727c5-ddc0-439f-bc98-6c99773ca91c',
           alertStatus: ALERT_STATUS.RESPONDING,
-          location: 'Room 302',
+          location: 'Room C',
           alertType: ALERT_TYPE.BUTTONS_NOT_URGENT,
           categories: ['Safer Use', 'Overdose', 'Mental Health', 'Other'],
         },
         {
-          id: 'guid-123-abc4',
+          id: 'e5a727c5-ddc0-439f-bc98-6c99773ca91d',
           alertStatus: ALERT_STATUS.REPORTING,
-          location: 'Room 302',
+          location: 'Room D',
           alertType: ALERT_TYPE.BUTTONS_NOT_URGENT,
           categories: ['Safer Use', 'Overdose', 'Mental Health', 'Other'],
         },
       ]),
     )
+
+    navigation.navigate(SCREEN.ALERT)
   }
 
   // Method for handling notifications opened

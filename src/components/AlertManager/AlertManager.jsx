@@ -1,11 +1,10 @@
 // Third-party dependencies
 import React from 'react'
 import { useSelector } from 'react-redux'
-import Portal from '@burstware/react-native-portal'
 import { isEmpty } from 'lodash'
 
 // In-house dependencies
-import { ModalView, ModalContainer, AlertModal } from '../Modals'
+import { AlertModal, ModalView, ModalContainer } from '../Modals'
 import { ALERT_TYPE, ALERT_STATUS } from '../../constants'
 import colors from '../../resources/colors'
 import { getAlerts } from '../../redux/selectors'
@@ -24,6 +23,7 @@ function AlertManager() {
     return (
       <ModalView backgroundColor={colors.greyscaleLightest} borderColor={borderColor} borderWidth={borderWidth} key={alert.id}>
         <AlertModal
+          id={alert.id}
           alertType={alert.alertType}
           deviceName={alert.location}
           alertStatus={alert.alertStatus}
@@ -34,11 +34,7 @@ function AlertManager() {
     )
   }
 
-  return (
-    <Portal>
-      <ModalContainer isModalVisible={!isEmpty(alerts)}>{alerts.map(renderAlert)}</ModalContainer>
-    </Portal>
-  )
+  return <ModalContainer isModalVisible={!isEmpty(alerts)}>{alerts.map(renderAlert)}</ModalContainer>
 }
 
 export default AlertManager

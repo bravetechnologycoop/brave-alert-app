@@ -1,4 +1,5 @@
 const SCREEN = {
+  ALERT: 'AlertScreen',
   ALERT_HISTORY: 'AlertHistoryScreen',
   CONTACT: 'ContactScreen',
   ERROR: 'ErrorScreen',
