@@ -5,7 +5,7 @@ import { isEmpty } from 'lodash'
 
 // In-house dependencies
 import { AlertModal, ModalView, ModalContainer } from '../Modals'
-import { ALERT_TYPE, ALERT_STATUS } from '../../constants'
+import { ALERT_TYPE, CHATBOT_STATE } from '../../constants'
 import colors from '../../resources/colors'
 import { getAlerts } from '../../redux/selectors'
 
@@ -18,16 +18,16 @@ function AlertManager() {
         ? colors.alertHistoric
         : colors.urgentHistoric
 
-    const borderWidth = alert.alertStatus === ALERT_STATUS.REMINDING ? 6 : 0
+    const borderWidth = alert.chatbotState === CHATBOT_STATE.WAITING_FOR_REPLY ? 6 : 0
 
     return (
       <ModalView backgroundColor={colors.greyscaleLightest} borderColor={borderColor} borderWidth={borderWidth} key={alert.id}>
         <AlertModal
           id={alert.id}
           alertType={alert.alertType}
-          deviceName={alert.location}
-          alertStatus={alert.alertStatus}
-          incidentTypes={alert.categories}
+          deviceName={alert.deviceName}
+          chatbotState={alert.chatbotState}
+          validIncidentCategories={alert.validIncidentCategories}
           key={alert.id}
         />
       </ModalView>
