@@ -1,5 +1,6 @@
 // Third-party dependencies
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { StyleSheet, Text, View } from 'react-native'
 import { StackActions, useNavigation } from '@react-navigation/native'
 import { BUTTONS_BASE_URL /* , SENSOR_BASE_URL */ } from '@env'
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
   buttonView: {
     marginBottom: 28,
   },
-  incidentTypesButtonView: {
+  incidentCategoryButtonView: {
     justifyContent: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -54,9 +55,10 @@ const styles = StyleSheet.create({
 })
 
 function IncidentCategoryModal(props) {
-  const { deviceName, incidentTypes, id } = props
+  const { deviceName, validIncidentCategories, id } = props
 
   const navigation = useNavigation()
+  const dispatch = useDispatch()
 
   const [fireSetIncidentCategoryRequest, fireSetIncidentCategoryRequestOptions] = useSafeHandler()
   const [selected, setSelected] = useState()
@@ -70,22 +72,25 @@ function IncidentCategoryModal(props) {
         /* AlertApiService.setIncidentCategoryRequest(SENSOR_BASE_URL, id, selected), */
       ]
 
-      // TODO update when the backend is working as expected
+      // TODO update when the Sensors backend is working
       const sensorsAlerts = []
-      const buttonsAlerts = []
-      /* const [buttonsAlerts , sensorsAlerts] = */ await Promise.all(promises)
+      const [buttonsAlerts /* , sensorsAlerts */] = await Promise.all(promises)
 
       // Combine the results
-      setAlerts(buttonsAlerts.concat(sensorsAlerts))
+      const alerts = buttonsAlerts.concat(sensorsAlerts)
 
-      // TODO close only this modal
-      const popAction = StackActions.pop(1)
-      navigation.dispatch(popAction)
+      dispatch(setAlerts(alerts))
+
+      fireSetIncidentCategoryRequestOptions.reset()
+
+      if (buttonsAlerts.length + sensorsAlerts.length === 0) {
+        // Navigate away from the AlertScreen
+        const popAction = StackActions.pop(1)
+        navigation.dispatch(popAction)
+      }
     }
 
     fireSetIncidentCategoryRequest(handle)
-
-    fireSetIncidentCategoryRequestOptions.reset()
   }
 
   return (
@@ -94,8 +99,8 @@ function IncidentCategoryModal(props) {
       <Text style={styles.respondToText}>You responded to:</Text>
       <Text style={styles.deviceNameText}>{deviceName}</Text>
       <Text style={styles.instructionsText}>Choose the option which best describes the incident:</Text>
-      <View style={styles.incidentTypesButtonView}>
-        {incidentTypes.map(incidentType => (
+      <View style={styles.incidentCategoryButtonView}>
+        {validIncidentCategories.map(incidentType => (
           <BasicButton
             backgroundColor={selected === incidentType ? colors.greyscaleLightest : colors.primaryMedium}
             borderColor={colors.primaryMedium}

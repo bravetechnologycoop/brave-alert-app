@@ -30,6 +30,17 @@ async function getLocation(baseUrl) {
   })
 }
 
+async function getActiveAlerts(baseUrl) {
+  return get({
+    base: baseUrl,
+    uri: `/alert/activeAlerts`,
+    headers: {
+      'X-API-KEY': getApiKey(),
+      'Content-Type': 'application/json',
+    },
+    transformResponse: JSON.parse,
+  })
+}
 async function getHistoricAlerts(baseUrl, maxHistoricAlerts) {
   return get({
     base: baseUrl,
@@ -67,6 +78,22 @@ async function acknowledgeAlertSessionRequest(baseUrl, sessionId) {
       'X-API-KEY': getApiKey(),
       'Content-Type': 'application/json',
     },
+    transformResponse: JSON.parse,
+  })
+}
+
+async function respondToAlertSessionRequest(baseUrl, sessionId) {
+  return post({
+    base: baseUrl,
+    uri: '/alert/respondToAlertSession',
+    body: {
+      sessionId,
+    },
+    headers: {
+      'X-API-KEY': getApiKey(),
+      'Content-Type': 'application/json',
+    },
+    transformResponse: JSON.parse,
   })
 }
 
@@ -82,14 +109,17 @@ async function setIncidentCategoryRequest(baseUrl, sessionId, incidentCategory) 
       'X-API-KEY': getApiKey(),
       'Content-Type': 'application/json',
     },
+    transformResponse: JSON.parse,
   })
 }
 
 export default {
   acknowledgeAlertSessionRequest,
   designateDeviceRequest,
+  getActiveAlerts,
   getHistoricAlerts,
   getLocation,
   getNewNotificationsCountRequest,
+  respondToAlertSessionRequest,
   setIncidentCategoryRequest,
 }

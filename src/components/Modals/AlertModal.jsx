@@ -1,7 +1,7 @@
 // Third-party dependencies
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { StackActions, useNavigation } from '@react-navigation/native'
+import { useDispatch } from 'react-redux'
 import { faBell, faExclamationCircle, faHourglassEnd, faRunning, faSensorOn } from '@fortawesome/pro-light-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { BUTTONS_BASE_URL /* , SENSOR_BASE_URL */ } from '@env'
@@ -11,7 +11,7 @@ import AlertApiService from '../../services/AlertApiService'
 import { useSafeHandler } from '../../hooks'
 import colors from '../../resources/colors'
 import BasicButton from '../BasicButton'
-import { ALERT_STATUS, ALERT_TYPE } from '../../constants'
+import { ALERT_TYPE, CHATBOT_STATE } from '../../constants'
 import IncidentCategoryModal from './IncidentCategoryModal'
 import { setAlerts } from '../../redux/slices/alertsSlice'
 import Logger from '../../services/Logger'
@@ -81,11 +81,60 @@ const styles = StyleSheet.create({
 })
 
 function AlertModal(props) {
-  const { alertStatus, alertType, deviceName, id, incidentTypes } = props
+  const { chatbotState, alertType, deviceName, id, validIncidentCategories } = props
 
-  const navigation = useNavigation()
+  const dispatch = useDispatch()
 
   const [fireAcknowledgeAlertSessionRequest, fireAcknowledgeAlertSessionRequestOptions] = useSafeHandler()
+  const [fireRespondToAlertSessionRequest, fireRespondToAlertSessionRequestOptions] = useSafeHandler()
+
+  function handleOnMyWay() {
+    async function handle() {
+      logger.debug(`Acknowledge alert for ${deviceName}`)
+
+      const promises = [
+        AlertApiService.acknowledgeAlertSessionRequest(BUTTONS_BASE_URL, id),
+        /* AlertApiService.acknowledgeAlertSessionRequest(SENSOR_BASE_URL, id), */
+      ]
+
+      // TODO update when the Sensors backend is working
+      const sensorsAlerts = []
+      const [buttonsAlerts /* , sensorsAlerts */] = await Promise.all(promises)
+
+      // Combine the results
+      const alerts = buttonsAlerts.concat(sensorsAlerts)
+
+      dispatch(setAlerts(alerts))
+
+      fireAcknowledgeAlertSessionRequestOptions.reset()
+    }
+
+    fireAcknowledgeAlertSessionRequest(handle)
+  }
+
+  function handleCompleted() {
+    async function handle() {
+      logger.debug(`Respond to alert for ${deviceName}`)
+
+      const promises = [
+        AlertApiService.respondToAlertSessionRequest(BUTTONS_BASE_URL, id),
+        /* AlertApiService.respondToAlertSessionRequest(SENSOR_BASE_URL, id), */
+      ]
+
+      // TODO update when the Sensors backend is working
+      const sensorsAlerts = []
+      const [buttonsAlerts /* , sensorsAlerts */] = await Promise.all(promises)
+
+      // Combine the results
+      const alerts = buttonsAlerts.concat(sensorsAlerts)
+
+      dispatch(setAlerts(alerts))
+
+      fireRespondToAlertSessionRequestOptions.reset()
+    }
+
+    fireRespondToAlertSessionRequest(handle)
+  }
 
   let icon
   let color
@@ -128,42 +177,22 @@ function AlertModal(props) {
     drawIconCircle = true
   }
 
-  function handleOnMyWay() {
-    async function handle() {
-      logger.debug(`Acknowledge alert for ${deviceName}`)
-
-      const promises = [
-        AlertApiService.acknowledgeAlertSessionRequest(BUTTONS_BASE_URL, id),
-        /* AlertApiService.acknowledgeAlertSessionRequest(SENSOR_BASE_URL, id), */
-      ]
-
-      // TODO update when the backend is working as expected
-      const sensorsAlerts = []
-      const buttonsAlerts = []
-      /* const [buttonsAlerts , sensorsAlerts] = */ await Promise.all(promises)
-
-      // Combine the results
-      setAlerts(buttonsAlerts.concat(sensorsAlerts))
-
-      // TODO close only this modal
-      const popAction = StackActions.pop(1)
-      navigation.dispatch(popAction)
-    }
-
-    fireAcknowledgeAlertSessionRequest(handle)
-
-    fireAcknowledgeAlertSessionRequestOptions.reset()
-  }
-
-  function handleCompleted() {
-    // TODO close only this modal
-    const popAction = StackActions.pop(1)
-    navigation.dispatch(popAction)
+  let respondToText
+  let buttonLabel
+  let buttonFunction
+  if (chatbotState === CHATBOT_STATE.STARTED || chatbotState === CHATBOT_STATE.WAITING_FOR_REPLY) {
+    respondToText = 'Respond to'
+    buttonLabel = 'On my way!'
+    buttonFunction = handleOnMyWay
+  } else if (chatbotState === CHATBOT_STATE.RESPONDING) {
+    respondToText = 'Now responding to'
+    buttonLabel = 'Completed'
+    buttonFunction = handleCompleted
   }
 
   return (
     <>
-      {(alertStatus === ALERT_STATUS.NEW || alertStatus === ALERT_STATUS.REMINDING) && (
+      {(chatbotState === CHATBOT_STATE.STARTED || chatbotState === CHATBOT_STATE.WAITING_FOR_REPLY || chatbotState === CHATBOT_STATE.RESPONDING) && (
         <>
           <View style={[styles.iconContainer, drawIconCircle ? { borderColor: color, borderWidth: 2 } : null]}>
             {drawIconSlash && <View style={[styles.slashView, { borderColor: color }]} />}
@@ -171,7 +200,7 @@ function AlertModal(props) {
           </View>
           <Text style={[styles.titleText, { color }]}>{title}</Text>
           <Text style={[styles.subtitleText, { color }]}>{subtitle}</Text>
-          <Text style={styles.respondToText}>Respond to</Text>
+          <Text style={styles.respondToText}>{respondToText}</Text>
           <Text style={styles.deviceNameText}>{deviceName}</Text>
           <View style={styles.buttonView}>
             <BasicButton
@@ -179,37 +208,16 @@ function AlertModal(props) {
               borderColor={buttonColor}
               fontColor={colors.greyscaleDarkest}
               width={140}
-              onPress={handleOnMyWay}
+              onPress={buttonFunction}
             >
-              On my way!
+              {buttonLabel}
             </BasicButton>
           </View>
         </>
       )}
-      {alertStatus === ALERT_STATUS.RESPONDING && (
-        <>
-          <View style={[styles.iconContainer, drawIconCircle ? { borderColor: color, borderWidth: 2 } : null]}>
-            {drawIconSlash && <View style={[styles.slashView, { borderColor: color }]} />}
-            <FontAwesomeIcon size={drawIconCircle ? iconSize - 16 : iconSize} icon={icon} color={color} />
-          </View>
-          <Text style={[styles.titleText, { color }]}>{title}</Text>
-          <Text style={[styles.subtitleText, { color }]}>{subtitle}</Text>
-          <Text style={styles.respondToText}>Now responding to</Text>
-          <Text style={styles.deviceNameText}>{deviceName}</Text>
-          <View style={styles.buttonView}>
-            <BasicButton
-              backgroundColor={buttonColor}
-              borderColor={buttonColor}
-              fontColor={colors.greyscaleDarkest}
-              width={140}
-              onPress={handleCompleted}
-            >
-              Completed
-            </BasicButton>
-          </View>
-        </>
+      {chatbotState === CHATBOT_STATE.WAITING_FOR_CATEGORY && (
+        <IncidentCategoryModal deviceName={deviceName} validIncidentCategories={validIncidentCategories} id={id} />
       )}
-      {alertStatus === ALERT_STATUS.REPORTING && <IncidentCategoryModal deviceName={deviceName} incidentTypes={incidentTypes} id={id} />}
     </>
   )
 }
