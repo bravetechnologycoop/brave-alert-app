@@ -12,6 +12,7 @@ import BasicButton from '../BasicButton'
 import AlertApiService from '../../services/AlertApiService'
 import Logger from '../../services/Logger'
 import { setAlerts } from '../../redux/slices/alertsSlice'
+import SCREEN from '../../navigation/ScreensEnum'
 
 const logger = new Logger('IncidentCategoryModal')
 
@@ -90,7 +91,7 @@ function IncidentCategoryModal(props) {
       }
     }
 
-    fireSetIncidentCategoryRequest(handle)
+    fireSetIncidentCategoryRequest(handle, { rollbackScreen: SCREEN.ALERT })
   }
 
   return (
@@ -115,15 +116,19 @@ function IncidentCategoryModal(props) {
         ))}
       </View>
       <View style={styles.buttonView}>
-        <BasicButton
-          backgroundColor={colors.greyscaleLightest}
-          borderColor={colors.primaryMedium}
-          fontColor={colors.primaryMedium}
-          width={140}
-          onPress={handleDone}
-        >
-          Done
-        </BasicButton>
+        {selected !== undefined && (
+          <BasicButton
+            backgroundColor={colors.greyscaleLightest}
+            borderColor={colors.primaryMedium}
+            fontColor={colors.primaryMedium}
+            width={140}
+            onPress={handleDone}
+            disabled={selected === undefined}
+          >
+            Done
+          </BasicButton>
+        )}
+        {selected === undefined && <View style={{ height: 45 }} />}
       </View>
     </>
   )

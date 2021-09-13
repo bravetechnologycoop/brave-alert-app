@@ -1,5 +1,5 @@
 // Third-party dependencies
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, Text, View } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
@@ -12,8 +12,12 @@ import { setNewNotificationsCount } from '../redux/slices/newNotificationsCountS
 import { useSafeHandler } from '../hooks'
 import AlertApiService from '../services/AlertApiService'
 import SCREEN from '../navigation/ScreensEnum'
+import { setAlerts } from '../redux/slices/alertsSlice'
 import HomeScreenInstructions from '../components/HomeScreenInstructions'
 import HomeScreenNotificationsButton from '../components/HomeScreenNotificationsButton'
+import Logger from '../services/Logger'
+
+const logger = new Logger('HomeScreen')
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -51,7 +55,9 @@ function HomeScreen() {
   const renderSensorsInstructions = useSelector(getIsSensorLocation)
   const newNotificationsCount = useSelector(getNewNotificationsCount)
   const [fireGetNewNotificationsCountRequest, fireGetNewNotificationsCountRequestOptions] = useSafeHandler()
+  const [fireGetActiveAlertsRequest, fireGetActiveAlertsRequestOptions] = useSafeHandler()
 
+  // Runs every time we navigate this this page
   useFocusEffect(
     useCallback(() => {
       async function handle() {
@@ -71,6 +77,31 @@ function HomeScreen() {
       fireGetNewNotificationsCountRequestOptions.reset()
     }, []),
   )
+
+  // Runs the first time this page is rendered
+  useEffect(() => {
+    async function handle() {
+      logger.debug('Try to get the active alerts from both Buttons and Sensors')
+      const promises = [AlertApiService.getActiveAlerts(BUTTONS_BASE_URL) /* , AlertApiService.getActiveAlerts(SENSOR_BASE_URL) */]
+      const sensorsAlerts = []
+      const [buttonsAlerts /* , sensorsAlerts */] = await Promise.all(promises)
+
+      // Combine the results
+      const activeAlerts = buttonsAlerts.concat(sensorsAlerts)
+
+      dispatch(setAlerts(activeAlerts))
+
+      if (activeAlerts && activeAlerts.length > 0) {
+        navigation.navigate(SCREEN.ALERT)
+      }
+    }
+
+    fireGetActiveAlertsRequest(handle, {
+      rollbackScreen: SCREEN.MAIN,
+    })
+
+    fireGetActiveAlertsRequestOptions.reset()
+  }, [])
 
   function onPress() {
     navigation.navigate(SCREEN.NOTIFICATIONS)
