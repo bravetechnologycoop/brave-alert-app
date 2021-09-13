@@ -43,6 +43,7 @@ function AlertHistoryScreen() {
   const [fireGetHistoricAlertsRequest, fireGetHistoricAlertsRequestOptions] = useSafeHandler()
   const [alerts, setAlerts] = useState(null)
 
+  // Runs every time we navigate this this page
   useFocusEffect(
     useCallback(() => {
       async function handle() {

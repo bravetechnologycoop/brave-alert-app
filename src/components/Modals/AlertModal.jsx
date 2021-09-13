@@ -15,6 +15,7 @@ import { ALERT_TYPE, CHATBOT_STATE } from '../../constants'
 import IncidentCategoryModal from './IncidentCategoryModal'
 import { setAlerts } from '../../redux/slices/alertsSlice'
 import Logger from '../../services/Logger'
+import SCREEN from '../../navigation/ScreensEnum'
 
 const logger = new Logger('AlertModal')
 
@@ -109,7 +110,7 @@ function AlertModal(props) {
       fireAcknowledgeAlertSessionRequestOptions.reset()
     }
 
-    fireAcknowledgeAlertSessionRequest(handle)
+    fireAcknowledgeAlertSessionRequest(handle, { rollbackScreen: SCREEN.ALERT })
   }
 
   function handleCompleted() {
@@ -133,7 +134,7 @@ function AlertModal(props) {
       fireRespondToAlertSessionRequestOptions.reset()
     }
 
-    fireRespondToAlertSessionRequest(handle)
+    fireRespondToAlertSessionRequest(handle, { rollbackScreen: SCREEN.ALERT })
   }
 
   let icon

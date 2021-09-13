@@ -48,6 +48,7 @@ function SplashScreen() {
   const [fireGetLocationRequest] = useSafeHandler()
   const [fireGetActiveAlertsRequest, fireGetActiveAlertsRequestOptions] = useSafeHandler()
 
+  // Runs the first time this page is rendered
   useEffect(() => {
     async function handle() {
       logger.debug('Try to get the location from both Buttons and Sensors')
@@ -104,9 +105,7 @@ function SplashScreen() {
       }
     }
 
-    fireGetActiveAlertsRequest(handle, {
-      rollbackScreen: SCREEN.MAIN,
-    })
+    fireGetActiveAlertsRequest(handle)
 
     fireGetActiveAlertsRequestOptions.reset()
   }
