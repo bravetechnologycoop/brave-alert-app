@@ -4,6 +4,10 @@ function getAlerts(state) {
   return get(state, 'alerts')
 }
 
+function getErrorMessage(state) {
+  return get(state, 'errorMessage')
+}
+
 function getIsButtonsLocation(state) {
   return get(state, 'location.isButtonsLocation')
 }
@@ -28,4 +32,4 @@ function getNewNotificationsCount(state) {
   return get(state, 'newNotificationsCount')
 }
 
-export { getAlerts, getIsButtonsLocation, getIsDemo, getIsSensorLocation, getLocation, getLocationName, getNewNotificationsCount }
+export { getAlerts, getErrorMessage, getIsButtonsLocation, getIsDemo, getIsSensorLocation, getLocation, getLocationName, getNewNotificationsCount }
