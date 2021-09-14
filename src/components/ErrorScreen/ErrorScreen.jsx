@@ -3,11 +3,14 @@ import React from 'react'
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
 import { get } from 'lodash'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useDispatch, useSelector } from 'react-redux'
 
 // In-house dependencies
 import BasicButton from '../BasicButton'
 import ContactBraveBoxes from '../ContactBraveBoxes'
 import colors from '../../resources/colors'
+import { getErrorMessage } from '../../redux/selectors'
+import { setErrorMessage } from '../../redux/slices/errorMessageSlice'
 
 const styles = StyleSheet.create({
   container: {
@@ -37,13 +40,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 16,
   },
+  detailsText: {
+    fontFamily: 'Roboto-Regular',
+    fontSize: 12,
+    color: colors.greyscaleDarker,
+    marginBottom: 20,
+    width: 300,
+  },
 })
 
 function ErrorScreen(props) {
   const { navigation, route } = props
+
+  const dispatch = useDispatch()
   const originalScreen = get(route, 'params.originalScreen', null)
+  const errorMessage = useSelector(getErrorMessage)
 
   function handleDismiss() {
+    dispatch(setErrorMessage(''))
+
     if (originalScreen) {
       navigation.navigate(originalScreen)
     } else {
@@ -63,12 +78,15 @@ function ErrorScreen(props) {
           <ContactBraveBoxes />
         </View>
 
+        <Text style={styles.detailsText}>{errorMessage}</Text>
+
         <BasicButton
           onPress={handleDismiss}
           backgroundColor={colors.primaryDark}
           borderColor={colors.primaryDark}
           fontColor={colors.greyscaleLightest}
           width={250}
+          margin={20}
         >
           Dismiss
         </BasicButton>

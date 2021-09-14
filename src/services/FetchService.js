@@ -52,10 +52,11 @@ async function handleSuccessWithoutContent() {
 
 async function handleClientError(request, response) {
   const json = await response.json()
+
   if (request.asValidationError) {
     throw request.asValidationError(json)
   } else {
-    throw new FetchServiceClientError(JSON.stringify(json))
+    throw new FetchServiceClientError(json)
   }
 }
 

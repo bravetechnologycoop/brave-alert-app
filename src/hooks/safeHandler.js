@@ -3,10 +3,12 @@
 // Third-party dependencies
 import { useNavigation } from '@react-navigation/native'
 import { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { isFunction } from 'lodash'
 
 // In-house dependencies
 import { safeReportError } from '../services/ErrorReportingService'
+import { setErrorMessage } from '../redux/slices/errorMessageSlice'
 import SCREEN from '../navigation/ScreensEnum'
 import Logger from '../services/Logger'
 
@@ -17,6 +19,7 @@ const logger = new Logger('safeHandler')
 // hook for reset (e.g. add emergency contact)
 export function useSafeHandler() {
   const navigation = useNavigation()
+  const dispatch = useDispatch()
   const handlerState = useRef('ready') // one of ready, firing, cancelled
   const [isFiring, setIsFiring] = useState(false)
 
@@ -36,6 +39,7 @@ export function useSafeHandler() {
 
     function handleError(error) {
       safeReportError(error)
+      dispatch(setErrorMessage(error.message))
       navigation.navigate(SCREEN.ERROR, { originalScreen: rollbackScreen })
     }
 
