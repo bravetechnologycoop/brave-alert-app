@@ -91,12 +91,11 @@ function SplashScreen() {
   function displayAlerts() {
     async function handle() {
       logger.debug('Try to get the active alerts from both Buttons and Sensors')
-      const promises = [AlertApiService.getActiveAlerts(BUTTONS_BASE_URL) /* , AlertApiService.getActiveAlerts(SENSOR_BASE_URL) */]
-      const sensorsAlerts = []
-      const [buttonsAlerts /* , sensorsAlerts */] = await Promise.all(promises)
+      const promises = [AlertApiService.getActiveAlerts(BUTTONS_BASE_URL), AlertApiService.getActiveAlerts(SENSOR_BASE_URL)]
+      const [buttonsAlerts, sensorsAlerts] = await Promise.all(promises)
 
-      // Combine the results
-      const activeAlerts = buttonsAlerts.concat(sensorsAlerts)
+      // Combine and sort the results
+      const activeAlerts = buttonsAlerts.concat(sensorsAlerts).sort((alert1, alert2) => alert1.createdAt > alert2.createdAt)
 
       dispatch(setAlerts(activeAlerts))
 
