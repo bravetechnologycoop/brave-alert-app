@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { StyleSheet, Text, View } from 'react-native'
 import { StackActions, useNavigation } from '@react-navigation/native'
-import { BUTTONS_BASE_URL /* , SENSOR_BASE_URL */ } from '@env'
+import { BUTTONS_BASE_URL, SENSOR_BASE_URL } from '@env'
 
 // In-house dependencies
 import { useSafeHandler } from '../../hooks'
@@ -13,6 +13,7 @@ import AlertApiService from '../../services/AlertApiService'
 import Logger from '../../services/Logger'
 import { setAlerts } from '../../redux/slices/alertsSlice'
 import SCREEN from '../../navigation/ScreensEnum'
+import { ALERT_TYPE } from '../../constants'
 
 const logger = new Logger('IncidentCategoryModal')
 
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
 })
 
 function IncidentCategoryModal(props) {
-  const { deviceName, validIncidentCategories, id } = props
+  const { deviceName, validIncidentCategories, id, alertType } = props
 
   const navigation = useNavigation()
   const dispatch = useDispatch()
@@ -68,23 +69,31 @@ function IncidentCategoryModal(props) {
     async function handle() {
       logger.debug(`Submit incidentCategory ${selected} for ${deviceName}`)
 
+      let setIncidentCategoryBaseUrl
+      let getActiveAlertsBaseUrl
+      if (alertType === ALERT_TYPE.BUTTONS_NOT_URGENT || alertType === ALERT_TYPE.BUTTONS_URGENT) {
+        setIncidentCategoryBaseUrl = BUTTONS_BASE_URL
+        getActiveAlertsBaseUrl = SENSOR_BASE_URL
+      } else {
+        setIncidentCategoryBaseUrl = SENSOR_BASE_URL
+        getActiveAlertsBaseUrl = BUTTONS_BASE_URL
+      }
+
       const promises = [
-        AlertApiService.setIncidentCategoryRequest(BUTTONS_BASE_URL, id, selected),
-        /* AlertApiService.setIncidentCategoryRequest(SENSOR_BASE_URL, id, selected), */
+        AlertApiService.setIncidentCategoryRequest(setIncidentCategoryBaseUrl, id, selected),
+        AlertApiService.getActiveAlerts(getActiveAlertsBaseUrl),
       ]
 
-      // TODO update when the Sensors backend is working
-      const sensorsAlerts = []
-      const [buttonsAlerts /* , sensorsAlerts */] = await Promise.all(promises)
+      const [buttonsAlerts, sensorsAlerts] = await Promise.all(promises)
 
-      // Combine the results
-      const alerts = buttonsAlerts.concat(sensorsAlerts)
+      // Combine and sort the results
+      const activeAlerts = buttonsAlerts.concat(sensorsAlerts).sort((alert1, alert2) => alert1.createdAt > alert2.createdAt)
 
-      dispatch(setAlerts(alerts))
+      dispatch(setAlerts(activeAlerts))
 
       fireSetIncidentCategoryRequestOptions.reset()
 
-      if (buttonsAlerts.length + sensorsAlerts.length === 0) {
+      if (activeAlerts.length === 0) {
         // Navigate away from the AlertScreen
         const popAction = StackActions.pop(1)
         navigation.dispatch(popAction)

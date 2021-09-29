@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from 'react'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'
 import { SafeAreaView, ScrollView, StyleSheet, StatusBar, Text, View } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import { BUTTONS_BASE_URL } from '@env'
+import { BUTTONS_BASE_URL, SENSOR_BASE_URL } from '@env'
 
 // In-house dependencies
 import colors from '../resources/colors'
@@ -82,12 +82,11 @@ function HomeScreen() {
   useEffect(() => {
     async function handle() {
       logger.debug('Try to get the active alerts from both Buttons and Sensors')
-      const promises = [AlertApiService.getActiveAlerts(BUTTONS_BASE_URL) /* , AlertApiService.getActiveAlerts(SENSOR_BASE_URL) */]
-      const sensorsAlerts = []
-      const [buttonsAlerts /* , sensorsAlerts */] = await Promise.all(promises)
+      const promises = [AlertApiService.getActiveAlerts(BUTTONS_BASE_URL), AlertApiService.getActiveAlerts(SENSOR_BASE_URL)]
+      const [buttonsAlerts, sensorsAlerts] = await Promise.all(promises)
 
-      // Combine the results
-      const activeAlerts = buttonsAlerts.concat(sensorsAlerts)
+      // Combine and sort the results
+      const activeAlerts = buttonsAlerts.concat(sensorsAlerts).sort((alert1, alert2) => alert1.createdAt > alert2.createdAt)
 
       dispatch(setAlerts(activeAlerts))
 

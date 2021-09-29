@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { faBell, faExclamationCircle, faHourglassEnd, faRunning, faSensorOn } from '@fortawesome/pro-light-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { BUTTONS_BASE_URL /* , SENSOR_BASE_URL */ } from '@env'
+import { BUTTONS_BASE_URL, SENSOR_BASE_URL } from '@env'
 
 // In-house dependencies
 import AlertApiService from '../../services/AlertApiService'
@@ -93,19 +93,27 @@ function AlertModal(props) {
     async function handle() {
       logger.debug(`Acknowledge alert for ${deviceName}`)
 
+      let acknowledgeBaseUrl
+      let getActiveAlertsBaseUrl
+      if (alertType === ALERT_TYPE.BUTTONS_NOT_URGENT || alertType === ALERT_TYPE.BUTTONS_URGENT) {
+        acknowledgeBaseUrl = BUTTONS_BASE_URL
+        getActiveAlertsBaseUrl = SENSOR_BASE_URL
+      } else {
+        acknowledgeBaseUrl = SENSOR_BASE_URL
+        getActiveAlertsBaseUrl = BUTTONS_BASE_URL
+      }
+
       const promises = [
-        AlertApiService.acknowledgeAlertSessionRequest(BUTTONS_BASE_URL, id),
-        /* AlertApiService.acknowledgeAlertSessionRequest(SENSOR_BASE_URL, id), */
+        AlertApiService.acknowledgeAlertSessionRequest(acknowledgeBaseUrl, id),
+        AlertApiService.getActiveAlerts(getActiveAlertsBaseUrl),
       ]
 
-      // TODO update when the Sensors backend is working
-      const sensorsAlerts = []
-      const [buttonsAlerts /* , sensorsAlerts */] = await Promise.all(promises)
+      const [buttonsAlerts, sensorsAlerts] = await Promise.all(promises)
 
-      // Combine the results
-      const alerts = buttonsAlerts.concat(sensorsAlerts)
+      // Combine and sort the results
+      const activeAlerts = buttonsAlerts.concat(sensorsAlerts).sort((alert1, alert2) => alert1.createdAt > alert2.createdAt)
 
-      dispatch(setAlerts(alerts))
+      dispatch(setAlerts(activeAlerts))
 
       fireAcknowledgeAlertSessionRequestOptions.reset()
     }
@@ -117,19 +125,27 @@ function AlertModal(props) {
     async function handle() {
       logger.debug(`Respond to alert for ${deviceName}`)
 
+      let respondToAlertBaseUrl
+      let getActiveAlertsBaseUrl
+      if (alertType === ALERT_TYPE.BUTTONS_NOT_URGENT || alertType === ALERT_TYPE.BUTTONS_URGENT) {
+        respondToAlertBaseUrl = BUTTONS_BASE_URL
+        getActiveAlertsBaseUrl = SENSOR_BASE_URL
+      } else {
+        respondToAlertBaseUrl = SENSOR_BASE_URL
+        getActiveAlertsBaseUrl = BUTTONS_BASE_URL
+      }
+
       const promises = [
-        AlertApiService.respondToAlertSessionRequest(BUTTONS_BASE_URL, id),
-        /* AlertApiService.respondToAlertSessionRequest(SENSOR_BASE_URL, id), */
+        AlertApiService.respondToAlertSessionRequest(respondToAlertBaseUrl, id),
+        AlertApiService.getActiveAlerts(getActiveAlertsBaseUrl),
       ]
 
-      // TODO update when the Sensors backend is working
-      const sensorsAlerts = []
-      const [buttonsAlerts /* , sensorsAlerts */] = await Promise.all(promises)
+      const [buttonsAlerts, sensorsAlerts] = await Promise.all(promises)
 
-      // Combine the results
-      const alerts = buttonsAlerts.concat(sensorsAlerts)
+      // Combine and sort the results
+      const activeAlerts = buttonsAlerts.concat(sensorsAlerts).sort((alert1, alert2) => alert1.createdAt > alert2.createdAt)
 
-      dispatch(setAlerts(alerts))
+      dispatch(setAlerts(activeAlerts))
 
       fireRespondToAlertSessionRequestOptions.reset()
     }
@@ -217,7 +233,7 @@ function AlertModal(props) {
         </>
       )}
       {chatbotState === CHATBOT_STATE.WAITING_FOR_CATEGORY && (
-        <IncidentCategoryModal deviceName={deviceName} validIncidentCategories={validIncidentCategories} id={id} />
+        <IncidentCategoryModal deviceName={deviceName} validIncidentCategories={validIncidentCategories} id={id} alertType={alertType} />
       )}
     </>
   )
