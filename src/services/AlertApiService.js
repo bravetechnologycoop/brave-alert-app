@@ -26,7 +26,6 @@ async function getLocation(baseUrl) {
     headers: {
       'X-API-KEY': getApiKey(),
     },
-    transformResponse: JSON.parse,
   })
 }
 
@@ -38,7 +37,6 @@ async function getActiveAlerts(baseUrl) {
       'X-API-KEY': getApiKey(),
       'Content-Type': 'application/json',
     },
-    transformResponse: JSON.parse,
   })
 }
 async function getHistoricAlerts(baseUrl, maxHistoricAlerts) {
@@ -52,7 +50,6 @@ async function getHistoricAlerts(baseUrl, maxHistoricAlerts) {
       'X-API-KEY': getApiKey(),
       'Content-Type': 'application/json',
     },
-    transformResponse: JSON.parse,
   })
 }
 
@@ -63,7 +60,6 @@ async function getNewNotificationsCountRequest(baseUrl) {
     headers: {
       'X-API-KEY': getApiKey(),
     },
-    transformResponse: JSON.parse,
   })
 }
 
@@ -78,7 +74,6 @@ async function acknowledgeAlertSessionRequest(baseUrl, sessionId) {
       'X-API-KEY': getApiKey(),
       'Content-Type': 'application/json',
     },
-    transformResponse: JSON.parse,
   })
 }
 
@@ -93,7 +88,6 @@ async function respondToAlertSessionRequest(baseUrl, sessionId) {
       'X-API-KEY': getApiKey(),
       'Content-Type': 'application/json',
     },
-    transformResponse: JSON.parse,
   })
 }
 
@@ -109,7 +103,6 @@ async function setIncidentCategoryRequest(baseUrl, sessionId, incidentCategory) 
       'X-API-KEY': getApiKey(),
       'Content-Type': 'application/json',
     },
-    transformResponse: JSON.parse,
   })
 }
 

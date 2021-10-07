@@ -48,7 +48,6 @@ describe('AlertApiService', () => {
         headers: {
           'X-API-KEY': fakeApiKey,
         },
-        transformResponse: JSON.parse,
       }
 
       await AlertApiService.getLocation(fakeBaseUrl)
@@ -68,7 +67,6 @@ describe('AlertApiService', () => {
           'X-API-KEY': fakeApiKey,
           'Content-Type': 'application/json',
         },
-        transformResponse: JSON.parse,
       }
 
       await AlertApiService.getActiveAlerts(fakeBaseUrl)
@@ -92,7 +90,6 @@ describe('AlertApiService', () => {
           'X-API-KEY': fakeApiKey,
           'Content-Type': 'application/json',
         },
-        transformResponse: JSON.parse,
       }
 
       await AlertApiService.getHistoricAlerts(fakeBaseUrl, fakeMaxHistoricAlerts)
@@ -111,7 +108,6 @@ describe('AlertApiService', () => {
         headers: {
           'X-API-KEY': fakeApiKey,
         },
-        transformResponse: JSON.parse,
       }
 
       await AlertApiService.getNewNotificationsCountRequest(fakeBaseUrl)
@@ -135,7 +131,6 @@ describe('AlertApiService', () => {
         body: {
           sessionId: fakeSessionId,
         },
-        transformResponse: JSON.parse,
       }
 
       await AlertApiService.acknowledgeAlertSessionRequest(fakeBaseUrl, fakeSessionId)
@@ -159,7 +154,6 @@ describe('AlertApiService', () => {
         body: {
           sessionId: fakeSessionId,
         },
-        transformResponse: JSON.parse,
       }
 
       await AlertApiService.respondToAlertSessionRequest(fakeBaseUrl, fakeSessionId)
@@ -185,7 +179,6 @@ describe('AlertApiService', () => {
           sessionId: fakeSessionId,
           incidentCategory: fakeIncidentCategory,
         },
-        transformResponse: JSON.parse,
       }
 
       await AlertApiService.setIncidentCategoryRequest(fakeBaseUrl, fakeSessionId, fakeIncidentCategory)
