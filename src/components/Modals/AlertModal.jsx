@@ -160,6 +160,7 @@ function AlertModal(props) {
   let title
   let subtitle
   let buttonColor
+  let buttonFontColor = colors.greyscaleDarkest
   if (alertType === ALERT_TYPE.BUTTONS_NOT_URGENT) {
     icon = faBell
     color = colors.alertHistoric
@@ -205,6 +206,8 @@ function AlertModal(props) {
     respondToText = 'Now responding to'
     buttonLabel = 'Completed'
     buttonFunction = handleCompleted
+    buttonColor = colors.primaryMedium
+    buttonFontColor = colors.greyscaleLightest
   }
 
   return (
@@ -226,6 +229,7 @@ function AlertModal(props) {
               fontColor={colors.greyscaleDarkest}
               width={140}
               onPress={buttonFunction}
+              fontColor={buttonFontColor}
             >
               {buttonLabel}
             </BasicButton>
