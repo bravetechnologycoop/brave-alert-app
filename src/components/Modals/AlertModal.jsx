@@ -223,14 +223,7 @@ function AlertModal(props) {
           <Text style={styles.respondToText}>{respondToText}</Text>
           <Text style={styles.deviceNameText}>{deviceName}</Text>
           <View style={styles.buttonView}>
-            <BasicButton
-              backgroundColor={buttonColor}
-              borderColor={buttonColor}
-              fontColor={colors.greyscaleDarkest}
-              width={140}
-              onPress={buttonFunction}
-              fontColor={buttonFontColor}
-            >
+            <BasicButton backgroundColor={buttonColor} borderColor={buttonColor} fontColor={buttonFontColor} width={140} onPress={buttonFunction}>
               {buttonLabel}
             </BasicButton>
           </View>
