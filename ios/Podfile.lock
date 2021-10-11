@@ -10,7 +10,7 @@ PODS:
     - React-jsi (= 0.64.2)
     - ReactCommon/turbomodule/core (= 0.64.2)
   - glog (0.3.5)
-  - OneSignal (3.6.2)
+  - OneSignal (3.8.1)
   - OneSignalXCFramework (3.4.4)
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
@@ -463,11 +463,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  DoubleConversion: cde416483dac037923206447da6e1454df403714
+  DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: e686045572151edef46010a6f819ade377dfeb4b
   FBReactNativeSpec: a29cff0414072731b6301df176fc15307f1dbb3a
-  glog: 40a13f7840415b9a77023fbcae0f1e6f43192af3
-  OneSignal: a61c6c6bc66d2a0a7565eafee6fca941d6fce121
+  glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
+  OneSignal: b44755cd425704bdef8d8912030ed26619446773
   OneSignalXCFramework: eaf286b7438aa1f030f03e5fa9f1c79ede5d8f04
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
   RCTRequired: 6d3e854f0e7260a648badd0d44fc364bc9da9728
@@ -480,7 +480,7 @@ SPEC CHECKSUMS:
   React-jsi: 67747b9722f6dab2ffe15b011bcf6b3f2c3f1427
   React-jsiexecutor: 80c46bd381fd06e418e0d4f53672dc1d1945c4c3
   React-jsinspector: cc614ec18a9ca96fd275100c16d74d62ee11f0ae
-  react-native-onesignal: 9ec377a898663829f9c96997b73e77cb5bab05de
+  react-native-onesignal: 2a7c3a5f2aa1c599d94cda6cc583205e1548828d
   react-native-safe-area-context: f0906bf8bc9835ac9a9d3f97e8bde2a997d8da79
   React-perflogger: 25373e382fed75ce768a443822f07098a15ab737
   React-RCTActionSheet: af7796ba49ffe4ca92e7277a5d992d37203f7da5
