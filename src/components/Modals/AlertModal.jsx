@@ -14,6 +14,7 @@ import BasicButton from '../BasicButton'
 import { ALERT_TYPE, CHATBOT_STATE } from '../../constants'
 import IncidentCategoryModal from './IncidentCategoryModal'
 import { setAlerts } from '../../redux/slices/alertsSlice'
+import { stopAlarm } from '../../services/SoundService'
 import Logger from '../../services/Logger'
 import SCREEN from '../../navigation/ScreensEnum'
 
@@ -92,6 +93,8 @@ function AlertModal(props) {
   function handleOnMyWay() {
     async function handle() {
       logger.debug(`Acknowledge alert for ${deviceName}`)
+
+      stopAlarm()
 
       let acknowledgeBaseUrl
       let getActiveAlertsBaseUrl
