@@ -13,6 +13,7 @@ import AlertApiService from '../services/AlertApiService'
 import colors from '../resources/colors'
 import SCREEN from '../navigation/ScreensEnum'
 import { setAlerts } from '../redux/slices/alertsSlice'
+import { startAlarm } from '../services/SoundService'
 import Logger from '../services/Logger'
 
 const logger = new Logger('SplashScreen')
@@ -123,6 +124,9 @@ function SplashScreen() {
 
     // Don't show the native notification
     notificationReceivedEvent.complete(null)
+
+    // Play the alert sound
+    startAlarm()
 
     displayAlerts()
   })
